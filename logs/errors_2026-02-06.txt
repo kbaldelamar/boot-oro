@@ -1,0 +1,141 @@
+[2026-02-06 10:41:51.618] [❌ ERROR] [IngresoItems] ❌ Error definitivo: No se encontró opción para CUPS 906916
+[2026-02-06 10:41:51.625] [❌ ERROR] [IngresoItems] ❌ Error general en IntemsAndFor: No se encontró opción para CUPS 906916
+  Exception: Exception: No se encontró opción para CUPS 906916
+[2026-02-06 10:42:08.639] [❌ ERROR] [IngresoItems] ❌ Error al intentar hacer clic en Aceptar: Page.wait_for_selector: Timeout 15000ms exceeded.
+Call log:
+waiting for locator("//span[contains(.,'Aceptar')]") to be visible
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+
+  Exception: TimeoutError: Page.wait_for_selector: Timeout 15000ms exceeded.
+Call log:
+waiting for locator("//span[contains(.,'Aceptar')]") to be visible
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+
+[2026-02-06 10:42:08.651] [❌ ERROR] [EjecutarCaso] ⏰ TIMEOUT - ELEMENTO NO RESPONDIÓ A TIEMPO
+  Exception: TimeoutError: Page.wait_for_selector: Timeout 15000ms exceeded.
+Call log:
+waiting for locator("//span[contains(.,'Aceptar')]") to be visible
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+
+[2026-02-06 10:42:13.939] [❌ ERROR] [Worker] Error procesando AURA RAMOS
+  Exception: Exception: Error ejecutando caso
+[2026-02-06 10:42:13.944] [⚠️ WARNING] [Worker] ⚠️ Error desconocido, marcando como ERROR final: Error ejecutando caso
+[10:42:18] [📸 SCREENSHOT] Screenshot guardado: screenshots\error_406573.png
+  Orden: 406573
+  Error: Error no clasificado: Error ejecutando caso
+[2026-02-06 10:42:18.317] [❌ ERROR] [Worker] ❌ Orden 406573 marcada como ERROR: Error no clasificado: Error ejecutando caso
+[2026-02-06 10:44:05.463] [❌ ERROR] [Worker] Error procesando KEVIN BALDELAMAR
+  Exception: Exception: Error ejecutando caso
+[2026-02-06 10:44:05.474] [⚠️ WARNING] [Worker] ⚠️ Error desconocido, marcando como ERROR final: Error ejecutando caso
+[10:44:09] [📸 SCREENSHOT] Screenshot guardado: screenshots\error_399795.png
+  Orden: 399795
+  Error: Error no clasificado: Error ejecutando caso
+[2026-02-06 10:44:09.872] [❌ ERROR] [Worker] ❌ Orden 399795 marcada como ERROR: Error no clasificado: Error ejecutando caso
+[2026-02-06 10:46:12.924] [❌ ERROR] [Worker] Error procesando KEVIN BALDELAMAR
+  Exception: Exception: Error ejecutando caso
+[10:46:17] [📸 SCREENSHOT] Screenshot guardado: screenshots\error_399795.png
+  Orden: 399795
+  Error: Error ejecutando caso
+[2026-02-06 10:46:17.327] [❌ ERROR] [Worker] ❌ Orden 399795 marcada como ERROR: Error ejecutando caso

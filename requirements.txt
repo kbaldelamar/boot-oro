@@ -1,0 +1,44 @@
+# ===================================
+# 📦 DEPENDENCIAS DEL PROYECTO
+# ===================================
+# Sistema de Automatización - Boot ORO
+# Última actualización: 2026-01-29
+
+# Interfaz gráfica (incluida con Python, no requiere instalación)
+# tkinter - Biblioteca estándar de Python para GUI
+
+# Peticiones HTTP
+requests>=2.31.0
+
+# Automatización web con Playwright
+playwright>=1.40.0
+
+# Resolución de CAPTCHA
+twocaptcha-python>=1.2.0
+
+# Generación de PDFs
+reportlab==3.6.13  # Compatible con Python 3.8
+PyMuPDF  # Para generación de PDFs con control preciso
+
+# Manejo de variables de entorno (opcional, si se prefiere usar python-dotenv)
+# python-dotenv>=1.0.0
+
+# Manejo de fechas y tiempos (incluido con Python)
+# datetime - Biblioteca estándar
+
+# Análisis y manipulación de datos (opcional, para futuras funcionalidades)
+pandas>=2.1.0
+
+# Validación de datos (opcional)
+pydantic>=2.5.0
+
+# Logging avanzado (opcional)
+colorlog>=6.8.0
+
+# Testing (opcional, para desarrollo)
+pytest>=7.4.0
+pytest-cov>=4.1.0
+
+# Formateo de código (opcional, para desarrollo)
+black>=23.12.0
+flake8>=7.0.0

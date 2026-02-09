@@ -1,0 +1,27 @@
+[2026-02-03 18:04:08.864] [⚠️ WARNING] [PDFAnexo3] ⚠️ Logo no encontrado en: C:\\python\\boot-oro\\resources\\images\\anexo3_header.png
+[2026-02-03 18:04:08.866] [❌ ERROR] [PDFAnexo3] Error generando Anexo 3
+  Exception: TypeError: 'usedforsecurity' is an invalid keyword argument for openssl_md5()
+[2026-02-03 18:05:08.897] [⚠️ WARNING] [PDFAnexo3] ⚠️ Logo no encontrado en: C:\\python\\boot-oro\\resources\\images\\anexo3_header.png
+[2026-02-03 18:05:08.905] [❌ ERROR] [PDFAnexo3] Error generando Anexo 3
+  Exception: AttributeError: 'str' object has no attribute 'wrapOn'
+[2026-02-03 18:07:38.386] [⚠️ WARNING] [PDFAnexo3] ⚠️ Logo no encontrado
+[2026-02-03 20:23:12.292] [⚠️ WARNING] [Test] Mensaje de advertencia
+[2026-02-03 20:23:12.293] [❌ ERROR] [Test] Mensaje de error
+[2026-02-03 21:42:16.042] [❌ ERROR] [Worker] Error procesando KEVIN BALDELAMAR
+  Exception: NameError: name 'PDFAnexo3Service' is not defined
+[2026-02-03 21:42:16.057] [⚠️ WARNING] [Worker] ⚠️ Error desconocido, marcando como ERROR final: name 'PDFAnexo3Service' is not defined
+[21:42:20] [📸 SCREENSHOT] Screenshot guardado: screenshots\error_399795.png
+  Orden: 399795
+  Error: Error no clasificado: name 'PDFAnexo3Service' is not defined
+[2026-02-03 21:42:20.570] [❌ ERROR] [Worker] ❌ Orden 399795 marcada como ERROR: Error no clasificado: name 'PDFAnexo3Service' is not defined
+[2026-02-03 21:44:07.448] [❌ ERROR] [Worker] Error procesando KEVIN BALDELAMAR
+  Exception: NameError: name 'PDFAnexo3Service' is not defined
+[2026-02-03 21:44:21.229] [⚠️ WARNING] [Worker] ⚠️ Error desconocido, marcando como ERROR final: name 'PDFAnexo3Service' is not defined
+[21:44:26] [📸 SCREENSHOT] Screenshot guardado: screenshots\error_399795.png
+  Orden: 399795
+  Error: Error no clasificado: name 'PDFAnexo3Service' is not defined
+[2026-02-03 21:44:26.325] [❌ ERROR] [Worker] ❌ Orden 399795 marcada como ERROR: Error no clasificado: name 'PDFAnexo3Service' is not defined
+[2026-02-03 21:49:08.388] [❌ ERROR] [Login] Error resolviendo CAPTCHA: bad response: 500
+[2026-02-03 21:49:08.395] [❌ ERROR] [Login] Error resolviendo CAPTCHA
+  Exception: NetworkException: bad response: 500
+[2026-02-03 21:49:08.408] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...

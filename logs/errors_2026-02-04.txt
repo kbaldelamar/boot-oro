@@ -1,0 +1,13 @@
+[2026-02-04 11:01:15.636] [❌ ERROR] [Worker] Error procesando KEVIN BALDELAMAR
+  Exception: Exception: Error ejecutando caso
+[2026-02-04 11:01:15.650] [⚠️ WARNING] [Worker] ⚠️ Error desconocido, marcando como ERROR final: Error ejecutando caso
+[11:01:20] [📸 SCREENSHOT] Screenshot guardado: screenshots\error_399795.png
+  Orden: 399795
+  Error: Error no clasificado: Error ejecutando caso
+[2026-02-04 11:01:20.179] [❌ ERROR] [Worker] ❌ Orden 399795 marcada como ERROR: Error no clasificado: Error ejecutando caso
+[2026-02-04 11:03:09.661] [❌ ERROR] [Worker] Error procesando KEVIN BALDELAMAR
+  Exception: Exception: Error ejecutando caso
+[11:03:14] [📸 SCREENSHOT] Screenshot guardado: screenshots\error_399795.png
+  Orden: 399795
+  Error: Error ejecutando caso
+[2026-02-04 11:03:14.226] [❌ ERROR] [Worker] ❌ Orden 399795 marcada como ERROR: Error ejecutando caso

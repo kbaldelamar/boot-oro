@@ -1,0 +1,460 @@
+[2026-02-02 16:50:48.559] [⚠️ WARNING] [Playwright] ⚠️ Página cerrada inesperadamente
+[2026-02-02 16:50:48.607] [❌ ERROR] [Login] No se pudo ingresar usuario
+[2026-02-02 16:50:48.618] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 17:04:03.114] [❌ ERROR] [Login] No se pudo ingresar usuario
+[2026-02-02 17:15:54.902] [❌ ERROR] [Login] Error resolviendo CAPTCHA
+  Exception: ApiException: ERROR_NO_SLOT_AVAILABLE
+[2026-02-02 17:15:54.908] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 17:16:24.955] [⚠️ WARNING] [Playwright] ⚠️ Página cerrada inesperadamente
+[2026-02-02 17:22:47.426] [❌ ERROR] [Login] Error inyectando CAPTCHA
+  Exception: Error: Page.evaluate: SyntaxError: Unexpected token 'const'
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-02 17:26:17.061] [❌ ERROR] [Login] Error resolviendo CAPTCHA
+  Exception: TimeoutException: timeout 120.0 exceeded
+[2026-02-02 17:26:17.061] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 17:28:08.198] [❌ ERROR] [Worker] Error en loop principal
+  Exception: AttributeError: 'str' object has no attribute 'get'
+[2026-02-02 17:28:20.334] [❌ ERROR] [Worker] Error en loop principal
+  Exception: AttributeError: 'str' object has no attribute 'get'
+[2026-02-02 17:28:32.447] [❌ ERROR] [Worker] Error en loop principal
+  Exception: AttributeError: 'str' object has no attribute 'get'
+[2026-02-02 17:28:44.531] [❌ ERROR] [Worker] Error en loop principal
+  Exception: AttributeError: 'str' object has no attribute 'get'
+[2026-02-02 17:28:56.641] [❌ ERROR] [Worker] Error en loop principal
+  Exception: AttributeError: 'str' object has no attribute 'get'
+[2026-02-02 17:29:52.649] [⚠️ WARNING] [Login] No se pudo verificar balance: ERROR_KEY_DOES_NOT_EXIST
+[2026-02-02 17:29:53.121] [❌ ERROR] [Login] 🔑 API Key inválida. Verifica endpoint.env
+[2026-02-02 17:29:53.121] [❌ ERROR] [Login] Error resolviendo CAPTCHA
+  Exception: ApiException: ERROR_KEY_DOES_NOT_EXIST
+[2026-02-02 17:29:53.141] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 17:32:11.714] [⚠️ WARNING] [Login] No se pudo verificar balance: ERROR_KEY_DOES_NOT_EXIST
+[2026-02-02 17:32:12.137] [❌ ERROR] [Login] 🔑 API Key inválida. Verifica endpoint.env
+[2026-02-02 17:32:12.152] [❌ ERROR] [Login] Error resolviendo CAPTCHA
+  Exception: ApiException: ERROR_KEY_DOES_NOT_EXIST
+[2026-02-02 17:32:12.175] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 17:33:27.339] [❌ ERROR] [Worker] Error en loop principal
+  Exception: AttributeError: 'str' object has no attribute 'get'
+[2026-02-02 17:33:39.452] [❌ ERROR] [Worker] Error en loop principal
+  Exception: AttributeError: 'str' object has no attribute 'get'
+[2026-02-02 17:33:51.551] [❌ ERROR] [Worker] Error en loop principal
+  Exception: AttributeError: 'str' object has no attribute 'get'
+[2026-02-02 17:34:03.680] [❌ ERROR] [Worker] Error en loop principal
+  Exception: AttributeError: 'str' object has no attribute 'get'
+[2026-02-02 17:34:15.804] [❌ ERROR] [Worker] Error en loop principal
+  Exception: AttributeError: 'str' object has no attribute 'get'
+[2026-02-02 17:34:54.030] [❌ ERROR] [Worker] Error en loop principal
+  Exception: AttributeError: 'str' object has no attribute 'get'
+[2026-02-02 17:36:42.133] [⚠️ WARNING] [API] No se encontró orden 381888
+[2026-02-02 17:46:37.776] [❌ ERROR] [API] Error actualizando estadoCaso: 400
+[2026-02-02 18:01:43.246] [❌ ERROR] [API] ❌ Error actualizando estadoCaso: HTTP 400
+[2026-02-02 18:01:45.049] [❌ ERROR] [API]    Respuesta: {'data': {}, 'description': "'estadoCaso' sólo admite los valores 1 o 2", 'message': 'Error', 'statusCode': 400}
+[2026-02-02 18:03:05.254] [❌ ERROR] [Worker] Error procesando KELLY RAMIREZ
+  Exception: Exception: Error ejecutando caso
+[2026-02-02 18:03:13.182] [⚠️ WARNING] [Worker] ⚠️ Orden 381782 reintentará después
+[2026-02-02 18:03:36.510] [❌ ERROR] [API] ❌ Error actualizando estadoCaso: HTTP 400
+[2026-02-02 18:03:36.520] [❌ ERROR] [API]    Respuesta: {'data': {}, 'description': "'estadoCaso' sólo admite los valores 1 o 2", 'message': 'Error', 'statusCode': 400}
+[2026-02-02 18:04:28.543] [❌ ERROR] [Home] No se pudo hacer clic en Reportar
+[2026-02-02 18:04:37.669] [❌ ERROR] [Worker] Error procesando NEVIS FUENTES  
+  Exception: Exception: No se pudo navegar al formulario
+[2026-02-02 18:04:45.362] [⚠️ WARNING] [Worker] ⚠️ Orden 381823 reintentará después
+[2026-02-02 18:04:56.397] [❌ ERROR] [API] Error obteniendo datos orden: HTTP 404
+[2026-02-02 18:05:02.226] [❌ ERROR] [Worker] No se encontraron datos para orden 153
+[2026-02-02 18:05:06.894] [❌ ERROR] [API] ❌ Error actualizando estadoCaso: HTTP 400
+[2026-02-02 18:05:06.926] [❌ ERROR] [API]    Respuesta: {'data': {}, 'description': "'estadoCaso' sólo admite los valores 1 o 2", 'message': 'Error', 'statusCode': 400}
+[18:05:07] [📸 SCREENSHOT] Screenshot guardado: screenshots\error_153.png
+  Orden: 153
+  Error: Datos de paciente no encontrados
+[2026-02-02 18:05:07.160] [❌ ERROR] [Worker] ❌ Orden 153 marcada como ERROR: Datos de paciente no encontrados
+[2026-02-02 18:31:25.545] [❌ ERROR] [Worker] Error procesando KELLY RAMIREZ
+  Exception: Exception: Error ejecutando caso
+[2026-02-02 18:31:36.538] [⚠️ WARNING] [Worker] ⚠️ Orden 381782 reintentará después (estadoCaso permanece en 3)
+[2026-02-02 18:32:35.066] [❌ ERROR] [Home] No se pudo hacer clic en Reportar
+[2026-02-02 18:32:35.073] [❌ ERROR] [Worker] Error procesando NEVIS FUENTES  
+  Exception: Exception: No se pudo navegar al formulario
+[2026-02-02 18:32:49.864] [⚠️ WARNING] [Worker] ⚠️ Orden 381823 reintentará después (estadoCaso permanece en 3)
+[2026-02-02 18:34:08.226] [❌ ERROR] [Home] No se pudo hacer clic en Ambulatoria
+[2026-02-02 18:34:08.232] [❌ ERROR] [Worker] Error procesando KELLY RAMIREZ
+  Exception: Exception: No se pudo navegar al formulario
+[2026-02-02 18:44:18.615] [❌ ERROR] [Playwright] Error navegando a https://portalsalud.coosalud.com/login
+  Exception: TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://portalsalud.coosalud.com/login", waiting until "domcontentloaded"
+
+[2026-02-02 18:44:18.624] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 18:47:10.293] [⚠️ WARNING] [Playwright] Timeout navegando (intento 1/3). Reintentando...
+[2026-02-02 18:48:52.522] [⚠️ WARNING] [Playwright] Timeout navegando (intento 1/3). Reintentando...
+[2026-02-02 18:49:24.605] [⚠️ WARNING] [Playwright] Timeout navegando (intento 2/3). Reintentando...
+[2026-02-02 18:49:56.646] [❌ ERROR] [Playwright] Error navegando a https://portalsalud.coosalud.com/login
+  Exception: TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://portalsalud.coosalud.com/login", waiting until "load"
+
+[2026-02-02 18:49:57.385] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 18:50:59.524] [⚠️ WARNING] [Playwright] Timeout navegando (intento 1/3). Reintentando...
+[2026-02-02 18:51:31.564] [⚠️ WARNING] [Playwright] Timeout navegando (intento 2/3). Reintentando...
+[2026-02-02 18:52:03.605] [❌ ERROR] [Playwright] Error navegando a https://portalsalud.coosalud.com/login
+  Exception: TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://portalsalud.coosalud.com/login", waiting until "load"
+
+[2026-02-02 18:52:03.613] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 18:53:05.755] [⚠️ WARNING] [Playwright] Timeout navegando (intento 1/3). Reintentando...
+[2026-02-02 18:53:37.806] [⚠️ WARNING] [Playwright] Timeout navegando (intento 2/3). Reintentando...
+[2026-02-02 18:54:09.857] [❌ ERROR] [Playwright] Error navegando a https://portalsalud.coosalud.com/login
+  Exception: TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://portalsalud.coosalud.com/login", waiting until "load"
+
+[2026-02-02 18:54:09.867] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 18:55:12.023] [⚠️ WARNING] [Playwright] Timeout navegando (intento 1/3). Reintentando...
+[2026-02-02 18:55:44.066] [⚠️ WARNING] [Playwright] Timeout navegando (intento 2/3). Reintentando...
+[2026-02-02 18:56:16.123] [❌ ERROR] [Playwright] Error navegando a https://portalsalud.coosalud.com/login
+  Exception: TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://portalsalud.coosalud.com/login", waiting until "load"
+
+[2026-02-02 18:56:16.140] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 18:57:18.253] [⚠️ WARNING] [Playwright] Timeout navegando (intento 1/3). Reintentando...
+[2026-02-02 18:57:50.286] [⚠️ WARNING] [Playwright] Timeout navegando (intento 2/3). Reintentando...
+[2026-02-02 18:58:22.332] [❌ ERROR] [Playwright] Error navegando a https://portalsalud.coosalud.com/login
+  Exception: TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://portalsalud.coosalud.com/login", waiting until "load"
+
+[2026-02-02 18:58:22.339] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 18:59:24.460] [⚠️ WARNING] [Playwright] Timeout navegando (intento 1/3). Reintentando...
+[2026-02-02 18:59:56.496] [⚠️ WARNING] [Playwright] Timeout navegando (intento 2/3). Reintentando...
+[2026-02-02 19:00:28.537] [❌ ERROR] [Playwright] Error navegando a https://portalsalud.coosalud.com/login
+  Exception: TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://portalsalud.coosalud.com/login", waiting until "load"
+
+[2026-02-02 19:00:28.540] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 19:01:30.652] [⚠️ WARNING] [Playwright] Timeout navegando (intento 1/3). Reintentando...
+[2026-02-02 19:02:02.687] [⚠️ WARNING] [Playwright] Timeout navegando (intento 2/3). Reintentando...
+[2026-02-02 19:02:34.729] [❌ ERROR] [Playwright] Error navegando a https://portalsalud.coosalud.com/login
+  Exception: TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://portalsalud.coosalud.com/login", waiting until "load"
+
+[2026-02-02 19:02:34.736] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 19:03:36.864] [⚠️ WARNING] [Playwright] Timeout navegando (intento 1/3). Reintentando...
+[2026-02-02 19:04:08.919] [⚠️ WARNING] [Playwright] Timeout navegando (intento 2/3). Reintentando...
+[2026-02-02 19:04:40.967] [❌ ERROR] [Playwright] Error navegando a https://portalsalud.coosalud.com/login
+  Exception: TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://portalsalud.coosalud.com/login", waiting until "load"
+
+[2026-02-02 19:04:40.974] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 19:05:43.092] [⚠️ WARNING] [Playwright] Timeout navegando (intento 1/3). Reintentando...
+[2026-02-02 19:06:15.140] [⚠️ WARNING] [Playwright] Timeout navegando (intento 2/3). Reintentando...
+[2026-02-02 19:06:47.198] [❌ ERROR] [Playwright] Error navegando a https://portalsalud.coosalud.com/login
+  Exception: TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://portalsalud.coosalud.com/login", waiting until "load"
+
+[2026-02-02 19:06:47.205] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 19:07:49.327] [⚠️ WARNING] [Playwright] Timeout navegando (intento 1/3). Reintentando...
+[2026-02-02 19:08:23.423] [⚠️ WARNING] [Playwright] Timeout navegando (intento 2/3). Reintentando...
+[2026-02-02 19:08:55.464] [❌ ERROR] [Playwright] Error navegando a https://portalsalud.coosalud.com/login
+  Exception: TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://portalsalud.coosalud.com/login", waiting until "load"
+
+[2026-02-02 19:08:55.491] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 19:09:57.619] [⚠️ WARNING] [Playwright] Timeout navegando (intento 1/3). Reintentando...
+[2026-02-02 19:10:29.662] [⚠️ WARNING] [Playwright] Timeout navegando (intento 2/3). Reintentando...
+[2026-02-02 19:11:01.700] [❌ ERROR] [Playwright] Error navegando a https://portalsalud.coosalud.com/login
+  Exception: TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://portalsalud.coosalud.com/login", waiting until "load"
+
+[2026-02-02 19:11:01.708] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 19:12:03.810] [⚠️ WARNING] [Playwright] Timeout navegando (intento 1/3). Reintentando...
+[2026-02-02 19:12:35.853] [⚠️ WARNING] [Playwright] Timeout navegando (intento 2/3). Reintentando...
+[2026-02-02 19:13:07.882] [❌ ERROR] [Playwright] Error navegando a https://portalsalud.coosalud.com/login
+  Exception: TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://portalsalud.coosalud.com/login", waiting until "load"
+
+[2026-02-02 19:13:07.887] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 19:14:10.031] [⚠️ WARNING] [Playwright] Timeout navegando (intento 1/3). Reintentando...
+[2026-02-02 19:14:42.069] [⚠️ WARNING] [Playwright] Timeout navegando (intento 2/3). Reintentando...
+[2026-02-02 19:15:14.118] [❌ ERROR] [Playwright] Error navegando a https://portalsalud.coosalud.com/login
+  Exception: TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://portalsalud.coosalud.com/login", waiting until "load"
+
+[2026-02-02 19:15:14.126] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 19:16:16.261] [⚠️ WARNING] [Playwright] Timeout navegando (intento 1/3). Reintentando...
+[2026-02-02 19:16:48.312] [⚠️ WARNING] [Playwright] Timeout navegando (intento 2/3). Reintentando...
+[2026-02-02 19:17:20.338] [❌ ERROR] [Playwright] Error navegando a https://portalsalud.coosalud.com/login
+  Exception: TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://portalsalud.coosalud.com/login", waiting until "load"
+
+[2026-02-02 19:17:20.347] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 19:18:22.517] [⚠️ WARNING] [Playwright] Timeout navegando (intento 1/3). Reintentando...
+[2026-02-02 19:18:54.538] [⚠️ WARNING] [Playwright] Timeout navegando (intento 2/3). Reintentando...
+[2026-02-02 19:19:26.572] [❌ ERROR] [Playwright] Error navegando a https://portalsalud.coosalud.com/login
+  Exception: TimeoutError: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://portalsalud.coosalud.com/login", waiting until "load"
+
+[2026-02-02 19:19:26.582] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 19:20:14.878] [⚠️ WARNING] [Playwright] ⚠️ Página cerrada inesperadamente
+[2026-02-02 19:20:14.891] [⚠️ WARNING] [Playwright] Error navegando (intento 1/3): Page.goto: Target page, context or browser has been closed
+Call log:
+navigating to "https://portalsa
+[2026-02-02 19:24:24.519] [⚠️ WARNING] [Playwright] ⚠️ Página cerrada inesperadamente
+[2026-02-02 19:24:24.590] [⚠️ WARNING] [Playwright] Error navegando (intento 1/3): Page.goto: Target page, context or browser has been closed
+Call log:
+navigating to "https://portalsa
+[2026-02-02 19:24:26.640] [⚠️ WARNING] [Playwright] Error navegando (intento 2/3): Page.goto: Target page, context or browser has been closed
+[2026-02-02 19:24:28.684] [❌ ERROR] [Playwright] Error navegando a https://portalsalud.coosalud.com/login
+  Exception: TargetClosedError: Page.goto: Target page, context or browser has been closed
+[2026-02-02 19:24:28.687] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 19:25:00.799] [⚠️ WARNING] [Playwright] Error navegando (intento 1/3): Page.goto: Target page, context or browser has been closed
+[2026-02-02 19:25:02.836] [⚠️ WARNING] [Playwright] Error navegando (intento 2/3): Page.goto: Target page, context or browser has been closed
+[2026-02-02 19:25:04.876] [❌ ERROR] [Playwright] Error navegando a https://portalsalud.coosalud.com/login
+  Exception: TargetClosedError: Page.goto: Target page, context or browser has been closed
+[2026-02-02 19:25:04.879] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 19:27:54.336] [⚠️ WARNING] [Playwright] Timeout navegando (intento 1/2). Reintentando...
+[2026-02-02 19:28:33.467] [⚠️ WARNING] [Playwright] ⚠️ Página cerrada inesperadamente
+[2026-02-02 19:28:33.504] [❌ ERROR] [Playwright] Error navegando a https://portalsalud.coosalud.com/login
+  Exception: TargetClosedError: Page.goto: Target page, context or browser has been closed
+Call log:
+navigating to "https://portalsalud.coosalud.com/login", waiting until "domcontentloaded"
+
+[2026-02-02 19:28:33.516] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 19:36:51.330] [❌ ERROR] [Playwright] Error al iniciar navegador
+  Exception: TimeoutError: Page.goto: Timeout 60000ms exceeded.
+Call log:
+navigating to "https://portalsalud.coosalud.com/login", waiting until "domcontentloaded"
+
+[2026-02-02 19:36:51.335] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 19:37:23.426] [⚠️ WARNING] [Playwright] ⚠️ Página cerrada inesperadamente
+[2026-02-02 19:37:23.473] [❌ ERROR] [Login] No se pudo ingresar usuario
+[2026-02-02 19:37:23.478] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 19:48:59.011] [❌ ERROR] [Login] No se pudo ingresar usuario
+[2026-02-02 19:48:59.018] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 19:51:14.813] [⚠️ WARNING] [Login] No se pudo verificar balance: ERROR_KEY_DOES_NOT_EXIST
+[2026-02-02 19:51:16.570] [❌ ERROR] [Login] 🔑 API Key inválida. Verifica endpoint.env
+[2026-02-02 19:51:16.577] [❌ ERROR] [Login] Error resolviendo CAPTCHA
+  Exception: ApiException: ERROR_KEY_DOES_NOT_EXIST
+[2026-02-02 19:51:16.585] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 19:52:14.495] [⚠️ WARNING] [Login] No se pudo verificar balance: ERROR_KEY_DOES_NOT_EXIST
+[2026-02-02 19:52:16.978] [❌ ERROR] [Login] 🔑 API Key inválida. Verifica endpoint.env
+[2026-02-02 19:52:16.998] [❌ ERROR] [Login] Error resolviendo CAPTCHA
+  Exception: ApiException: ERROR_KEY_DOES_NOT_EXIST
+[2026-02-02 19:52:17.002] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 20:04:00.627] [❌ ERROR] [Worker] Error procesando NEVIS FUENTES  
+  Exception: Exception: Error ejecutando caso
+[2026-02-02 20:04:09.359] [⚠️ WARNING] [Worker] ⚠️ Orden 381823 reintentará después (intentos incrementados, estadoCaso permanece en 3)
+[2026-02-02 20:04:42.841] [❌ ERROR] [API] Error obteniendo datos orden: HTTP 404
+[2026-02-02 20:04:44.144] [❌ ERROR] [Worker] No se encontraron datos para orden 153
+[2026-02-02 20:04:48.900] [❌ ERROR] [API] ❌ Error actualizando estadoCaso: HTTP 404
+[2026-02-02 20:04:48.914] [❌ ERROR] [API]    Respuesta: {'data': {}, 'description': 'No se encontró el Id proporcionado', 'message': 'No encontrado', 'statusCode': 404}
+[20:04:49] [📸 SCREENSHOT] Screenshot guardado: screenshots\error_153.png
+  Orden: 153
+  Error: Datos de paciente no encontrados
+[2026-02-02 20:04:49.225] [❌ ERROR] [Worker] ❌ Orden 153 marcada como ERROR: Datos de paciente no encontrados
+[2026-02-02 20:06:12.548] [❌ ERROR] [Home] No se pudo hacer clic en Reportar
+[2026-02-02 20:06:12.560] [❌ ERROR] [Worker] Error procesando NEVIS FUENTES  
+  Exception: Exception: No se pudo navegar al formulario
+[2026-02-02 20:14:46.786] [❌ ERROR] [Worker] Error procesando JARA ARRIETA
+  Exception: NameError: name 'ConfigUtil' is not defined
+[2026-02-02 20:15:01.143] [⚠️ WARNING] [Worker] ⚠️ Orden 381888 reintentará después (intentos incrementados, estadoCaso permanece en 3)
+[2026-02-02 20:16:15.866] [❌ ERROR] [Home] No se pudo hacer clic en Reportar
+[2026-02-02 20:20:54.259] [❌ ERROR] [Playwright] Error al iniciar navegador
+  Exception: TimeoutError: Page.goto: Timeout 60000ms exceeded.
+Call log:
+navigating to "https://portalsalud.coosalud.com/login", waiting until "load"
+
+[2026-02-02 20:20:54.279] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 20:25:02.158] [❌ ERROR] [EjecutarCaso] ❓ ERROR NO CLASIFICADO: 'PlaywrightHelper' object has no attribute 'ingresar_texto'
+  Exception: AttributeError: 'PlaywrightHelper' object has no attribute 'ingresar_texto'
+[2026-02-02 20:26:19.520] [⚠️ WARNING] [EjecutarCaso] ⚠️ Error en API al actualizar: El recurso solicitado no fue encontrado.
+[2026-02-02 20:26:22.817] [❌ ERROR] [Worker] Error procesando JARA ARRIETA
+  Exception: Exception: Error ejecutando caso
+[2026-02-02 20:26:56.722] [⚠️ WARNING] [Worker] ⚠️ Orden 381888 reintentará después (intentos incrementados, estadoCaso permanece en 3)
+[2026-02-02 20:27:55.378] [❌ ERROR] [Home] No se pudo hacer clic en Reportar
+[2026-02-02 20:27:55.386] [❌ ERROR] [Worker] Error procesando NEVIS FUENTES  
+  Exception: Exception: No se pudo navegar al formulario
+[2026-02-02 20:35:33.661] [⚠️ WARNING] [Playwright] Timeout en navegación, pero continuando: Page.goto: Timeout 60000ms exceeded.
+Call log:
+navigating to "https://portalsalud.coosalud.com/login", waiting until "domcontentloaded"
+
+[2026-02-02 20:37:40.598] [⚠️ WARNING] [Playwright] Primer intento falló: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://portalsalud.coosalud.com/login", waiting until "load"
+
+[2026-02-02 20:49:51.805] [❌ ERROR] [API] Error obteniendo datos orden: HTTP 404
+[2026-02-02 20:49:53.922] [❌ ERROR] [Worker] No se encontraron datos para orden 153
+[2026-02-02 20:49:58.647] [❌ ERROR] [API] ❌ Error actualizando estadoCaso: HTTP 404
+[2026-02-02 20:49:58.670] [❌ ERROR] [API]    Respuesta: {'data': {}, 'description': 'No se encontró el Id proporcionado', 'message': 'No encontrado', 'statusCode': 404}
+[20:49:58] [📸 SCREENSHOT] Screenshot guardado: screenshots\error_153.png
+  Orden: 153
+  Error: Datos de paciente no encontrados
+[2026-02-02 20:49:58.924] [❌ ERROR] [Worker] ❌ Orden 153 marcada como ERROR: Datos de paciente no encontrados
+[2026-02-02 20:51:39.835] [❌ ERROR] [API] Error obteniendo datos orden: HTTP 404
+[2026-02-02 20:51:39.842] [❌ ERROR] [Worker] No se encontraron datos para orden 153
+[2026-02-02 20:51:44.083] [❌ ERROR] [API] ❌ Error actualizando estadoCaso: HTTP 404
+[2026-02-02 20:51:44.103] [❌ ERROR] [API]    Respuesta: {'data': {}, 'description': 'No se encontró el Id proporcionado', 'message': 'No encontrado', 'statusCode': 404}
+[20:51:44] [📸 SCREENSHOT] Screenshot guardado: screenshots\error_153.png
+  Orden: 153
+  Error: Datos de paciente no encontrados
+[2026-02-02 20:51:44.325] [❌ ERROR] [Worker] ❌ Orden 153 marcada como ERROR: Datos de paciente no encontrados
+[2026-02-02 20:56:17.783] [❌ ERROR] [Worker] Error procesando NEVIS FUENTES  
+  Exception: Exception: Error ejecutando caso
+[2026-02-02 20:56:34.642] [⚠️ WARNING] [Worker] ⚠️ Orden 381823 reintentará después (intentos incrementados, estadoCaso permanece en 3)
+[2026-02-02 20:56:44.790] [❌ ERROR] [API] Error obteniendo datos orden: HTTP 404
+[2026-02-02 20:56:46.436] [❌ ERROR] [Worker] No se encontraron datos para orden 153
+[2026-02-02 20:56:51.155] [❌ ERROR] [API] ❌ Error actualizando estadoCaso: HTTP 404
+[2026-02-02 20:56:51.173] [❌ ERROR] [API]    Respuesta: {'data': {}, 'description': 'No se encontró el Id proporcionado', 'message': 'No encontrado', 'statusCode': 404}
+[20:56:51] [📸 SCREENSHOT] Screenshot guardado: screenshots\error_153.png
+  Orden: 153
+  Error: Datos de paciente no encontrados
+[2026-02-02 20:56:51.411] [❌ ERROR] [Worker] ❌ Orden 153 marcada como ERROR: Datos de paciente no encontrados
+[2026-02-02 21:03:56.200] [❌ ERROR] [Login] ⏱️ Timeout esperando TwoCaptcha. Servicio muy ocupado.
+[2026-02-02 21:03:56.213] [❌ ERROR] [Login] Error resolviendo CAPTCHA
+  Exception: TimeoutException: timeout 180.0 exceeded
+[2026-02-02 21:03:56.223] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 21:08:27.345] [❌ ERROR] [Worker] Error procesando NEVIS FUENTES  
+  Exception: Exception: Error ejecutando caso
+[2026-02-02 21:09:06.400] [⚠️ WARNING] [Worker] ⚠️ Orden 381823 reintentará después (intentos incrementados, estadoCaso permanece en 3)
+[2026-02-02 21:11:46.052] [❌ ERROR] [Worker] Error procesando JARA ARRIETA
+  Exception: Exception: Error ejecutando caso
+[2026-02-02 21:11:55.680] [⚠️ WARNING] [Worker] ⚠️ Orden 381888 reintentará después (intentos incrementados, estadoCaso permanece en 3)
+[2026-02-02 21:19:14.588] [⚠️ WARNING] [Playwright] Primer intento falló: Page.goto: Timeout 30000ms exceeded.
+Call log:
+navigating to "https://portalsalud.coosalud.com/login", waiting until "load"
+
+[2026-02-02 21:22:49.121] [❌ ERROR] [Playwright] Error al iniciar navegador
+  Exception: TimeoutError: Page.goto: Timeout 15000ms exceeded.
+Call log:
+navigating to "https://portalsalud.coosalud.com/login", waiting until "domcontentloaded"
+
+[2026-02-02 21:22:49.131] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 21:24:46.628] [❌ ERROR] [Playwright] Error al iniciar navegador
+  Exception: TimeoutError: Page.goto: Timeout 15000ms exceeded.
+Call log:
+navigating to "https://portalsalud.coosalud.com/login", waiting until "domcontentloaded"
+
+[2026-02-02 21:24:46.636] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 21:27:18.519] [⚠️ WARNING] [Playwright] Timeout en navegación, verificando si la página cargó: Page.goto: Timeout 15000ms exceeded.
+Call log:
+navigating to "https://portalsalud.coosalud.com/login", waiting until "domcontentloaded"
+
+[2026-02-02 21:33:03.628] [❌ ERROR] [Worker] Error procesando JARA ARRIETA
+  Exception: Exception: Error ejecutando caso
+[2026-02-02 21:33:03.637] [⚠️ WARNING] [Worker] ⚠️ Error desconocido, marcando como ERROR final: Error ejecutando caso
+[21:33:08] [📸 SCREENSHOT] Screenshot guardado: screenshots\error_381888.png
+  Orden: 381888
+  Error: Error no clasificado: Error ejecutando caso
+[2026-02-02 21:33:08.156] [❌ ERROR] [Worker] ❌ Orden 381888 marcada como ERROR: Error no clasificado: Error ejecutando caso
+[2026-02-02 21:35:54.401] [❌ ERROR] [Worker] Error procesando KELLY RAMIREZ
+  Exception: Exception: Error ejecutando caso
+[2026-02-02 21:35:54.408] [⚠️ WARNING] [Worker] ⚠️ Error desconocido, marcando como ERROR final: Error ejecutando caso
+[21:35:58] [📸 SCREENSHOT] Screenshot guardado: screenshots\error_381782.png
+  Orden: 381782
+  Error: Error no clasificado: Error ejecutando caso
+[2026-02-02 21:35:58.893] [❌ ERROR] [Worker] ❌ Orden 381782 marcada como ERROR: Error no clasificado: Error ejecutando caso
+[2026-02-02 21:39:36.012] [❌ ERROR] [Worker] Error procesando JARA ARRIETA
+  Exception: Exception: Error ejecutando caso
+[2026-02-02 21:39:36.019] [⚠️ WARNING] [Worker] ⚠️ Error desconocido, marcando como ERROR final: Error ejecutando caso
+[21:39:40] [📸 SCREENSHOT] Screenshot guardado: screenshots\error_381888.png
+  Orden: 381888
+  Error: Error no clasificado: Error ejecutando caso
+[2026-02-02 21:39:40.483] [❌ ERROR] [Worker] ❌ Orden 381888 marcada como ERROR: Error no clasificado: Error ejecutando caso
+[2026-02-02 21:40:27.578] [❌ ERROR] [Worker] Error procesando KELLY RAMIREZ
+  Exception: Exception: Error ejecutando caso
+[2026-02-02 21:40:27.587] [⚠️ WARNING] [Worker] ⚠️ Error desconocido, marcando como ERROR final: Error ejecutando caso
+[21:40:32] [📸 SCREENSHOT] Screenshot guardado: screenshots\error_381782.png
+  Orden: 381782
+  Error: Error no clasificado: Error ejecutando caso
+[2026-02-02 21:40:32.087] [❌ ERROR] [Worker] ❌ Orden 381782 marcada como ERROR: Error no clasificado: Error ejecutando caso
+[2026-02-02 21:40:55.963] [❌ ERROR] [Worker] Error procesando NEVIS FUENTES  
+  Exception: Exception: Error ejecutando caso
+[2026-02-02 21:40:55.973] [⚠️ WARNING] [Worker] ⚠️ Error desconocido, marcando como ERROR final: Error ejecutando caso
+[21:41:00] [📸 SCREENSHOT] Screenshot guardado: screenshots\error_381823.png
+  Orden: 381823
+  Error: Error no clasificado: Error ejecutando caso
+[2026-02-02 21:41:00.502] [❌ ERROR] [Worker] ❌ Orden 381823 marcada como ERROR: Error no clasificado: Error ejecutando caso
+[2026-02-02 21:41:13.056] [❌ ERROR] [API] Error obteniendo datos orden: HTTP 404
+[2026-02-02 21:41:13.064] [❌ ERROR] [Worker] No se encontraron datos para orden 381559
+[21:41:17] [📸 SCREENSHOT] Screenshot guardado: screenshots\error_381559.png
+  Orden: 381559
+  Error: Datos de paciente no encontrados
+[2026-02-02 21:41:17.534] [❌ ERROR] [Worker] ❌ Orden 381559 marcada como ERROR: Datos de paciente no encontrados
+[2026-02-02 21:43:40.750] [❌ ERROR] [Worker] Error procesando NEVIS FUENTES  
+  Exception: Exception: Error ejecutando caso
+[2026-02-02 21:43:40.759] [⚠️ WARNING] [Worker] ⚠️ Error desconocido, marcando como ERROR final: Error ejecutando caso
+[21:43:45] [📸 SCREENSHOT] Screenshot guardado: screenshots\error_381823.png
+  Orden: 381823
+  Error: Error no clasificado: Error ejecutando caso
+[2026-02-02 21:43:45.229] [❌ ERROR] [Worker] ❌ Orden 381823 marcada como ERROR: Error no clasificado: Error ejecutando caso
+[2026-02-02 21:43:45.254] [🔥 CRITICAL] [Worker] 🚨 ALERTA: 5 errores consecutivos detectados
+[2026-02-02 21:44:08.666] [❌ ERROR] [API] Error obteniendo datos orden: HTTP 404
+[2026-02-02 21:44:08.675] [❌ ERROR] [Worker] No se encontraron datos para orden 381559
+[21:44:13] [📸 SCREENSHOT] Screenshot guardado: screenshots\error_381559.png
+  Orden: 381559
+  Error: Datos de paciente no encontrados
+[2026-02-02 21:44:13.140] [❌ ERROR] [Worker] ❌ Orden 381559 marcada como ERROR: Datos de paciente no encontrados
+[2026-02-02 21:44:13.159] [🔥 CRITICAL] [Worker] 🚨 ALERTA: 5 errores consecutivos detectados
+[2026-02-02 21:52:19.203] [❌ ERROR] [EjecutarCaso] ❓ ERROR NO CLASIFICADO: Page.evaluate: ReferenceError: arguments is not defined
+    at eval (eval at evaluate (:226:30), <an...
+  Exception: Error: Page.evaluate: ReferenceError: arguments is not defined
+    at eval (eval at evaluate (:226:30), <anonymous>:1:1)
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-02 21:52:33.905] [❌ ERROR] [Worker] Error procesando JARA ARRIETA
+  Exception: Exception: Error ejecutando caso
+[2026-02-02 21:52:49.131] [⚠️ WARNING] [Worker] ⚠️ Error desconocido, marcando como ERROR final: Error ejecutando caso
+[21:52:55] [📸 SCREENSHOT] Screenshot guardado: screenshots\error_381888.png
+  Orden: 381888
+  Error: Error no clasificado: Error ejecutando caso
+[2026-02-02 21:52:55.841] [❌ ERROR] [Worker] ❌ Orden 381888 marcada como ERROR: Error no clasificado: Error ejecutando caso
+[2026-02-02 21:52:55.862] [🔥 CRITICAL] [Worker] 🚨 ALERTA: 5 errores consecutivos detectados
+[2026-02-02 21:58:40.641] [❌ ERROR] [Login] Error resolviendo CAPTCHA: ERROR_CAPTCHA_UNSOLVABLE
+[2026-02-02 21:58:40.649] [❌ ERROR] [Login] Error resolviendo CAPTCHA
+  Exception: ApiException: ERROR_CAPTCHA_UNSOLVABLE
+[2026-02-02 21:58:40.661] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 22:04:13.152] [❌ ERROR] [EjecutarCaso] ❓ ERROR NO CLASIFICADO: Page.evaluate: ReferenceError: arguments is not defined
+    at eval (eval at evaluate (:226:30), <an...
+  Exception: Error: Page.evaluate: ReferenceError: arguments is not defined
+    at eval (eval at evaluate (:226:30), <anonymous>:1:1)
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-02 22:04:16.452] [❌ ERROR] [Worker] Error procesando JARA ARRIETA
+  Exception: Exception: Error ejecutando caso
+[2026-02-02 22:04:16.459] [⚠️ WARNING] [Worker] ⚠️ Error desconocido, marcando como ERROR final: Error ejecutando caso
+[22:04:20] [📸 SCREENSHOT] Screenshot guardado: screenshots\error_381888.png
+  Orden: 381888
+  Error: Error no clasificado: Error ejecutando caso
+[2026-02-02 22:04:20.947] [❌ ERROR] [Worker] ❌ Orden 381888 marcada como ERROR: Error no clasificado: Error ejecutando caso
+[2026-02-02 22:10:50.361] [❌ ERROR] [EjecutarCaso] ❓ ERROR NO CLASIFICADO: Page.evaluate: ReferenceError: arguments is not defined
+    at eval (eval at evaluate (:226:30), <an...
+  Exception: Error: Page.evaluate: ReferenceError: arguments is not defined
+    at eval (eval at evaluate (:226:30), <anonymous>:1:1)
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-02 22:10:53.659] [❌ ERROR] [Worker] Error procesando JARA ARRIETA
+  Exception: Exception: Error ejecutando caso
+[2026-02-02 22:10:53.667] [⚠️ WARNING] [Worker] ⚠️ Error desconocido, marcando como ERROR final: Error ejecutando caso
+[2026-02-02 22:12:48.464] [❌ ERROR] [Login] 🔑 API Key inválida. Verifica endpoint.env
+[2026-02-02 22:12:48.482] [❌ ERROR] [Login] Error resolviendo CAPTCHA
+  Exception: NetworkException: HTTPSConnectionPool(host='2captcha.com', port=443): Max retries exceeded with url: /res.php?key=857a4d41a543d0168a59504919ad5807&action=get&id=81808039427 (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x0000029C5F46B490>: Failed to resolve '2captcha.com' ([Errno 11001] getaddrinfo failed)"))
+[2026-02-02 22:12:48.513] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-02 22:27:18.131] [❌ ERROR] [EjecutarCaso] ❓ ERROR NO CLASIFICADO: Page.evaluate: ReferenceError: arguments is not defined
+    at eval (eval at evaluate (:226:30), <an...
+  Exception: Error: Page.evaluate: ReferenceError: arguments is not defined
+    at eval (eval at evaluate (:226:30), <anonymous>:1:1)
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
