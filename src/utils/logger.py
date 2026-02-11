@@ -2,12 +2,14 @@
 Sistema de logging avanzado con triple salida:
 - Consola (print)
 - UI (callback)
-- Archivo (solo warnings y errores)
+- Archivo de errores (solo warnings y errores) → errors_YYYY-MM-DD.txt
+- Archivo de app completo (todos los niveles)  → app_YYYY-MM-DD.log
 """
 import os
 from datetime import datetime
 from pathlib import Path
 from typing import Optional, Callable
+from utils.paths import get_data_path
 
 
 class AdvancedLogger:
@@ -31,12 +33,13 @@ class AdvancedLogger:
             log_dir: Directorio para archivos de log
         """
         self.ui_callback = ui_callback
-        self.log_dir = Path(log_dir)
-        self.log_dir.mkdir(exist_ok=True)
+        self.log_dir = get_data_path(log_dir)
+        self.log_dir.mkdir(parents=True, exist_ok=True)
         
         # Archivo del día actual
         self.current_date = datetime.now().strftime('%Y-%m-%d')
         self.log_file = self.log_dir / f"errors_{self.current_date}.txt"
+        self.app_log_file = self.log_dir / f"app_{self.current_date}.log"
     
     def _format_message(self, nivel: str, modulo: str, mensaje: str) -> str:
         """Formatea el mensaje de log"""
@@ -50,15 +53,25 @@ class AdvancedLogger:
         if current != self.current_date:
             self.current_date = current
             self.log_file = self.log_dir / f"errors_{self.current_date}.txt"
+            self.app_log_file = self.log_dir / f"app_{self.current_date}.log"
     
     def _write_to_file(self, mensaje: str):
-        """Escribe al archivo de log"""
+        """Escribe al archivo de log de errores"""
         try:
             self._check_date_rollover()
             with open(self.log_file, 'a', encoding='utf-8') as f:
                 f.write(mensaje + '\n')
         except Exception as e:
             print(f"Error escribiendo al log: {e}")
+
+    def _write_to_app_log(self, mensaje: str):
+        """Escribe al archivo de log general de la app (todos los niveles)"""
+        try:
+            self._check_date_rollover()
+            with open(self.app_log_file, 'a', encoding='utf-8') as f:
+                f.write(mensaje + '\n')
+        except Exception:
+            pass
     
     def log(self, nivel: str, modulo: str, mensaje: str):
         """
@@ -81,7 +94,10 @@ class AdvancedLogger:
             except Exception as e:
                 print(f"Error actualizando UI: {e}")
         
-        # 3. A archivo solo WARNING, ERROR, CRITICAL
+        # 3. A archivo app_*.log TODOS los niveles
+        self._write_to_app_log(formatted)
+        
+        # 4. A archivo errors_*.txt solo WARNING, ERROR, CRITICAL
         if nivel in ['WARNING', 'ERROR', 'CRITICAL']:
             self._write_to_file(formatted)
     

@@ -238,15 +238,20 @@ class EjecutarCasosPlaywright:
                     self.logger.info('EjecutarCaso', "Clicked on IPS Remitente input")
                     time.sleep(1)
                     
-                    # Obtener IPS Remitente desde los datos del paciente (nombreIps del JSON)
-                    nombre_ips_remitente = getattr(data, 'nombreIps', '') or ''
-                    self.logger.info('EjecutarCaso', f"IPS Remitente desde JSON: '{nombre_ips_remitente}'")
+                    # IPS Remitente: usar NITIPS + NOMBREIPS del .env
+                    nit_config = (config.nit_ips or "").strip()
+                    nombre_config = (config.nombre_ips or "").strip()
+                    if nit_config and nombre_config:
+                        nombre_ips_remitente = f"{nit_config} - {nombre_config}"
+                    else:
+                        nombre_ips_remitente = nombre_config or nit_config
+                    self.logger.info('EjecutarCaso', f"IPS Remitente desde config: '{nombre_ips_remitente}'")
                     
                     if not nombre_ips_remitente:
-                        raise Exception("No se encontró nombreIps en los datos del paciente")
+                        raise Exception("No se encontró NITIPS/NOMBREIPS en configuración")
                     
                     # Extraer el NIT (primer parte antes del guión) para búsqueda
-                    nit_busqueda = nombre_ips_remitente.split('-')[0].strip() if '-' in nombre_ips_remitente else nombre_ips_remitente
+                    nit_busqueda = nit_config or (nombre_ips_remitente.split('-')[0].strip() if '-' in nombre_ips_remitente else nombre_ips_remitente)
                     
                     if not self.helper.ingresar_texto_secuencial(input_IPSREMITE, nit_busqueda):
                         self.logger.info('EjecutarCaso', f"No se pudo ingresar texto secuencialmente: '{nit_busqueda}'")
@@ -459,10 +464,12 @@ class EjecutarCasosPlaywright:
                 # ====== VERIFICACIÓN DE SESIÓN ANTES DE IPS ======
                 self.verificar_sesion_activa(data, "ANTES DE SELECCIÓN DE IPS")
                 
-                # Buscar y clickear IPS
-                resultado = self.buscar_y_clickear_ips()
+                # Buscar y clickear IPS de atención y sede (desde JSON)
+                nombre_ips_atencion = getattr(data, 'nombreIps', '') or ''
+                sede_atencion = getattr(data, 'sede', '') or ''
+                resultado = self.buscar_y_clickear_ips(nombre_ips_atencion)
                 if resultado:
-                    self.buscar_y_clickear_ips_sede()
+                    self.buscar_y_clickear_ips_sede(sede_atencion)
                 else:
                     nombre_archivo = "archivo.txt"
                     with open(nombre_archivo, 'a') as archivo:
@@ -883,7 +890,7 @@ class EjecutarCasosPlaywright:
             id_item = data.idItemOrden
             
             # Usar el endpoint correcto para actualizar estadoCaso
-            url = f"http://localhost:5000/h-itemordenesproced/{id_item}/estadoCaso"
+            url = f"{config.api_url_programacion_base.rstrip('/')}/h-itemordenesproced/{id_item}/estadoCaso"
             
             # Mapear el estado string a integer para estadoCaso
             estado_int = int(estado) if estado.isdigit() else 0
@@ -977,8 +984,8 @@ class EjecutarCasosPlaywright:
             self.logger.info('EjecutarCaso', f"clic boton bonton_ok")
             self.reinicio()
     
-    def buscar_y_clickear_ips(self) -> bool:
-        """Buscar y clickear IPS de atención - XPATH SELENIUM EXACTO"""
+    def buscar_y_clickear_ips(self, nombre_ips_atencion: str) -> bool:
+        """Buscar y clickear IPS de atención usando nombreIps del JSON"""
         try:
             print("🔍 === INICIANDO BÚSQUEDA DE IPS DE ATENCIÓN ===")
             
@@ -997,7 +1004,14 @@ class EjecutarCasosPlaywright:
             self.logger.info('EjecutarCaso', "Clicked on IPS de atención input")
             time.sleep(1)
             
-            search_text = config.nit_ips
+            nombre_ips_atencion = (nombre_ips_atencion or "").strip()
+            if not nombre_ips_atencion:
+                nit_cfg = (config.nit_ips or "").strip()
+                nombre_cfg = (config.nombre_ips or "").strip()
+                nombre_ips_atencion = f"{nit_cfg} - {nombre_cfg}" if nit_cfg and nombre_cfg else (nombre_cfg or nit_cfg)
+            
+            nit_busqueda = nombre_ips_atencion.split('-')[0].strip() if '-' in nombre_ips_atencion else nombre_ips_atencion
+            search_text = nit_busqueda or (config.nit_ips or "")
             print(f"⌨️ Paso 3: Ingresando texto: '{search_text}'")
             
             if self.helper.ingresar_texto_secuencial(input_IPS, search_text):
@@ -1040,12 +1054,21 @@ class EjecutarCasosPlaywright:
                 print("🎯 Paso 6: Buscando opción específica...")
                 option_encontrada = None
                 
-                nombre_ips_cfg = config.nombre_ips or ""
-                nombres_ips = [n.strip() for n in nombre_ips_cfg.split("|") if n.strip()]
+                nombre_ips_cfg = (config.nombre_ips or "").strip()
+                nombres_ips = []
+                if nombre_ips_atencion:
+                    if '-' in nombre_ips_atencion:
+                        nombre_parte = nombre_ips_atencion.split('-', 1)[1].strip()
+                        if nombre_parte:
+                            nombres_ips.append(nombre_parte)
+                    else:
+                        nombres_ips.append(nombre_ips_atencion)
+                if nombre_ips_cfg:
+                    nombres_ips.extend([n.strip() for n in nombre_ips_cfg.split("|") if n.strip()])
                 
                 for elemento, texto in opciones_con_texto:
                     print(f"  📝 Evaluando: '{texto}'")
-                    if search_text in texto and any(nombre in texto for nombre in nombres_ips):
+                    if search_text in texto and (not nombres_ips or any(nombre in texto for nombre in nombres_ips)):
                         print(f"  ✅ Opción encontrada: '{texto}'")
                         option_encontrada = elemento
                         break
@@ -1095,28 +1118,31 @@ class EjecutarCasosPlaywright:
                 pass
             return False
     
-    def buscar_y_clickear_ips_sede(self) -> bool:
-        """Buscar y hacer clic en la SEDE - XPATH SELENIUM EXACTO"""
+    def buscar_y_clickear_ips_sede(self, sede_atencion: str) -> bool:
+        """Buscar y hacer clic en la SEDE usando el valor del JSON"""
         try:
             # XPATH SELENIUM EXACTO
             input_ips_sede = self.page.wait_for_selector("//input[contains(@aria-owns,'sedeIpsAtencion_list')]", timeout=5000)
             input_ips_sede.fill("")
             input_ips_sede.click()
             self.logger.info('EjecutarCaso', "clic ips sede")
-            
+
+            sede_atencion = (sede_atencion or "").strip()
             sede_code = (config.sede_ips or "").strip()
             sede_nombre = (config.sede_ips_nombre or "").strip()
-            
-            if not sede_code and not sede_nombre:
+
+            if not sede_atencion and not sede_code and not sede_nombre:
                 self.logger.warning('EjecutarCaso', "SEDE IPS no configurada")
                 return False
             
-            search_text = sede_code if sede_code else sede_nombre
+            search_text = sede_atencion or sede_code or sede_nombre
             if self.helper.ingresar_texto_secuencial(input_ips_sede, search_text):
                 self.logger.info('EjecutarCaso', "Texto ingresado correctamente en IPS Sede")
                 time.sleep(2)
                 
                 candidates = []
+                if sede_atencion:
+                    candidates.append(sede_atencion)
                 if sede_nombre and sede_code:
                     candidates.append(f"{sede_code}-{sede_nombre}")
                 if sede_code:

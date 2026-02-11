@@ -20,6 +20,12 @@ twocaptcha-python>=1.2.0
 reportlab==3.6.13  # Compatible con Python 3.8
 PyMuPDF  # Para generación de PDFs con control preciso
 
+# Criptografía para licencia
+cryptography>=42.0.0
+
+# Empaquetado como .exe
+pyinstaller>=6.0.0
+
 # Manejo de variables de entorno (opcional, si se prefiere usar python-dotenv)
 # python-dotenv>=1.0.0
 

@@ -464,8 +464,11 @@ class ProgramacionPanel(ttk.Frame):
         """Limpia recursos al destruir"""
         if self.refresh_id:
             self.after_cancel(self.refresh_id)
-        
-        if self.worker and self.worker.is_alive():
-            self.worker.detener()
-        
+
+        if self.worker:
+            # Evitar callbacks a UI destruida
+            self.worker.on_stats_update = None
+            if hasattr(self.worker, 'logger'):
+                self.worker.logger.ui_callback = None
+
         super().destroy()

@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Optional
 from playwright.sync_api import sync_playwright, Browser, BrowserContext, Page, Playwright
 from utils.logger import AdvancedLogger
+from utils.paths import get_data_path
 
 
 class PlaywrightService:
@@ -26,11 +27,11 @@ class PlaywrightService:
         self.page: Optional[Page] = None
         
         # Archivos de sesión y screenshots
-        self.session_dir = Path("session_data")
+        self.session_dir = get_data_path("session_data")
         self.session_dir.mkdir(exist_ok=True)
         self.session_file = self.session_dir / "session_state.json"
         
-        self.screenshots_dir = Path("screenshots")
+        self.screenshots_dir = get_data_path("screenshots")
         self.screenshots_dir.mkdir(exist_ok=True)
     
     def iniciar_navegador(self, reutilizar_sesion: bool = True) -> bool:

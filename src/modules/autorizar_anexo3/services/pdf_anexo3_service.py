@@ -6,6 +6,7 @@ import os
 import requests
 from datetime import datetime
 from pathlib import Path
+from utils.paths import get_data_path, get_resource_path
 
 try:
     import fitz  # PyMuPDF
@@ -44,10 +45,29 @@ class PDFAnexo3Service:
         
         self.logger = logger
         self.config = config
-        self.base_url = "http://localhost:5000"
-        self.pdf_output_dir = config.get('PDF_OUTPUT_DIR', 'C:\\temp\\anexos3')
-        self.logo_path = config.get('ANEXO3_LOGO_PATH', '')
-        self.firmas_path = config.get('FIRMAS_PATH', 'C:\\python\\boot-oro\\resources\\images')
+        self.base_url = (config.api_url_programacion_base or 'http://localhost:5000').rstrip('/')
+        
+        # Directorio de salida de PDFs: runtime (escritura)
+        pdf_dir = config.get('PDF_OUTPUT_DIR', '')
+        if pdf_dir and Path(pdf_dir).is_absolute() and Path(pdf_dir).exists():
+            self.pdf_output_dir = pdf_dir
+        else:
+            self.pdf_output_dir = str(get_data_path('temp/anexos3'))
+        
+        # Logo: recurso empaquetado (solo lectura)
+        logo = config.get('ANEXO3_LOGO_PATH', '')
+        if logo and Path(logo).exists():
+            self.logo_path = logo
+        else:
+            self.logo_path = str(get_resource_path('resources/images/Anexo3.png'))
+        
+        # Firmas: recurso empaquetado (solo lectura)
+        firmas = config.get('FIRMAS_PATH', '')
+        if firmas and Path(firmas).exists():
+            self.firmas_path = firmas
+        else:
+            self.firmas_path = str(get_resource_path('resources/images'))
+        
         os.makedirs(self.pdf_output_dir, exist_ok=True)
     
     def generar_anexo3(self, id_atencion: int, id_orden: int, id_procedimiento: int) -> str:
@@ -92,6 +112,52 @@ class PDFAnexo3Service:
             
         except Exception as e:
             self.logger.error('PDFAnexo3', f"Error generando Anexo 3", e)
+            raise
+
+    def generar_anexo3_grupo(self, id_atencion: int, id_orden: int) -> str:
+        """Genera el PDF del Anexo 3 para grupo de procedimientos"""
+        try:
+            self.logger.info(
+                'PDFAnexo3',
+                f"📄 Generando Anexo 3 (grupo) - Atención: {id_atencion}, Orden: {id_orden}"
+            )
+
+            url = f"{self.base_url}/datos-orden-atencion-sin-procedimiento?idAtencion={id_atencion}&idOrden={id_orden}"
+            self.logger.info('PDFAnexo3', f"🌐 Consultando: {url}")
+
+            response = requests.get(url, timeout=10)
+            if response.status_code != 200:
+                raise Exception(f"Error en API: HTTP {response.status_code}")
+
+            data_response = response.json()
+            if data_response.get('statusCode') != 200:
+                raise Exception(f"Error en respuesta: {data_response.get('message')}")
+
+            datos = data_response.get('data', {})
+            self.logger.info(
+                'PDFAnexo3',
+                f"✅ Datos obtenidos - Paciente: {datos.get('Nombre1')} {datos.get('Apellido1')}"
+            )
+
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            no_documento = datos.get('NoDocumento', 'SinDoc')
+            filename = f"Anexo3_Grupo_{id_atencion}_{id_orden}_{no_documento}_{timestamp}.pdf"
+            filepath = os.path.join(self.pdf_output_dir, filename)
+
+            self.logger.info('PDFAnexo3', f"📝 Archivo destino: {filepath}")
+
+            self._crear_pdf(filepath, datos)
+
+            if not os.path.exists(filepath):
+                raise Exception("PDF no se generó correctamente")
+
+            tamaño = os.path.getsize(filepath)
+            self.logger.info('PDFAnexo3', f"✅ PDF generado exitosamente ({tamaño} bytes)")
+
+            return filepath
+
+        except Exception as e:
+            self.logger.error('PDFAnexo3', f"Error generando Anexo 3 (grupo)", e)
             raise
     
     def _crear_pdf(self, filepath: str, datos: dict):
@@ -546,18 +612,35 @@ class PDFAnexo3Service:
         
         y += 24
         
-        # Datos
-        cups = datos.get('Id_Procedimiento', '881301')
-        cantidad = str(datos.get('Cantidad', 1))
-        descripcion = datos.get('NProcedimiento', '')
-        numero_autorizacion = datos.get('numeroAutorizacion', '')
-        
-        self._texto(page, x + 10, y, f"1  {cups}", 7)
-        self._texto(page, x + 65, y, cantidad, 7)
-        self._texto(page, x + 110, y, descripcion[:50], 6)
-        self._texto(page, x + 380, y, numero_autorizacion, 7)
-        
-        y += 20
+        procedimientos = datos.get('procedimientos')
+        if procedimientos and isinstance(procedimientos, list):
+            for idx, proc in enumerate(procedimientos, start=1):
+                cups = proc.get('Id_Procedimiento', '')
+                cantidad = str(proc.get('Cantidad', 1))
+                descripcion = proc.get('NProcedimiento', '')
+                numero_autorizacion = proc.get('numeroAutorizacion', '')
+
+                self._texto(page, x + 10, y, f"{idx}  {cups}", 7)
+                self._texto(page, x + 65, y, cantidad, 7)
+                self._texto(page, x + 110, y, descripcion[:50], 6)
+                self._texto(page, x + 380, y, numero_autorizacion, 7)
+
+                y += 12
+
+            y += 8
+        else:
+            # Datos individuales
+            cups = datos.get('Id_Procedimiento', '881301')
+            cantidad = str(datos.get('Cantidad', 1))
+            descripcion = datos.get('NProcedimiento', '')
+            numero_autorizacion = datos.get('numeroAutorizacion', '')
+            
+            self._texto(page, x + 10, y, f"1  {cups}", 7)
+            self._texto(page, x + 65, y, cantidad, 7)
+            self._texto(page, x + 110, y, descripcion[:50], 6)
+            self._texto(page, x + 380, y, numero_autorizacion, 7)
+            
+            y += 20
         
         # Justificación Clínica
         justificacion = datos.get('NotaHc', '')

@@ -6,7 +6,7 @@ import os
 import tkinter as tk
 from tkinter import ttk, messagebox
 from datetime import datetime
-from typing import List, Dict
+from typing import List, Dict, Optional
 import sys
 from pathlib import Path
 
@@ -34,7 +34,9 @@ class AutorizarAnexo3Panel(ttk.Frame):
         super().__init__(parent)
         self.config = config
         self.service = AutorizarAnexo3Service(config)
-        self.programacion_service = ProgramacionService()
+        self.programacion_service = ProgramacionService(
+            base_url=config.api_url_programacion_base or 'http://localhost:5000'
+        )
         self.logger = AdvancedLogger()
         try:
             self.pdf_service = PDFAnexo3Service(self.logger, config)
@@ -95,6 +97,21 @@ class AutorizarAnexo3Panel(ttk.Frame):
         )
         combo_estado.pack(side=tk.LEFT)
         combo_estado.bind('<<ComboboxSelected>>', lambda e: self._cargar_datos())
+
+        # Busqueda por nombre o documento
+        self.nombre_var = tk.StringVar()
+        self.documento_var = tk.StringVar()
+        ttk.Label(toolbar, text="Nombre:").pack(side=tk.LEFT, padx=(10, 5))
+        nombre_entry = ttk.Entry(toolbar, textvariable=self.nombre_var, width=18)
+        nombre_entry.pack(side=tk.LEFT)
+        ttk.Label(toolbar, text="Documento:").pack(side=tk.LEFT, padx=(10, 5))
+        documento_entry = ttk.Entry(toolbar, textvariable=self.documento_var, width=14)
+        documento_entry.pack(side=tk.LEFT)
+        ttk.Button(
+            toolbar,
+            text="🔍 Buscar",
+            command=self._cargar_datos
+        ).pack(side=tk.LEFT, padx=5)
         
         # Botón para programar órdenes
         ttk.Button(
@@ -231,7 +248,13 @@ class AutorizarAnexo3Panel(ttk.Frame):
             except ValueError:
                 estado_caso = 0
 
-            response = self.service.obtener_ordenes_hc(estado_caso=estado_caso)
+            nombre = self.nombre_var.get().strip()
+            documento = self.documento_var.get().strip()
+            response = self.service.obtener_ordenes_hc(
+                estado_caso=estado_caso,
+                nombre=nombre or None,
+                documento=documento or None
+            )
             
             if response['success']:
                 ordenes = response['data'] or []
@@ -266,7 +289,7 @@ class AutorizarAnexo3Panel(ttk.Frame):
                 "Error",
                 f"Error al conectar con el API:\n{str(e)}\n\n"
                 f"Asegúrese de que el servidor esté ejecutándose en:\n"
-                f"http://localhost:5000"
+                f"{self.config.api_url_programacion_base}"
             )
     
     def _actualizar_tabla(self, ordenes):
@@ -423,6 +446,10 @@ class AutorizarAnexo3Panel(ttk.Frame):
                 "PDF no esta disponible. Instale PyMuPDF para habilitar esta funcion."
             )
             return
+
+        tipo = self._seleccionar_tipo_impresion()
+        if not tipo:
+            return
         if not self.seleccionados:
             messagebox.showwarning(
                 "Sin Selección",
@@ -437,20 +464,30 @@ class AutorizarAnexo3Panel(ttk.Frame):
                 errores += 1
                 continue
 
-            id_atencion = orden.get('idAtencion') or orden.get('IdAtencion')
-            id_orden = orden.get('idOrden') or orden.get('IdOrden')
-            id_procedimiento = orden.get('idProcedimiento') or orden.get('Id_Procedimiento')
-
-            if not id_atencion or not id_orden or not id_procedimiento:
-                errores += 1
-                continue
-
             try:
-                file_path = self.pdf_service.generar_anexo3(
-                    id_atencion=int(id_atencion),
-                    id_orden=int(id_orden),
-                    id_procedimiento=int(id_procedimiento)
-                )
+                id_atencion = orden.get('idAtencion') or orden.get('IdAtencion')
+                id_orden = orden.get('idOrden') or orden.get('IdOrden')
+                id_procedimiento = orden.get('idProcedimiento') or orden.get('Id_Procedimiento')
+
+                if not id_atencion or not id_orden:
+                    errores += 1
+                    continue
+
+                if tipo == "grupo":
+                    file_path = self.pdf_service.generar_anexo3_grupo(
+                        id_atencion=int(id_atencion),
+                        id_orden=int(id_orden)
+                    )
+                else:
+                    if not id_procedimiento:
+                        errores += 1
+                        continue
+                    file_path = self.pdf_service.generar_anexo3(
+                        id_atencion=int(id_atencion),
+                        id_orden=int(id_orden),
+                        id_procedimiento=int(id_procedimiento)
+                    )
+
                 if os.path.exists(file_path):
                     os.startfile(file_path)
                 else:
@@ -463,6 +500,61 @@ class AutorizarAnexo3Panel(ttk.Frame):
                 "PDF",
                 f"Se generaron PDFs con errores: {errores}"
             )
+
+    def _seleccionar_tipo_impresion(self) -> Optional[str]:
+        """Pregunta el tipo de impresion y devuelve 'individual' o 'grupo'"""
+        respuesta = {'tipo': None}
+
+        ventana = tk.Toplevel(self)
+        ventana.title("Imprimir")
+        ancho, alto = 320, 140
+        ventana.geometry(f"{ancho}x{alto}")
+        ventana.resizable(False, False)
+        ventana.transient(self)
+
+        ttk.Label(
+            ventana,
+            text="Seleccione el tipo de impresion",
+            font=('Arial', 10, 'bold')
+        ).pack(pady=10)
+
+        btn_frame = ttk.Frame(ventana)
+        btn_frame.pack(pady=5)
+
+        def elegir(tipo: str):
+            respuesta['tipo'] = tipo
+            ventana.destroy()
+
+        ttk.Button(
+            btn_frame,
+            text="Imprimir individual",
+            command=lambda: elegir("individual"),
+            width=18
+        ).pack(side=tk.LEFT, padx=5)
+
+        ttk.Button(
+            btn_frame,
+            text="Imprimir grupo",
+            command=lambda: elegir("grupo"),
+            width=18
+        ).pack(side=tk.LEFT, padx=5)
+
+        ttk.Button(
+            ventana,
+            text="Cancelar",
+            command=ventana.destroy,
+            width=12
+        ).pack(pady=5)
+
+        ventana.update_idletasks()
+        x = (ventana.winfo_screenwidth() // 2) - (ancho // 2)
+        y = (ventana.winfo_screenheight() // 2) - (alto // 2)
+        ventana.geometry(f"{ancho}x{alto}+{x}+{y}")
+
+        ventana.grab_set()
+        ventana.wait_window()
+
+        return respuesta['tipo']
 
     def _anular_seleccionados(self):
         """Anula las órdenes seleccionadas"""

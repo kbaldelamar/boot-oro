@@ -5,6 +5,7 @@ Permite acceder a la configuración desde cualquier parte del proyecto.
 import os
 from pathlib import Path
 from typing import Optional
+from utils.paths import get_resource_path, get_data_path, get_runtime_path
 
 
 class Config:
@@ -29,23 +30,36 @@ class Config:
     
     def _load_env_file(self):
         """Carga las variables desde el archivo endpoint.env"""
-        # Obtener el directorio raíz del proyecto
-        project_root = Path(__file__).parent.parent.parent
-        env_file = project_root / 'endpoint.env'
+        env_file = get_resource_path('endpoint.env')
         
         if not env_file.exists():
             raise FileNotFoundError(f"No se encontró el archivo de configuración: {env_file}")
         
-        # Leer y parsear el archivo .env
+        # Diccionario temporal para almacenar variables
+        temp_vars = {}
+        
+        # Primera pasada: leer todas las variables
         with open(env_file, 'r', encoding='utf-8') as f:
             for line in f:
-                # Ignorar comentarios y líneas vacías
                 line = line.strip()
                 if line and not line.startswith('#'):
-                    # Parsear la línea KEY=VALUE
                     if '=' in line:
                         key, value = line.split('=', 1)
-                        os.environ[key.strip()] = value.strip()
+                        temp_vars[key.strip()] = value.strip()
+        
+        # Segunda pasada: resolver interpolación de variables
+        for key, value in temp_vars.items():
+            # Reemplazar variables ${VAR} en el valor
+            resolved_value = value
+            import re
+            pattern = r'\$\{([^}]+)\}'
+            matches = re.findall(pattern, value)
+            for var_name in matches:
+                if var_name in temp_vars:
+                    resolved_value = resolved_value.replace(f'${{{var_name}}}', temp_vars[var_name])
+            
+            # Establecer la variable de entorno con el valor resuelto
+            os.environ[key] = resolved_value
     
     @staticmethod
     def get(key: str, default: str = '') -> str:
@@ -60,6 +74,35 @@ class Config:
             Valor de la variable o el valor por defecto
         """
         return os.environ.get(key, default)
+    
+    # ===================================
+    # CONFIGURACIÓN DEL SERVIDOR
+    # ===================================
+    @property
+    def server_ip(self) -> str:
+        """IP del servidor"""
+        return self.get('SERVER_IP', 'localhost')
+    
+    @property
+    def server_port(self) -> str:
+        """Puerto del servidor"""
+        return self.get('SERVER_PORT', '5000')
+    
+    def build_server_url(self, endpoint: str = "") -> str:
+        """
+        Construye una URL usando la IP y puerto del servidor configurados.
+        
+        Args:
+            endpoint: Endpoint a agregar (opcional)
+        
+        Returns:
+            URL completa del servidor
+        """
+        base_url = f"http://{self.server_ip}:{self.server_port}"
+        if endpoint:
+            endpoint = endpoint.lstrip('/')
+            return f"{base_url}/{endpoint}"
+        return base_url
     
     # ===================================
     # ENDPOINTS DE API
@@ -127,6 +170,22 @@ class Config:
     def sede_ips_nombre(self) -> str:
         """Nombre completo de la sede de la IPS"""
         return self.get('SEDEIPSNOMBRE')
+
+    # ===================================
+    # LICENCIA / IPS PERMITIDAS
+    # ===================================
+    @property
+    def ips_nombres_permitidos(self) -> list:
+        """Lista de IPS permitidas para uso de la app"""
+        return [
+            "OROSALUD CAUCASIA IPS S.A.S"
+        ]
+
+    @property
+    def recarga_public_key_path(self) -> str:
+        """Ruta de la llave publica para recargas (recurso empaquetado)"""
+        relative = self.get('RECARGA_PUBLIC_KEY_PATH', 'resources/keys/recarga_public.pem')
+        return str(get_resource_path(relative))
     
     # ===================================
     # RUTAS DE ARCHIVOS
@@ -134,7 +193,15 @@ class Config:
     @property
     def anexo3_logo_path(self) -> str:
         """Ruta del logo del encabezado del Anexo 3"""
-        return self.get('ANEXO3_LOGO_PATH', '')
+        path = self.get('ANEXO3_LOGO_PATH', '')
+        if path:
+            # Si es ruta absoluta, verificar si existe; si no, buscar en resources
+            p = Path(path)
+            if p.exists():
+                return str(p)
+            # Intentar como recurso empaquetado
+            return str(get_resource_path('resources/images/Anexo3.png'))
+        return ''
 
 
 # Crear una instancia global para facilitar el acceso

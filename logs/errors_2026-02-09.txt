@@ -1,0 +1,3 @@
+[2026-02-09 15:10:37.237] [❌ ERROR] [Worker] Error en login
+  Exception: AttributeError: 'NoneType' object has no attribute 'page'
+[2026-02-09 15:10:37.480] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...

@@ -1,0 +1,16 @@
+[2026-02-10 13:14:05.207] [❌ ERROR] [Licencia] Error en consulta: HTTPConnectionPool(host='192.168.101.10', port=5000): Max retries exceeded with url: /ips-saldos (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x00000207ACA86310>, 'Connection to 192.168.101.10 timed out. (connect timeout=10)'))
+[2026-02-10 13:14:05.208] [⚠️ WARNING] [Licencia] Validación fallida: Error consultando saldo
+[2026-02-10 16:06:09.548] [❌ ERROR] [EjecutarCaso] ❌ SESIÓN DEL NAVEGADOR PERDIDA: Page.title: Target page, context or browser has been closed
+  Exception: TargetClosedError: Page.title: Target page, context or browser has been closed
+[2026-02-10 16:06:09.552] [❌ ERROR] [EjecutarCaso] ❌ Error durante reinicio: Sesión del navegador perdida
+  Exception: SessionLostException: Sesión del navegador perdida
+[2026-02-10 16:06:09.555] [❌ ERROR] [EjecutarCaso] ❓ ERROR NO CLASIFICADO: Sesión del navegador perdida
+  Exception: SessionLostException: Sesión del navegador perdida
+[2026-02-10 16:06:11.621] [❌ ERROR] [EjecutarCaso] ❌ SESIÓN DEL NAVEGADOR PERDIDA: Page.title: Target page, context or browser has been closed
+  Exception: TargetClosedError: Page.title: Target page, context or browser has been closed
+[2026-02-10 16:06:11.623] [❌ ERROR] [EjecutarCaso] ❌ Error durante reinicio: Sesión del navegador perdida
+  Exception: SessionLostException: Sesión del navegador perdida
+[2026-02-10 16:06:11.625] [❌ ERROR] [Worker] Error procesando KEVIN BALDELAMAR
+  Exception: SessionLostException: Sesión del navegador perdida
+[2026-02-10 16:53:58.401] [❌ ERROR] [Licencia] Error en consulta: HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /ips-saldos (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000020291E32190>: Failed to establish a new connection: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión'))
+[2026-02-10 16:53:58.403] [⚠️ WARNING] [Licencia] Validación fallida: Error consultando saldo
