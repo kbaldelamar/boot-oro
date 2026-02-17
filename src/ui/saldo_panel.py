@@ -34,8 +34,18 @@ class RecargaSaldoPanel(ttk.Frame):
         title = ttk.Label(self, text="Recarga de saldo", font=('Arial', 16, 'bold'))
         title.pack(pady=10)
 
-        self.saldo_label = ttk.Label(self, text="Saldo actual: --", font=('Arial', 12))
+        # Frame para información del saldo
+        info_frame = ttk.LabelFrame(self, text="Información de Saldo", padding=10)
+        info_frame.pack(pady=10, padx=20, fill=tk.X)
+
+        self.saldo_label = ttk.Label(info_frame, text="Saldo actual: --", font=('Arial', 12, 'bold'))
         self.saldo_label.pack(pady=5)
+        
+        self.valor_caso_label = ttk.Label(info_frame, text="Valor por caso: --", font=('Arial', 10))
+        self.valor_caso_label.pack(pady=2)
+        
+        self.casos_exitosos_label = ttk.Label(info_frame, text="Casos exitosos: --", font=('Arial', 10))
+        self.casos_exitosos_label.pack(pady=2)
 
         info = ttk.Label(
             self,
@@ -57,8 +67,28 @@ class RecargaSaldoPanel(ttk.Frame):
     def _refresh_saldo(self):
         info = self.license_service.obtener_saldo()
         saldo = info.get("saldo_robot") if info.get("success") else None
-        texto = self._formatear_saldo(saldo)
-        self.saldo_label.config(text=f"Saldo actual: {texto}")
+        valor_caso = info.get("valor_caso") if info.get("success") else None
+        casos_exitosos = info.get("numero_casos_exitosos") if info.get("success") else None
+        
+        texto_saldo = self._formatear_saldo(saldo)
+        self.saldo_label.config(text=f"Saldo actual: {texto_saldo}")
+        
+        # Actualizar valor por caso
+        if valor_caso is not None:
+            try:
+                texto_valor = f"{float(valor_caso):,.0f}"
+            except (TypeError, ValueError):
+                texto_valor = str(valor_caso)
+        else:
+            texto_valor = "--"
+        self.valor_caso_label.config(text=f"Valor por caso: {texto_valor}")
+        
+        # Actualizar casos exitosos
+        if casos_exitosos is not None:
+            texto_casos = str(casos_exitosos)
+        else:
+            texto_casos = "--"
+        self.casos_exitosos_label.config(text=f"Casos exitosos: {texto_casos}")
 
         app = self._get_app()
         if app:

@@ -6,6 +6,7 @@
 
 # Interfaz gráfica (incluida con Python, no requiere instalación)
 # tkinter - Biblioteca estándar de Python para GUI
+tkcalendar>=1.6.1  # Widget de calendario para tkinter
 
 # Peticiones HTTP
 requests>=2.31.0

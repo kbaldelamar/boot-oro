@@ -1,3 +1,20 @@
 [2026-02-11 10:44:02.326] [❌ ERROR] [Licencia] Error en consulta: HTTPConnectionPool(host='localhost', port=5000): Read timed out. (read timeout=10)
 [2026-02-11 10:44:02.327] [⚠️ WARNING] [Licencia] Validación fallida: Error consultando saldo
 [2026-02-11 10:45:46.594] [⚠️ WARNING] [Licencia] Validación fallida: HTTP 500
+[2026-02-11 14:49:08.461] [❌ ERROR] [IngresoItems] ❌ No se encontró código CUPS en data.cups
+[2026-02-11 14:49:08.464] [❌ ERROR] [IngresoItems] ❌ Error general en IntemsAndFor: Código CUPS no encontrado en data
+  Exception: Exception: Código CUPS no encontrado en data
+[2026-02-11 14:49:10.581] [❌ ERROR] [EjecutarCaso] ❓ ERROR NO CLASIFICADO: Código CUPS no encontrado en data
+  Exception: Exception: Código CUPS no encontrado en data
+[2026-02-11 14:49:15.952] [❌ ERROR] [Worker] Error procesando VICTOR ACOSTA
+  Exception: Exception: Error ejecutando caso
+[2026-02-11 14:49:15.959] [⚠️ WARNING] [Worker] ⚠️ Error desconocido, marcando como ERROR final: Error ejecutando caso
+[14:49:20] [📸 SCREENSHOT] Screenshot guardado: c:\python\boot-oro\screenshots\error_409857.png
+  Orden: 409857
+  Error: Error no clasificado: Error ejecutando caso
+[2026-02-11 14:49:20.471] [❌ ERROR] [Worker] ❌ Orden 409857 marcada como ERROR: Error no clasificado: Error ejecutando caso
+[2026-02-11 15:37:55.247] [❌ ERROR] [Worker] Error asegurando navegador activo
+  Exception: NameError: name 'sys' is not defined
+[2026-02-11 15:37:55.256] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...
+[2026-02-11 15:41:30.161] [❌ ERROR] [Login] No se pudo ingresar usuario
+[2026-02-11 15:41:30.171] [❌ ERROR] [Worker] No se pudo iniciar navegador, esperando...

@@ -88,7 +88,23 @@ class MainWindow:
             label="Worker Automatización",
             command=lambda: self._open_panel('worker_automatizacion')
         )
+        self.procesos_menu.add_command(
+            label="Worker Automatización Laboratorio",
+            command=lambda: self._open_panel('worker_laboratorio')
+        )
         # Aquí se pueden agregar más opciones de menú para otros paneles
+        
+        # Menú Estadísticas
+        estadisticas_menu = tk.Menu(self.menubar, tearoff=0)
+        self.menubar.add_cascade(label="Estadísticas", menu=estadisticas_menu)
+        estadisticas_menu.add_command(
+            label="Casos creados Laboratorio",
+            command=lambda: self._open_panel('casos_creados_laboratorio')
+        )
+        estadisticas_menu.add_command(
+            label="Casos asistidos Laboratorio",
+            command=lambda: self._open_panel('casos_asistidos_laboratorio')
+        )
         
         # Menú Ayuda
         ayuda_menu = tk.Menu(self.menubar, tearoff=0)
@@ -126,8 +142,12 @@ class MainWindow:
         """Registra todos los paneles disponibles"""
         try:
             from modules.autorizar_anexo3 import AutorizarAnexo3Panel, ProgramacionPanel
+            from modules.laboratorio import LaboratorioPanel, EstadisticasCreadosPanel, EstadisticasAsistidosPanel
             self.panels_registry['autorizar_anexo3'] = AutorizarAnexo3Panel
             self.panels_registry['worker_automatizacion'] = ProgramacionPanel
+            self.panels_registry['worker_laboratorio'] = LaboratorioPanel
+            self.panels_registry['casos_creados_laboratorio'] = EstadisticasCreadosPanel
+            self.panels_registry['casos_asistidos_laboratorio'] = EstadisticasAsistidosPanel
             self.panels_registry['recarga_saldo'] = RecargaSaldoPanel
             self.panels_registry['empresas_casos_boot'] = EmpresasCasosBootPanel
             self.panels_registry['procedimientos_boot'] = ProcedimientosBootPanel
@@ -268,6 +288,8 @@ class MainWindow:
         self._startup_logger.info('Licencia', f'Respuesta saldo - success: {info.get("success")}')
         self._startup_logger.info('Licencia', f'Respuesta saldo - message: {info.get("message")}')
         self._startup_logger.info('Licencia', f'Respuesta saldo - saldo_robot: {info.get("saldo_robot")}')
+        self._startup_logger.info('Licencia', f'Respuesta saldo - valor_caso: {info.get("valor_caso")}')
+        self._startup_logger.info('Licencia', f'Respuesta saldo - numero_casos_exitosos: {info.get("numero_casos_exitosos")}')
         self._startup_logger.info('Licencia', f'Respuesta saldo - nombre_encriptado: {(info.get("nombre_encriptado") or "")[:30]}...')
         self._startup_logger.info('Licencia', f'Respuesta saldo - nombre_desencriptado: {info.get("nombre_desencriptado")}')
         if info.get("error"):

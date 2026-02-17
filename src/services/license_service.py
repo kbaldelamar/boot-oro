@@ -81,6 +81,8 @@ class LicenseService:
         result = {
             "success": False,
             "saldo_robot": None,
+            "valor_caso": None,
+            "numero_casos_exitosos": None,
             "nombre_encriptado": None,
             "nombre_desencriptado": None,
             "message": "",
@@ -102,6 +104,8 @@ class LicenseService:
 
             item = data_list[0]
             result["saldo_robot"] = item.get("saldoRobot")
+            result["valor_caso"] = item.get("ValorCaso")
+            result["numero_casos_exitosos"] = item.get("NumeroCasosExitosos")
             result["nombre_encriptado"] = item.get("Nbre")
             result["nombre_desencriptado"] = self.decrypt_name(item.get("Nbre"))
             result["success"] = True
@@ -126,3 +130,109 @@ class LicenseService:
         nombre_norm = normalizar(nombre)
         permitidos_norm = [normalizar(p) for p in permitidos if p.strip()]
         return nombre_norm in permitidos_norm
+    
+    def actualizar_saldo(self, nuevo_saldo: float) -> Dict:
+        """
+        Actualiza el saldo del robot en la API
+        
+        Args:
+            nuevo_saldo: Nuevo valor del saldo
+            
+        Returns:
+            Dict con success, message, error
+        """
+        result = {
+            "success": False,
+            "message": "",
+            "error": None
+        }
+        
+        try:
+            url = f"{self.base_url}/ips-saldos"
+            data = {"saldoRobot": nuevo_saldo}
+            response = requests.post(url, json=data, timeout=10)
+            
+            if response.status_code not in (200, 201):
+                result["message"] = f"HTTP {response.status_code}"
+                return result
+            
+            result["success"] = True
+            result["message"] = "Saldo actualizado correctamente"
+            return result
+            
+        except Exception as exc:
+            result["error"] = str(exc)
+            result["message"] = "Error actualizando saldo"
+            return result
+    
+    def descontar_caso_exitoso(self) -> Dict:
+        """
+        Consulta el saldo actual, descuenta el valor de un caso y actualiza
+        
+        Returns:
+            Dict con success, saldo_anterior, saldo_nuevo, valor_descontado, message, error
+        """
+        result = {
+            "success": False,
+            "saldo_anterior": None,
+            "saldo_nuevo": None,
+            "valor_descontado": None,
+            "saldo_agotado": False,
+            "message": "",
+            "error": None
+        }
+        
+        try:
+            # Obtener saldo actual
+            info_saldo = self.obtener_saldo()
+            
+            if not info_saldo.get("success"):
+                result["message"] = "No se pudo consultar saldo actual"
+                result["error"] = info_saldo.get("error")
+                return result
+            
+            saldo_actual = info_saldo.get("saldo_robot")
+            valor_caso = info_saldo.get("valor_caso")
+            
+            if saldo_actual is None or valor_caso is None:
+                result["message"] = "Datos de saldo o valor de caso no disponibles"
+                return result
+            
+            # Convertir a float
+            try:
+                saldo_float = float(saldo_actual)
+                valor_float = float(valor_caso)
+            except (TypeError, ValueError) as e:
+                result["message"] = f"Error convirtiendo valores: {e}"
+                return result
+            
+            # Calcular nuevo saldo
+            nuevo_saldo = saldo_float - valor_float
+            
+            # No permitir saldo negativo
+            if nuevo_saldo < 0:
+                nuevo_saldo = 0
+            
+            # Actualizar saldo
+            resultado_actualizacion = self.actualizar_saldo(nuevo_saldo)
+            
+            if not resultado_actualizacion.get("success"):
+                result["message"] = "Error actualizando saldo en API"
+                result["error"] = resultado_actualizacion.get("error")
+                return result
+            
+            # Éxito
+            result["success"] = True
+            result["saldo_anterior"] = saldo_float
+            result["saldo_nuevo"] = nuevo_saldo
+            result["valor_descontado"] = valor_float
+            result["saldo_agotado"] = (nuevo_saldo <= 0)
+            result["message"] = f"Saldo descontado: {valor_float}"
+            
+            return result
+            
+        except Exception as exc:
+            result["error"] = str(exc)
+            result["message"] = f"Error en descuento de caso: {str(exc)}"
+            return result
+

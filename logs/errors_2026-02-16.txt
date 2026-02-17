@@ -1,0 +1,978 @@
+[2026-02-16 10:53:46.434] [❌ ERROR] [EjecutarCaso] Error al manejar IPS Remitente: ElementHandle.click: Target page, context or browser has been closed
+  Exception: TargetClosedError: ElementHandle.click: Target page, context or browser has been closed
+[2026-02-16 10:53:46.489] [❌ ERROR] [EjecutarCaso] ❓ ERROR NO CLASIFICADO: ElementHandle.click: Target page, context or browser has been closed
+  Exception: TargetClosedError: ElementHandle.click: Target page, context or browser has been closed
+[2026-02-16 11:11:00.921] [❌ ERROR] [EjecutarCaso] Error en intento 1: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+  Exception: Error: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-16 11:11:01.955] [❌ ERROR] [EjecutarCaso] Error en intento 2: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+  Exception: Error: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-16 11:11:02.985] [❌ ERROR] [EjecutarCaso] Error en intento 3: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+  Exception: Error: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-16 11:11:03.999] [❌ ERROR] [EjecutarCaso] Error en intento 4: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+  Exception: Error: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-16 11:11:05.022] [❌ ERROR] [EjecutarCaso] Error en intento 5: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+  Exception: Error: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-16 11:11:06.064] [❌ ERROR] [EjecutarCaso] Error en intento 6: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+  Exception: Error: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-16 11:11:07.075] [❌ ERROR] [EjecutarCaso] Error en intento 7: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+  Exception: Error: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-16 11:11:08.064] [❌ ERROR] [EjecutarCaso] Error en intento 8: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+  Exception: Error: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-16 11:11:09.063] [❌ ERROR] [EjecutarCaso] Error en intento 9: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+  Exception: Error: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-16 11:11:10.068] [❌ ERROR] [EjecutarCaso] Error en intento 10: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+  Exception: Error: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-16 11:11:11.076] [❌ ERROR] [EjecutarCaso] Error en intento 11: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+  Exception: Error: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-16 11:11:12.078] [❌ ERROR] [EjecutarCaso] Error en intento 12: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+  Exception: Error: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-16 11:11:13.092] [❌ ERROR] [EjecutarCaso] Error en intento 13: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+  Exception: Error: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-16 11:11:14.092] [❌ ERROR] [EjecutarCaso] Error en intento 14: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+  Exception: Error: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-16 11:11:15.088] [❌ ERROR] [EjecutarCaso] Error en intento 15: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+  Exception: Error: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-16 11:11:16.111] [❌ ERROR] [EjecutarCaso] Error en intento 16: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+  Exception: Error: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-16 11:11:17.109] [❌ ERROR] [EjecutarCaso] Error en intento 17: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+  Exception: Error: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-16 11:11:18.110] [❌ ERROR] [EjecutarCaso] Error en intento 18: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+  Exception: Error: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-16 11:11:19.098] [❌ ERROR] [EjecutarCaso] Error en intento 19: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+  Exception: Error: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-16 11:11:20.125] [❌ ERROR] [EjecutarCaso] Error en intento 20: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+  Exception: Error: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-16 11:11:21.161] [❌ ERROR] [EjecutarCaso] Error en intento 21: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+  Exception: Error: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-16 11:11:22.152] [❌ ERROR] [EjecutarCaso] Error en intento 22: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+  Exception: Error: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-16 11:11:23.149] [❌ ERROR] [EjecutarCaso] Error en intento 23: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+  Exception: Error: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-16 11:11:24.147] [❌ ERROR] [EjecutarCaso] Error en intento 24: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+  Exception: Error: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-16 11:11:25.154] [❌ ERROR] [EjecutarCaso] Error en intento 25: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+  Exception: Error: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-16 11:11:26.163] [❌ ERROR] [EjecutarCaso] Error en intento 26: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+  Exception: Error: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-16 11:11:27.175] [❌ ERROR] [EjecutarCaso] Error en intento 27: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+  Exception: Error: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-16 11:11:28.184] [❌ ERROR] [EjecutarCaso] Error en intento 28: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+  Exception: Error: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-16 11:11:29.197] [❌ ERROR] [EjecutarCaso] Error en intento 29: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+  Exception: Error: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-16 11:11:30.203] [❌ ERROR] [EjecutarCaso] Error en intento 30: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+  Exception: Error: Page.evaluate: SyntaxError: Illegal return statement
+    at eval (<anonymous>)
+    at UtilityScript.evaluate (<anonymous>:226:30)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+[2026-02-16 11:11:30.210] [⚠️ WARNING] [EjecutarCaso] Opción 'RC' no encontrada después de 30 intentos
+[2026-02-16 12:15:36.879] [❌ ERROR] [Licencia] Error en consulta: HTTPConnectionPool(host='192.168.101.10', port=5000): Max retries exceeded with url: /ips-saldos (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001C1306454C0>, 'Connection to 192.168.101.10 timed out. (connect timeout=10)'))
+[2026-02-16 12:15:36.880] [⚠️ WARNING] [Licencia] Validación fallida: Error consultando saldo
+[2026-02-16 12:16:15.225] [❌ ERROR] [Licencia] IPS NO autorizada - cerrando app
+[2026-02-16 12:18:23.887] [❌ ERROR] [OrdenesService] Error: El servidor encontró un error interno al procesar la solicitud. Por favor, intente nuevamente más tarde o contacte al administrador del sistema.
+[2026-02-16 12:18:23.888] [⚠️ WARNING] [OrdenesService] Mensaje: Error 500 - Error Interno del Servidor
+[2026-02-16 14:02:09.945] [❌ ERROR] [WorkerLab] Error iniciando navegador: __init__() got an unexpected keyword argument 'headless'
+  Exception: TypeError: __init__() got an unexpected keyword argument 'headless'
+[2026-02-16 14:02:09.947] [❌ ERROR] [WorkerLab] No se pudo iniciar navegador
+[2026-02-16 14:02:42.389] [❌ ERROR] [WorkerLab] Error iniciando navegador: __init__() got an unexpected keyword argument 'headless'
+  Exception: TypeError: __init__() got an unexpected keyword argument 'headless'
+[2026-02-16 14:02:42.390] [❌ ERROR] [WorkerLab] No se pudo iniciar navegador
+[2026-02-16 14:03:14.840] [❌ ERROR] [WorkerLab] Error iniciando navegador: __init__() got an unexpected keyword argument 'headless'
+  Exception: TypeError: __init__() got an unexpected keyword argument 'headless'
+[2026-02-16 14:03:14.841] [❌ ERROR] [WorkerLab] No se pudo iniciar navegador
+[2026-02-16 14:15:32.885] [❌ ERROR] [Licencia] Error en consulta: HTTPConnectionPool(host='localhost', port=5000): Read timed out. (read timeout=10)
+[2026-02-16 14:15:32.886] [⚠️ WARNING] [Licencia] Validación fallida: Error consultando saldo
+[2026-02-16 14:27:59.464] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'obtener_browser'
+[2026-02-16 14:27:59.470] [❌ ERROR] [LaboratorioWorker] Error crítico en worker: 'PlaywrightService' object has no attribute 'obtener_browser'
+[2026-02-16 15:11:00.599] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'str' object has no attribute 'get'
+[2026-02-16 15:11:10.420] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'str' object has no attribute 'get'
+[2026-02-16 15:11:21.185] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'str' object has no attribute 'get'
+[2026-02-16 15:11:30.990] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'str' object has no attribute 'get'
+[2026-02-16 15:11:38.212] [❌ ERROR] [LaboratorioWorker] Error cerrando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:14:20.507] [❌ ERROR] [EjecutarCasosLaboratorio] Campo requerido faltante: cups_list
+[2026-02-16 15:14:30.715] [❌ ERROR] [EjecutarCasosLaboratorio] Campo requerido faltante: cups_list
+[2026-02-16 15:14:34.790] [❌ ERROR] [LaboratorioWorker] Error cerrando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:23:49.730] [❌ ERROR] [EjecutarCasosLaboratorio] ❌ Error en ejecución: 'EjecutarCasosLaboratorio' object has no attribute '_navegar_a_formulario'
+[2026-02-16 15:23:59.873] [❌ ERROR] [EjecutarCasosLaboratorio] ❌ Error en ejecución: 'EjecutarCasosLaboratorio' object has no attribute '_navegar_a_formulario'
+[2026-02-16 15:24:10.028] [❌ ERROR] [EjecutarCasosLaboratorio] ❌ Error en ejecución: 'EjecutarCasosLaboratorio' object has no attribute '_navegar_a_formulario'
+[2026-02-16 15:24:21.663] [❌ ERROR] [EjecutarCasosLaboratorio] ❌ Error en ejecución: 'EjecutarCasosLaboratorio' object has no attribute '_navegar_a_formulario'
+[2026-02-16 15:24:31.843] [❌ ERROR] [EjecutarCasosLaboratorio] ❌ Error en ejecución: 'EjecutarCasosLaboratorio' object has no attribute '_navegar_a_formulario'
+[2026-02-16 15:34:28.217] [❌ ERROR] [IngresoItemsLaboratorio] Error ingresando CUPS 902210: Page.wait_for_selector: Timeout 5000ms exceeded.
+Call log:
+waiting for locator("//input[contains(@id, 'cups') or contains(@name, 'cups') or contains(@placeholder, 'CUPS')]") to be visible
+
+[2026-02-16 15:34:28.218] [❌ ERROR] [EjecutarCasosLaboratorio] Error ingresando CUPS
+[2026-02-16 15:43:41.720] [❌ ERROR] [EjecutarCasosLaboratorio] Error buscando PDF: name 'data' is not defined
+[2026-02-16 15:43:54.706] [❌ ERROR] [Home] No se pudo hacer clic en Reportar
+[2026-02-16 15:43:54.708] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: No se pudo navegar al formulario
+[2026-02-16 15:44:02.489] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 15:44:02.490] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:44:02.490] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:44:02.494] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 15:44:02.495] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:44:02.496] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:44:10.330] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 15:44:10.331] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:44:10.332] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:44:10.336] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 15:44:10.337] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:44:10.339] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:44:18.119] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 15:44:18.120] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:44:18.121] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:44:18.123] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 15:44:18.124] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:44:18.124] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:44:25.926] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 15:44:25.927] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:44:25.928] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:44:25.931] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 15:44:25.932] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:44:25.932] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:44:33.756] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 15:44:33.756] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:44:33.757] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:44:33.760] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 15:44:33.761] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:44:33.761] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:44:41.569] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 15:44:41.570] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:44:41.571] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:44:41.574] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 15:44:41.575] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:44:41.576] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:44:49.603] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 15:44:49.604] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:44:49.605] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:44:49.608] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 15:44:49.609] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:44:49.609] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:44:57.445] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 15:44:57.446] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:44:57.448] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:44:57.450] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 15:44:57.452] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:44:57.453] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:45:05.178] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 15:45:05.179] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:45:05.180] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:45:05.183] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 15:45:05.184] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:45:05.185] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:45:12.973] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 15:45:12.974] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:45:12.975] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:45:12.978] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 15:45:12.979] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:45:12.979] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:45:20.790] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 15:45:20.791] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:45:20.792] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:45:20.794] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 15:45:20.795] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:45:20.796] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:45:28.651] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 15:45:28.651] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:45:28.653] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:45:28.656] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 15:45:28.656] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:45:28.657] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:45:36.461] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 15:45:36.461] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:45:36.462] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:45:36.464] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 15:45:36.465] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 15:45:36.466] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:03:41.814] [❌ ERROR] [EjecutarCaso] ❓ ERROR NO CLASIFICADO: ElementHandle.fill: Target page, context or browser has been closed
+Call log:
+  fill("")
+  - attempt...
+  Exception: TargetClosedError: ElementHandle.fill: Target page, context or browser has been closed
+Call log:
+  fill("")
+  - attempting fill action
+  -   waiting for element to be visible, enabled and editable
+
+[2026-02-16 16:03:41.815] [❌ ERROR] [EjecutarCasosLaboratorio] ❌ Error en ejecución: actualizar() takes 3 positional arguments but 4 were given
+[2026-02-16 16:29:08.201] [❌ ERROR] [EjecutarCasosLaboratorio] Error buscando PDF: name 'data' is not defined
+[2026-02-16 16:29:08.202] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: Error en automatización - resultado False
+[2026-02-16 16:29:47.331] [❌ ERROR] [Home] No se pudo hacer clic en Reportar
+[2026-02-16 16:29:47.332] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: No se pudo navegar al formulario
+[2026-02-16 16:30:28.371] [❌ ERROR] [Home] No se pudo hacer clic en Ambulatoria
+[2026-02-16 16:30:28.372] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: No se pudo navegar al formulario
+[2026-02-16 16:30:44.423] [❌ ERROR] [Home] No se pudo hacer clic en Reportar
+[2026-02-16 16:30:44.424] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: No se pudo navegar al formulario
+[2026-02-16 16:30:52.399] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:30:52.400] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:30:52.404] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:30:52.409] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:30:52.410] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:30:52.411] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:31:00.254] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:31:00.256] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:31:00.257] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:31:00.262] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:31:00.263] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:31:00.264] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:31:08.301] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:31:08.302] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:31:08.303] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:31:08.308] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:31:08.309] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:31:08.310] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:44:31.969] [⚠️ WARNING] [EjecutarCasosLaboratorio] ❌ No se encontró PDF para documento 1432273 en \192.168.1.22\Compartida\Soportes\Facturacion\Ingresos
+[2026-02-16 16:44:31.970] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: Error en automatización - resultado False
+[2026-02-16 16:44:45.911] [❌ ERROR] [Home] No se pudo hacer clic en Reportar
+[2026-02-16 16:44:45.912] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: No se pudo navegar al formulario
+[2026-02-16 16:53:56.537] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ PDF no encontrado en ruta urlOrdenMedica: \192.168.1.22\Compartida\Soportes\Facturacion\Ingresos\1_4_HISTORIA CLINICA.pdf
+[2026-02-16 16:53:56.552] [⚠️ WARNING] [EjecutarCasosLaboratorio] ❌ No se encontró PDF para documento 1432273 en \192.168.1.22\Compartida\Soportes\Facturacion\Ingresos
+[2026-02-16 16:53:56.552] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: Error en automatización - resultado False
+[2026-02-16 16:54:10.983] [❌ ERROR] [Home] No se pudo hacer clic en Reportar
+[2026-02-16 16:54:10.984] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: No se pudo navegar al formulario
+[2026-02-16 16:54:18.449] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:54:18.450] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:54:18.450] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:54:18.453] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:54:18.454] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:54:18.456] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:54:27.898] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:54:27.899] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:54:27.900] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:54:27.904] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:54:27.905] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:54:27.906] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:54:36.773] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:54:36.775] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:54:36.776] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:54:36.779] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:54:36.780] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:54:36.781] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:54:44.232] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:54:44.233] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:54:44.234] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:54:44.237] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:54:44.238] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:54:44.239] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:54:51.670] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:54:51.670] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:54:51.671] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:54:51.675] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:54:51.676] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:54:51.677] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:54:59.130] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:54:59.131] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:54:59.132] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:54:59.135] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:54:59.136] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:54:59.137] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:55:06.566] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:55:06.569] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:55:06.570] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:55:06.574] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:55:06.575] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:55:06.576] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:55:14.015] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:55:14.016] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:55:14.017] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:55:14.021] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:55:14.022] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:55:14.023] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:55:21.468] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:55:21.469] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:55:21.477] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:55:21.485] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:55:21.486] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:55:21.491] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:55:28.961] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:55:28.962] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:55:28.963] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:55:28.966] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:55:28.967] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:55:28.968] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:55:36.363] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:55:36.363] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:55:36.365] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:55:36.367] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:55:36.369] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:55:36.369] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:55:43.822] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:55:43.822] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:55:43.823] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:55:43.827] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:55:43.827] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:55:43.828] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:55:51.268] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:55:51.269] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:55:51.270] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:55:51.273] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:55:51.274] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:55:51.275] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:55:58.711] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:55:58.712] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:55:58.713] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:55:58.716] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:55:58.717] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:55:58.719] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:56:06.185] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:56:06.185] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:56:06.186] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:56:06.190] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:56:06.192] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:56:06.193] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:56:13.653] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:56:13.654] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:56:13.654] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:56:13.657] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:56:13.658] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:56:13.660] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:56:21.121] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:56:21.122] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:56:21.123] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:56:21.126] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:56:21.127] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:56:21.128] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:56:28.807] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:56:28.808] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:56:28.809] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:56:28.813] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:56:28.814] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:56:28.816] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:56:38.159] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:56:38.159] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:56:38.160] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:56:38.163] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:56:38.164] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:56:38.165] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:56:45.615] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:56:45.616] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:56:45.617] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:56:45.621] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:56:45.622] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:56:45.623] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:56:53.056] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:56:53.057] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:56:53.058] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:56:53.061] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:56:53.062] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:56:53.063] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:57:00.544] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:57:00.545] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:57:00.546] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:57:00.551] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:57:00.552] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:57:00.553] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:57:07.976] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:57:07.977] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:57:07.978] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:57:07.981] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:57:07.982] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:57:07.983] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:57:15.426] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:57:15.427] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:57:15.428] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:57:15.432] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:57:15.433] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:57:15.434] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:57:22.899] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:57:22.900] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:57:22.902] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:57:22.906] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:57:22.907] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:57:22.908] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:57:30.368] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:57:30.370] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:57:30.371] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:57:30.375] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:57:30.376] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:57:30.377] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:57:38.541] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:57:38.542] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:57:38.542] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:57:38.546] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:57:38.546] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:57:38.547] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:57:46.027] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:57:46.028] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:57:46.029] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:57:46.033] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:57:46.034] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:57:46.035] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:57:53.507] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:57:53.507] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:57:53.508] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:57:53.511] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:57:53.512] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:57:53.513] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:58:00.947] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:58:00.948] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:58:00.949] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:58:00.952] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:58:00.953] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:58:00.955] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:58:08.391] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:58:08.392] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:58:08.393] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:58:08.396] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:58:08.397] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:58:08.398] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:58:15.851] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:58:15.852] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:58:15.853] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:58:15.858] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:58:15.859] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:58:15.860] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:58:23.356] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:58:23.357] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:58:23.358] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:58:23.361] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:58:23.362] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:58:23.363] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:58:30.816] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:58:30.817] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:58:30.818] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:58:30.823] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:58:30.824] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:58:30.825] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:58:38.262] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:58:38.263] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:58:38.264] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:58:38.267] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:58:38.268] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:58:38.270] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:58:46.362] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:58:46.363] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:58:46.365] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:58:46.367] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:58:46.368] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:58:46.369] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:58:53.865] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:58:53.867] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:58:53.868] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:58:53.871] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:58:53.872] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:58:53.874] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:59:01.356] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:59:01.357] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:59:01.358] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:59:01.361] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:59:01.361] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:59:01.363] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:59:08.841] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:59:08.842] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:59:08.843] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:59:08.846] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:59:08.846] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:59:08.848] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:59:16.298] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:59:16.300] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:59:16.302] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:59:16.307] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:59:16.307] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:59:16.309] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:59:23.770] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:59:23.772] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:59:23.774] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:59:23.787] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:59:23.788] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:59:23.798] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:59:31.260] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:59:31.262] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:59:31.264] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:59:31.268] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:59:31.269] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:59:31.270] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:59:38.750] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:59:38.751] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:59:38.752] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:59:38.755] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:59:38.757] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:59:38.758] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:59:46.120] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:59:46.121] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:59:46.122] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:59:46.126] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:59:46.127] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:59:46.128] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:59:53.630] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:59:53.633] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:59:53.635] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:59:53.641] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 16:59:53.642] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 16:59:53.645] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:00:01.107] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:00:01.108] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:00:01.109] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:00:01.114] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:00:01.115] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:00:01.117] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:00:08.581] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:00:08.582] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:00:08.583] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:00:08.586] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:00:08.587] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:00:08.589] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:00:16.059] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:00:16.060] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:00:16.062] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:00:16.066] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:00:16.067] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:00:16.068] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:00:23.507] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:00:23.508] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:00:23.510] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:00:23.513] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:00:23.513] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:00:23.515] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:00:30.959] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:00:30.960] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:00:30.962] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:00:30.968] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:00:30.970] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:00:30.971] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:00:38.430] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:00:38.431] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:00:38.432] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:00:38.435] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:00:38.436] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:00:38.437] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:00:47.818] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:00:47.818] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:00:47.821] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:00:47.827] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:00:47.828] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:00:47.829] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:00:55.323] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:00:55.324] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:00:55.325] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:00:55.331] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:00:55.332] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:00:55.333] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:01:02.786] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:01:02.787] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:01:02.788] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:01:02.791] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:01:02.792] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:01:02.793] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:01:10.251] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:01:10.252] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:01:10.252] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:01:10.257] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:01:10.258] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:01:10.259] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:01:17.725] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:01:17.727] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:01:17.728] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:01:17.736] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:01:17.739] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:01:17.740] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:01:25.227] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:01:25.228] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:01:25.229] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:01:25.234] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:01:25.235] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:01:25.238] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:01:32.936] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:01:32.937] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:01:32.944] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:01:32.948] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:01:32.951] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:01:32.953] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:01:40.516] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:01:40.530] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:01:40.544] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:01:40.595] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:01:40.632] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:01:40.642] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:01:50.210] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:01:50.212] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:01:50.213] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:01:50.220] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:01:50.222] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:01:50.224] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:01:57.678] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:01:57.678] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:01:57.680] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:01:57.683] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:01:57.685] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:01:57.686] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:02:05.188] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:02:05.188] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:02:05.189] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:02:05.194] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:02:05.195] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:02:05.196] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: 'PlaywrightService' object has no attribute 'cerrar'
+[2026-02-16 17:07:23.555] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ PDF no encontrado en ruta urlOrdenMedica: \192.168.1.22\Compartida\Soportes\Facturacion\Ingresos\1_4_HISTORIA CLINICA.pdf
+[2026-02-16 17:07:23.566] [⚠️ WARNING] [EjecutarCasosLaboratorio] ❌ No se encontró PDF para documento 1432273 en \192.168.1.22\Compartida\Soportes\Facturacion\Ingresos
+[2026-02-16 17:07:23.566] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: Error en automatización - resultado False
+[2026-02-16 17:07:46.427] [❌ ERROR] [Home] No se pudo hacer clic en Reportar
+[2026-02-16 17:07:46.428] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: No se pudo navegar al formulario
+[2026-02-16 17:07:54.028] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:07:54.032] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: No se pudo iniciar el navegador
+[2026-02-16 17:07:54.033] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: No se pudo iniciar el navegador
+[2026-02-16 17:07:54.038] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:07:54.040] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: No se pudo iniciar el navegador
+[2026-02-16 17:07:54.041] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: No se pudo iniciar el navegador
+[2026-02-16 17:08:01.583] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:08:01.585] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: No se pudo iniciar el navegador
+[2026-02-16 17:08:01.585] [❌ ERROR] [LaboratorioWorker] Error verificando navegador: No se pudo iniciar el navegador
+[2026-02-16 17:08:01.589] [❌ ERROR] [Playwright] Error al iniciar navegador: It looks like you are using Playwright Sync API inside the asyncio loop.
+Please use the Async API instead.
+[2026-02-16 17:08:01.591] [❌ ERROR] [LaboratorioWorker] Error inicializando servicios: No se pudo iniciar el navegador
+[2026-02-16 17:08:01.591] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: No se pudo iniciar el navegador
+[2026-02-16 17:15:42.127] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ PDF no encontrado en ruta urlOrdenMedica: \192.168.1.22\Compartida\Soportes\Facturacion\Ingresos\1_4_HISTORIA CLINICA.pdf
+[2026-02-16 17:15:42.139] [⚠️ WARNING] [EjecutarCasosLaboratorio] ❌ No se encontró PDF para documento 1432273 en \192.168.1.22\Compartida\Soportes\Facturacion\Ingresos
+[2026-02-16 17:15:42.140] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MARIA DE LOS ANGELES ESPINOZA GONZALEZ: Error en automatización - resultado False
+[2026-02-16 17:16:04.093] [❌ ERROR] [Home] No se pudo hacer clic en Reportar
+[2026-02-16 17:16:04.094] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente LUZ MARY PRASCA ACOSTA: No se pudo navegar al formulario
+[2026-02-16 17:26:39.330] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ PDF no encontrado en ruta urlOrdenMedica: \192.168.1.22\Compartida\Soportes\Facturacion\Ingresos\192_14_HISTORIA CLINICA.pdf
+[2026-02-16 17:28:54.909] [⚠️ WARNING] [EjecutarCasosLaboratorio] ❌ No se encontró PDF para documento 64575858 en \192.168.1.22\Compartida\Soportes\Facturacion\Ingresos
+[2026-02-16 17:29:05.689] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente MABEL DEL CARMEN  ALVAREZ ARRIETA   : Error en automatización - resultado False
+[2026-02-16 17:30:21.236] [❌ ERROR] [Home] No se pudo hacer clic en Reportar
+[2026-02-16 17:30:21.240] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente PEDRO  SIERRA PEREZ: No se pudo navegar al formulario
+[2026-02-16 17:42:48.961] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ PDF no encontrado en ruta urlOrdenMedica: \\\\192.168.1.22\\Compartida\\Soportes\\Facturacion\\Ingresos\184_29_HISTORIA CLINICA.pdf
+[2026-02-16 17:44:31.581] [⚠️ WARNING] [EjecutarCasosLaboratorio] ❌ No se encontró PDF para documento 1103522005 en \192.168.1.22\Compartida\Soportes\Facturacion\Ingresos
+[2026-02-16 17:44:31.591] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente SAMUEL DAVID CANTERO PEREZ: Error en automatización - resultado False
+[2026-02-16 17:50:07.539] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ PDF no encontrado en ruta urlOrdenMedica: \\\\192.168.1.22\\Compartida\\Soportes\\Facturacion\\Ingresos\161_34_HISTORIA CLINICA.pdf
+[2026-02-16 18:06:12.703] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ PDF no encontrado en ruta urlOrdenMedica: \\\\192.168.1.22\\Compartida\\Soportes\\Facturacion\\Ingresos\90_37_HISTORIA CLINICA.pdf
+[2026-02-16 18:09:01.564] [⚠️ WARNING] [EjecutarCasosLaboratorio] ❌ No se encontró PDF para documento 22732266 en \192.168.1.22\Compartida\Soportes\Facturacion\Ingresos
+[2026-02-16 18:09:01.567] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente NUBIA STELLA DIAZ TORRES: Error en automatización - resultado False
+[2026-02-16 18:15:44.326] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente LILIANA DEL CARMEN  PATERNINA BENITEZ   : Error en automatización - resultado False
+[2026-02-16 18:32:57.590] [❌ ERROR] [EjecutarCaso] ❓ ERROR NO CLASIFICADO: PDF no encontrado - \\\\192.168.1.22\\Compartida\\Soportes\\Facturacion\\Ingresos\94_46_HISTORIA CLI...
+  Exception: Exception: PDF no encontrado - \\\\192.168.1.22\\Compartida\\Soportes\\Facturacion\\Ingresos\94_46_HISTORIA CLINICA.pdf
+[2026-02-16 18:32:57.593] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente ITALIA MARIA   FERIA VILORIA   : actualizar() takes 3 positional arguments but 4 were given

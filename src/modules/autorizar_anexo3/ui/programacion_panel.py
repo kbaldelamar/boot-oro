@@ -29,7 +29,8 @@ class ProgramacionPanel(ttk.Frame):
         self.config = config
         self.global_config = Config()  # Configuración global
         self.worker: Optional[AutomationWorker] = None
-        self.api_service = ProgramacionService()
+        base_url = self.global_config.api_url_programacion_base or "http://localhost:5000"
+        self.api_service = ProgramacionService(base_url=base_url)
         self.refresh_id = None
         self.estado_filtro = tk.StringVar(value="PENDIENTE")  # Filtro por defecto
         
@@ -139,6 +140,20 @@ class ProgramacionPanel(ttk.Frame):
             text="🗑️ Anular",
             command=self._anular_seleccion,
             width=15
+        ).pack(side=tk.LEFT, padx=5)
+        
+        ttk.Button(
+            toolbar,
+            text="🔄 Reprogramar",
+            command=self._reprogramar_seleccion,
+            width=15
+        ).pack(side=tk.LEFT, padx=5)
+        
+        ttk.Button(
+            toolbar,
+            text="☑️ Selec. Todo",
+            command=self._seleccionar_todo,
+            width=12
         ).pack(side=tk.LEFT, padx=5)
         
         # Filtro por estado
@@ -285,6 +300,64 @@ class ProgramacionPanel(ttk.Frame):
             f"🗑️ Anuladas: {anuladas}, canceladas: {canceladas}, errores: {errores}"
         )
         self._cargar_programados()
+    
+    def _reprogramar_seleccion(self):
+        """Reprograma las órdenes seleccionadas (estado a PENDIENTE)"""
+        seleccion = self.tree_programados.selection()
+        if not seleccion:
+            messagebox.showwarning("Sin selección", "Seleccione al menos un registro")
+            return
+
+        if not messagebox.askyesno(
+            "Confirmar",
+            f"¿Reprogramar {len(seleccion)} registro(s) seleccionado(s)?\nSe pondrán como PENDIENTE nuevamente."
+        ):
+            return
+
+        reprogramadas = 0
+        errores = 0
+
+        for item_id in seleccion:
+            valores = self.tree_programados.item(item_id, "values")
+            id_item = valores[0] if valores else None
+            if not id_item:
+                errores += 1
+                continue
+
+            try:
+                # Cambiar estado a PENDIENTE y resetear campos
+                ok = self.api_service.actualizar_estado_programacion(
+                    int(id_item),
+                    estado="PENDIENTE",
+                    resultado="",
+                    mensaje_error=""
+                )
+                if ok:
+                    reprogramadas += 1
+                else:
+                    errores += 1
+            except Exception:
+                errores += 1
+
+        self._agregar_log(
+            f"🔄 Reprogramadas: {reprogramadas}, errores: {errores}"
+        )
+        self._cargar_programados()
+    
+    def _seleccionar_todo(self):
+        """Selecciona o deselecciona todos los registros de la tabla"""
+        items = self.tree_programados.get_children()
+        if not items:
+            return
+        
+        # Si ya hay algo seleccionado, verificar si es todo
+        seleccion_actual = self.tree_programados.selection()
+        if len(seleccion_actual) == len(items):
+            # Deseleccionar todo
+            self.tree_programados.selection_remove(*items)
+        else:
+            # Seleccionar todo
+            self.tree_programados.selection_set(items)
     
     def _iniciar_worker(self):
         """Inicia el worker de automatización"""

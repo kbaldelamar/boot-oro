@@ -160,7 +160,7 @@ class AutorizarAnexo3Panel(ttk.Frame):
         
         # Frame para la tabla con checkboxes
         columns = (
-            "seleccion", "idOrden", "idItemOrden", "NoDocumento", "Paciente", 
+            "seleccion", "idOrden", "idItemOrden", "TipoDoc", "NoDocumento", "Paciente", 
             "cups", "procedimiento", "FechaOrden", "estadoCaso", "telefono"
         )
         
@@ -184,6 +184,7 @@ class AutorizarAnexo3Panel(ttk.Frame):
         self.tree.heading("seleccion", text="")
         self.tree.heading("idOrden", text="ID Orden")
         self.tree.heading("idItemOrden", text="ID Item")
+        self.tree.heading("TipoDoc", text="Tipo Doc")
         self.tree.heading("NoDocumento", text="Documento")
         self.tree.heading("Paciente", text="Paciente")
         self.tree.heading("cups", text="CUPS")
@@ -196,6 +197,7 @@ class AutorizarAnexo3Panel(ttk.Frame):
         self.tree.column("seleccion", width=0, stretch=False)
         self.tree.column("idOrden", width=80, anchor=tk.CENTER)
         self.tree.column("idItemOrden", width=80, anchor=tk.CENTER)
+        self.tree.column("TipoDoc", width=50, anchor=tk.CENTER)
         self.tree.column("NoDocumento", width=100, anchor=tk.CENTER)
         self.tree.column("Paciente", width=200)
         self.tree.column("cups", width=80, anchor=tk.CENTER)

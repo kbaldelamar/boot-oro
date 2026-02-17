@@ -4,7 +4,9 @@ Manejo de navegador, contexto y sesión persistente
 """
 import os
 import time
+import sys
 from pathlib import Path
+import sys
 from typing import Optional
 from playwright.sync_api import sync_playwright, Browser, BrowserContext, Page, Playwright
 from utils.logger import AdvancedLogger
@@ -41,6 +43,9 @@ class PlaywrightService:
         Returns:
             True si se inició correctamente
         """
+        # Detectar si estamos ejecutando desde .exe
+        is_frozen = getattr(sys, 'frozen', False)
+        
         try:
             self.logger.info('Playwright', 'Iniciando Playwright...')
             
@@ -50,9 +55,10 @@ class PlaywrightService:
             
             # 2. Lanzar Chromium con configuración más robusta
             self.logger.info('Playwright', 'Lanzando navegador Chromium...')
-            self.browser = self.playwright.chromium.launch(
-                headless=False,
-                args=[
+            
+            launch_options = {
+                'headless': False,
+                'args': [
                     '--start-maximized',
                     '--disable-blink-features=AutomationControlled',
                     '--disable-web-security',
@@ -63,9 +69,45 @@ class PlaywrightService:
                     '--disable-accelerated-2d-canvas',
                     '--disable-gpu'
                 ]
-            )
+            }
+            
+            # Si estamos en .exe, intentar usar navegadores empaquetados o Chrome del sistema
+            if is_frozen:
+                self.logger.info('Playwright', '🔄 Ejecutando desde .exe - Configurando navegadores...')
+                browser_path = self._configure_playwright_browsers()
+                if browser_path:
+                    launch_options['executable_path'] = browser_path
+                    self.logger.info('Playwright', f'✅ Usando navegador: {browser_path}')
+                else:
+                    self.logger.warning('Playwright', '⚠️ Navegador no encontrado, intentando con Playwright por defecto...')
+            
+            self.browser = self.playwright.chromium.launch(**launch_options)
             self.logger.success('Playwright', 'Navegador Chromium lanzado')
             
+        except Exception as e:
+            error_msg = str(e)
+            self.logger.error('Playwright', f'Error al iniciar navegador: {error_msg}')
+            
+            # Si estamos en .exe y falló, intentar Edge como fallback
+            if is_frozen and 'Executable doesn\'t exist' in error_msg:
+                try:
+                    self.logger.info('Playwright', '🔄 Intentando con Microsoft Edge como fallback...')
+                    edge_path = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
+                    if os.path.exists(edge_path):
+                        launch_options['executable_path'] = edge_path
+                        self.browser = self.playwright.chromium.launch(**launch_options)
+                        self.logger.success('Playwright', '✅ Navegador Edge lanzado exitosamente')
+                    else:
+                        raise Exception("Edge tampoco está disponible")
+                except Exception as edge_error:
+                    self.logger.error('Playwright', f'Edge también falló: {edge_error}')
+                    self.cerrar()
+                    return False
+            else:
+                self.cerrar()
+                return False
+        
+        try:
             # 3. Crear contexto con user agent real
             self.context = self.browser.new_context(
                 viewport={'width': 1920, 'height': 1080},
@@ -266,6 +308,10 @@ class PlaywrightService:
             
         except Exception as e:
             self.logger.error('Playwright', 'Error cerrando navegador', e)
+
+    def cerrar(self):
+        """Alias de cerrar_navegador() para compatibilidad"""
+        self.cerrar_navegador()
     
     def esta_activo(self) -> bool:
         """
@@ -283,3 +329,59 @@ class PlaywrightService:
             return True
         except:
             return False
+    
+    def _find_system_chrome(self) -> Optional[str]:
+        """
+        Encuentra la instalación de Chrome del sistema.
+        
+        Returns:
+            Ruta al ejecutable de Chrome si se encuentra, None sino
+        """
+        chrome_paths = [
+            r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+            r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
+            os.path.expanduser(r"~\AppData\Local\Google\Chrome\Application\chrome.exe")
+        ]
+        
+        for path in chrome_paths:
+            if os.path.exists(path):
+                self.logger.debug('Playwright', f'Chrome encontrado en: {path}')
+                return path
+        
+        self.logger.warning('Playwright', 'Chrome del sistema no encontrado en rutas comunes')
+        return None
+    
+    def _configure_playwright_browsers(self) -> Optional[str]:
+        """
+        Configura el navegador Playwright para ejecución desde .exe empaquetado.
+        
+        Returns:
+            Ruta al ejecutable del navegador si se encuentra, None sino
+        """
+        # Comprobar si estamos ejecutando desde .exe empaquetado
+        if not getattr(sys, 'frozen', False):
+            return None
+        
+        try:
+            # Buscar navegadores en el directorio de recursos empaquetados
+            base_path = Path(sys._MEIPASS)
+            
+            # Buscar navegadores de Playwright empaquetados
+            playwright_browsers_dir = base_path / 'playwright' / 'browsers'
+            
+            if playwright_browsers_dir.exists():
+                # Buscar Chromium
+                for chromium_dir in playwright_browsers_dir.glob('chromium-*'):
+                    if chromium_dir.is_dir():
+                        chrome_exe = chromium_dir / 'chrome-win' / 'chrome.exe'
+                        if chrome_exe.exists():
+                            self.logger.info('Playwright', f'✅ Navegador Playwright empaquetado encontrado: {chrome_exe}')
+                            return str(chrome_exe)
+            
+            # Si no se encuentra navegador empaquetado, usar Chrome del sistema
+            self.logger.warning('Playwright', '⚠️ Navegador Playwright empaquetado no encontrado, usando Chrome del sistema')
+            return self._find_system_chrome()
+            
+        except Exception as e:
+            self.logger.error('Playwright', f'Error configurando navegadores: {e}')
+            return self._find_system_chrome()

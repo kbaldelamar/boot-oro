@@ -65,6 +65,14 @@ class BootOroBuilder:
         src_dir = self.project_root / "src"
         if src_dir.exists():
             items.append((str(src_dir), "src"))
+        
+        # Navegadores Playwright → playwright/browsers/
+        playwright_browsers = self._find_playwright_browsers()
+        if playwright_browsers:
+            for browser_path in playwright_browsers:
+                browser_name = Path(browser_path).parent.parent.name  # Ej: chromium-1091
+                items.append((str(browser_path), f"playwright/browsers/{browser_name}"))
+            print(f"  ✅ {len(playwright_browsers)} navegador(es) Playwright empaquetado(s)")
 
         return items
 
@@ -247,6 +255,52 @@ exe = EXE(
             dr.mkdir(parents=True, exist_ok=True)
             print(f"  📁 {d}/")
         print("  ✅ Directorios de runtime creados en dist/")
+    
+    def _find_playwright_browsers(self) -> list:
+        """
+        Encuentra instalaciones de navegadores Playwright en el sistema.
+        
+        Returns:
+            Lista de rutas a directorios de navegadores encontrados
+        """
+        browsers_found = []
+        
+        # Rutas comunes donde Playwright instala navegadores
+        possible_locations = [
+            Path.home() / ".cache" / "ms-playwright",  # Linux/macOS
+            Path.home() / "AppData" / "Local" / "ms-playwright",  # Windows
+            Path("C:") / "Users" / "runneradmin" / "AppData" / "Local" / "ms-playwright",  # CI
+        ]
+        
+        for location in possible_locations:
+            if not location.exists():
+                continue
+            
+            # Buscar subdirectorios de navegadores (chromium-*, firefox-*, webkit-*)
+            for browser_dir in location.iterdir():
+                if browser_dir.is_dir() and any(browser_dir.name.startswith(prefix) for prefix in ["chromium-", "firefox-", "webkit-"]):
+                    # Verificar que tenga estructura válida de navegador
+                    if browser_dir.name.startswith("chromium-"):
+                        chrome_exe = browser_dir / "chrome-win" / "chrome.exe"
+                        if chrome_exe.exists():
+                            browsers_found.append(str(browser_dir))
+                            print(f"  📦 Navegador encontrado: {browser_dir.name}")
+        
+        return browsers_found
+    
+    def _configure_playwright_browsers(self) -> None:
+        """
+        Configura los navegadores Playwright para el empaquetado.
+        Se ejecuta durante el proceso de build.
+        """
+        browsers = self._find_playwright_browsers()
+        if browsers:
+            print(f"\n📦 Configurando {len(browsers)} navegador(es) Playwright para empaquetado...")
+            for browser in browsers:
+                print(f"  ➤ {Path(browser).name}")
+        else:
+            print("\n⚠️ No se encontraron navegadores Playwright instalados")
+            print("   El .exe usará Chrome del sistema como fallback")
 
     # ──────────────────────────────────────────
     # BUILD principal
@@ -280,6 +334,10 @@ exe = EXE(
         spec_content = self._build_spec_content()
         self.spec_file.write_text(spec_content, encoding="utf-8")
         print(f"  Archivo: {self.spec_file}")
+
+        # 3.5. Configurar navegadores Playwright
+        print("\n🌐 Paso 3.5: Configurando navegadores Playwright...")
+        self._configure_playwright_browsers()
 
         # 4. Ejecutar PyInstaller
         print("\n⚙️  Paso 4: Ejecutando PyInstaller...")

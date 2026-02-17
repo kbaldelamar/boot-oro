@@ -1,0 +1,5 @@
+[2026-02-17 08:48:38.861] [❌ ERROR] [Licencia] Error en consulta: HTTPConnectionPool(host='localhost', port=5000): Read timed out. (read timeout=10)
+[2026-02-17 08:48:38.862] [⚠️ WARNING] [Licencia] Validación fallida: Error consultando saldo
+[2026-02-17 08:57:50.522] [❌ ERROR] [EjecutarCasosLaboratorio] Error actualizando estado: actualizar_item_orden_procedimiento() got an unexpected keyword argument 'id_orden'
+[2026-02-17 09:12:01.108] [⚠️ WARNING] [EjecutarCaso] ⚠️ Error actualizando resultado_ejecucion: 500
+[2026-02-17 10:00:05.272] [⚠️ WARNING] [EjecutarCaso] ⚠️ Error actualizando resultado_ejecucion: 500

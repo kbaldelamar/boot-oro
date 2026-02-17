@@ -101,10 +101,14 @@ class AutorizarAnexo3Service:
         # Estado como texto
         estado = "Pendiente" if orden.get('estadoCaso', 0) == 0 else "Procesado"
         
+        # Tipo de documento y número por separado
+        tipo_doc = orden.get('Id_TipoIdentificacion', '') or orden.get('tipoIdentificacion', '')
+        no_doc = orden.get('NoDocumento', '')
         return (
             orden.get('idOrden', ''),
             orden.get('idItemOrden', ''),
-            orden.get('NoDocumento', ''),
+            tipo_doc,
+            no_doc,
             nombre_completo,
             orden.get('cups', ''),
             orden.get('procedimiento', ''),

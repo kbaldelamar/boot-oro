@@ -178,7 +178,8 @@ class Config:
     def ips_nombres_permitidos(self) -> list:
         """Lista de IPS permitidas para uso de la app"""
         return [
-            "OROSALUD CAUCASIA IPS S.A.S"
+            "OROSALUD CAUCASIA IPS S.A.S",
+            "SERVICIOS EMERGENCY IPS S.A.S"
         ]
 
     @property
@@ -202,6 +203,11 @@ class Config:
             # Intentar como recurso empaquetado
             return str(get_resource_path('resources/images/Anexo3.png'))
         return ''
+    
+    @property
+    def laboratorio_pdf_path(self) -> str:
+        """Ruta donde están los PDFs de órdenes médicas para laboratorio"""
+        return self.get('LABORATORIO_PDF_PATH', 'C:\\boot\\temp\\laboratorio')
 
 
 # Crear una instancia global para facilitar el acceso

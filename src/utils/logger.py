@@ -134,3 +134,7 @@ class AdvancedLogger:
         mensaje = f"Screenshot guardado: {screenshot_path}\n  Orden: {orden_id}\n  Error: {error}"
         formatted = f"[{timestamp}] [📸 SCREENSHOT] {mensaje}"
         self._write_to_file(formatted)
+
+
+# Alias para compatibilidad
+Logger = AdvancedLogger

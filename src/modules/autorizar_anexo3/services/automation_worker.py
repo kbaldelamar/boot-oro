@@ -14,6 +14,8 @@ from modules.autorizar_anexo3.playwright.playwright_service import PlaywrightSer
 from modules.autorizar_anexo3.playwright.login_playwright import LoginPlaywright
 from modules.autorizar_anexo3.playwright.home_playwright import HomePlaywright
 from modules.autorizar_anexo3.playwright.ejecutar_casos_playwright import EjecutarCasosPlaywright
+from services.license_service import LicenseService
+from config.config import Config
 
 
 class AutomationWorker(threading.Thread):
@@ -32,8 +34,11 @@ class AutomationWorker(threading.Thread):
         self.paused = False
         
         # Servicios
+        self.config = Config()
         self.logger = AdvancedLogger(ui_callback=ui_callback)
-        self.api_service = ProgramacionService(logger=self.logger)
+        base_url = self.config.api_url_programacion_base or "http://localhost:5000"
+        self.api_service = ProgramacionService(base_url=base_url, logger=self.logger)
+        self.license_service = LicenseService(base_url=base_url)
         self.playwright_service: Optional[PlaywrightService] = None
         
         # Control de navegador
@@ -62,6 +67,18 @@ class AutomationWorker(threading.Thread):
                 if self.paused:
                     time.sleep(1)
                     continue
+                
+                # Verificar saldo antes de procesar
+                info_saldo = self.license_service.obtener_saldo()
+                if info_saldo.get("success"):
+                    saldo_actual = info_saldo.get("saldo_robot")
+                    try:
+                        if saldo_actual is not None and float(saldo_actual) <= 0:
+                            self.logger.error('Worker', '🛑 SALDO AGOTADO - Deteniendo worker')
+                            self.stop()
+                            break
+                    except (TypeError, ValueError):
+                        pass
                 
                 # Obtener órdenes pendientes
                 pendientes = self.api_service.obtener_pendientes()
@@ -192,7 +209,8 @@ class AutomationWorker(threading.Thread):
             for key, value in datos_paciente.items():
                 setattr(data, key, value)
             # Mapear campos adicionales que usa inicio_casos
-            data.tipoIdentificacion = datos_paciente.get('TipoIdentificacion', 'Cédula de Ciudadanía')
+            # La API devuelve Id_TipoIdentificacion (ej: "CC", "TI", "CE")
+            data.tipoIdentificacion = datos_paciente.get('Id_TipoIdentificacion', '') or datos_paciente.get('TipoIdentificacion', 'Cédula de Ciudadanía')
             data.identificacion = datos_paciente.get('NoDocumento', '')
             data.telefono = datos_paciente.get('telefono', '')
             data.fechaFacturaEvento = datos_paciente.get('FechaOrden', '')
@@ -278,6 +296,22 @@ class AutomationWorker(threading.Thread):
             resultado="OK"
         )
         self.api_service.actualizar_estado_caso(id_item, 1)  # 1 = Completado
+        
+        # Descontar saldo por caso exitoso
+        resultado_descuento = self.license_service.descontar_caso_exitoso()
+        
+        if resultado_descuento.get("success"):
+            saldo_nuevo = resultado_descuento.get("saldo_nuevo", 0)
+            valor_descontado = resultado_descuento.get("valor_descontado", 0)
+            self.logger.info('Worker', f'💰 Saldo descontado: {valor_descontado} | Saldo restante: {saldo_nuevo}')
+            
+            # Verificar si el saldo se agotó
+            if resultado_descuento.get("saldo_agotado"):
+                self.logger.warning('Worker', '⚠️ SALDO AGOTADO - Deteniendo worker')
+                self.stop()
+                self.logger.error('Worker', '🛑 Worker detenido por saldo agotado')
+        else:
+            self.logger.error('Worker', f'Error descontando saldo: {resultado_descuento.get("message")}')
         
         self.exitosos += 1
         self.procesados += 1

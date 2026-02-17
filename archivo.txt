@@ -2,3 +2,15 @@ caso,servicio 881301 con el número de radicado #16892639,paciente,1143135147,or
 caso,servicio 881301 con el número de radicado #16892639,paciente,1143135147,ordenCapita,399795
 caso,servicio 881301 con el número de radicado #16892639,paciente,1143135147,ordenCapita,399795
 caso,servicio 881301 con el número de radicado #16892639,paciente,1143135147,ordenCapita,399795
+caso,Correcto Caso # 17501845,paciente,39273830,ordenCapita,409921
+caso,SOLICITUD ACTIVA - El afiliado cuenta con una solicitud activa para el servicio 895101 con el número de radicado #17501845,paciente,39273830,ordenCapita,409921
+caso,SOLICITUD ACTIVA - El afiliado cuenta con una solicitud activa para el servicio 895101 con el número de radicado #17501845,paciente,39273830,ordenCapita,409921
+caso,SOLICITUD ACTIVA - El afiliado cuenta con una solicitud activa para el servicio 890266 con el número de radicado #17609229,paciente,1038092588,ordenCapita,411711
+caso,Correcto Caso # 17634542,paciente,1101884753,ordenCapita,372
+caso,Correcto Caso # 17635305,paciente,3999740,ordenCapita,986
+caso,Correcto Caso # 17635468,paciente,64582462,ordenCapita,1134
+caso,SOLICITUD ACTIVA - El afiliado cuenta con una solicitud activa para el servicio 903841 con el número de radicado #16883078,paciente,1101880751,ordenCapita,357
+caso,SOLICITUD ACTIVA - El afiliado cuenta con una solicitud activa para el servicio 906610 con el número de radicado #17635305,paciente,3999740,ordenCapita,45
+caso,SOLICITUD ACTIVA - El afiliado cuenta con una solicitud activa para el servicio 903426 con el número de radicado #17635468,paciente,64582462,ordenCapita,62
+caso,SOLICITUD ACTIVA - El afiliado cuenta con una solicitud activa para el servicio 903426 con el número de radicado #17635468,paciente,64582462,ordenCapita,62
+caso,SOLICITUD ACTIVA - El afiliado cuenta con una solicitud activa para el servicio 903841 con el número de radicado #16883078,paciente,1101880751,ordenCapita,72

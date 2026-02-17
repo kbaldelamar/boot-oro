@@ -154,8 +154,6 @@ class LoginPlaywright:
             
             # 1. Obtener URL actual
             current_url = self.page.url
-            self.logger.debug('Login', f'URL para CAPTCHA: {current_url}')
-            self.logger.debug('Login', f'Site Key: {self.captcha_site_key}')
             
             # 2. Llamar a TwoCaptcha con configuración optimizada
             solver = TwoCaptcha(
@@ -168,13 +166,11 @@ class LoginPlaywright:
             # Verificar balance primero
             try:
                 balance = solver.balance()
-                self.logger.info('Login', f'💰 Balance TwoCaptcha: ${balance}')
                 if float(balance) < 0.5:
                     self.logger.warning('Login', '⚠️ Balance bajo! Recarga en https://2captcha.com')
             except Exception as e:
                 self.logger.warning('Login', f'No se pudo verificar balance: {e}')
             
-            self.logger.info('Login', 'Esperando respuesta de Captcha...')
             response = solver.recaptcha(
                 sitekey=self.captcha_site_key,
                 url=current_url

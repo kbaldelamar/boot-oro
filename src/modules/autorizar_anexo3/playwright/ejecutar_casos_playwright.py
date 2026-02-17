@@ -7,6 +7,7 @@ import time
 import os
 import datetime
 import re
+import requests
 from typing import Dict, Optional
 from playwright.sync_api import Page, TimeoutError as PlaywrightTimeout
 from utils.logger import AdvancedLogger
@@ -57,42 +58,44 @@ class EjecutarCasosPlaywright:
             
             # ====== SELECCIÓN DE TIPO DE IDENTIFICACIÓN ======
             if data.tipoIdentificacion == "Cédula de Ciudadanía":
-                # Construir el XPath dinámicamente con el tipo de identificación
+                # Lógica especial para cédula
                 self.comboIdentidad()
                 dynamic_xpath = f"//div[@class='ant-select-item-option-content'][contains(.,'{data.tipoIdentificacion}')]"
-                
-                # Intentar hacer clic en el elemento dinámico
                 combo_tipo_identidad = self.esperar_y_clickear(dynamic_xpath)
-                
-                # Si el elemento no es clickeable, intentar hacer scroll y luego clickear nuevamente
                 if not combo_tipo_identidad:
-                    for i in range(4):  # Intentar hasta 4 veces más
-                        # Verificar sesión antes de cada intento de scroll
+                    for i in range(4):
                         self.verificar_sesion_activa(data, "DURANTE SCROLL DE IDENTIFICACIÓN")
-                        
-                        self.scroll_list_to(100 * (i + 1))  # Desplazar el scrollbar más abajo
+                        self.scroll_list_to(100 * (i + 1))
                         combo_tipo_identidad = self.esperar_y_clickear(dynamic_xpath)
                         if combo_tipo_identidad:
                             break
-                        
                 if combo_tipo_identidad:
                     self.logger.info('EjecutarCaso', f"Clicked on combo tipo identidad dinámico: {data.tipoIdentificacion}")
                 else:
                     self.logger.warning('EjecutarCaso', f"Elemento no fue clickeable después de intentar scroll.")
             else:
-                # Resto del código...
+                # Lógica general para otros tipos de documento
                 self.comboIdentidad()
-                # Esperar a que el combo se abra y sea interactivo
-                self.page.wait_for_selector('.rc-virtual-list-holder', timeout=5000)
-                
-                # Buscar y seleccionar la opción
-                option = self.scroll_list_and_find_option(data.tipoIdentificacion)
-                time.sleep(1)
-                if option:
-                    self.click_option(option)
-                    print(f"Opción '{data.tipoIdentificacion}' seleccionada con éxito.")
+                dynamic_xpath = f"//div[@class='ant-select-item-option-content'][contains(.,'{data.tipoIdentificacion}')]"
+                combo_tipo_identidad = self.esperar_y_clickear(dynamic_xpath)
+                if not combo_tipo_identidad:
+                    for i in range(4):
+                        self.verificar_sesion_activa(data, "DURANTE SCROLL DE IDENTIFICACIÓN")
+                        self.scroll_list_to(100 * (i + 1))
+                        combo_tipo_identidad = self.esperar_y_clickear(dynamic_xpath)
+                        if combo_tipo_identidad:
+                            break
+                if combo_tipo_identidad:
+                    self.logger.info('EjecutarCaso', f"Clicked on combo tipo identidad dinámico: {data.tipoIdentificacion}")
                 else:
-                    print(f"No se pudo encontrar la opción: {data.tipoIdentificacion}")
+                    self.page.wait_for_selector('.rc-virtual-list-holder', timeout=5000)
+                    option = self.scroll_list_and_find_option(data.tipoIdentificacion)
+                    time.sleep(1)
+                    if option:
+                        self.click_option(option)
+                        print(f"Opción '{data.tipoIdentificacion}' seleccionada con éxito.")
+                    else:
+                        print(f"No se pudo encontrar la opción: {data.tipoIdentificacion}")
             
             # ====== VERIFICACIÓN DE SESIÓN ANTES DE CONTINUAR ======
             self.verificar_sesion_activa(data, "DESPUÉS DE SELECCIÓN DE IDENTIFICACIÓN")
@@ -404,16 +407,8 @@ class EjecutarCasosPlaywright:
                     self.logger.error('EjecutarCaso', f"Error al manejar Modalidad: {str(e)}", e)
                     raise
                 
-                # Servicios (XPATH SELENIUM EXACTO)
-                clic_Boton_servicios = self.page.wait_for_selector("//button[@aria-required='true'][contains(.,'Seleccionar Servicio')]", timeout=5000)
-                clic_Boton_servicios.click()
-                self.logger.info('EjecutarCaso', "Clicked Servicios combo")
-                
-                # ====== VERIFICACIÓN DE SESIÓN ANTES DE INGRESO DE ITEMS ======
-                self.verificar_sesion_activa(data, "ANTES DE INGRESO DE ITEMS")
-                
-                # Ingresar Items
-                self.ingreso_items.IntemsAndFor(data)
+                # ====== INGRESO DE SERVICIOS (método sobrescribible) ======
+                self._ingresar_servicios(data)
                 
                 time.sleep(1)
                 self.page.evaluate("window.scrollBy(0, 100)")
@@ -478,38 +473,10 @@ class EjecutarCasosPlaywright:
                     self.reinicio()
                     return False  # ERROR: IPS no encontrada
                 
-                # ====== GENERACIÓN Y MANEJO DE ARCHIVOS ======
-                self.logger.info('EjecutarCaso', f"📄 === GENERANDO ANEXO 3 ===")
-                
-                try:
-                    # Generar PDF del Anexo 3 usando los datos de la orden
-                    file_path = self.pdf_service.generar_anexo3(
-                        id_atencion=data.idAtencion,
-                        id_orden=data.idOrden,
-                        id_procedimiento=data.idProcedimiento
-                    )
-                    
-                    self.logger.info('EjecutarCaso', f"✅ PDF generado: {file_path}")
-                    
-                    # Verificar que se generó correctamente
-                    if not os.path.exists(file_path):
-                        raise Exception("PDF del Anexo 3 no se generó correctamente")
-                    
-                    tamaño_archivo = os.path.getsize(file_path)
-                    self.logger.info('EjecutarCaso', f"📊 Tamaño del archivo: {tamaño_archivo} bytes")
-                    
-                    if tamaño_archivo == 0:
-                        raise Exception("PDF generado está vacío (0 bytes)")
-                    elif tamaño_archivo < 1024:
-                        self.logger.warning('EjecutarCaso', f"⚠️ ADVERTENCIA: El archivo es muy pequeño ({tamaño_archivo} bytes)")
-                    
-                except Exception as e:
-                    error_msg = f"Error al generar PDF del Anexo 3: {e}"
-                    self.logger.error('EjecutarCaso', f"❌ {error_msg}", e)
-                    self.crear_archivo_error(data, "ERROR_GENERAR_PDF", error_msg, "")
-                    self.actualizar(data, "17", "")
-                    self.reinicio()
-                    return False
+                # ====== OBTENCIÓN DE ARCHIVO PDF (método sobrescribible) ======
+                file_path = self._obtener_archivo_pdf(data)
+                if not file_path:
+                    return False  # El método ya manejó el error y reinicio
                 
                 # Verificar sesión antes de subir archivos
                 self.verificar_sesion_activa(data, "ANTES DE SUBIR ARCHIVOS")
@@ -575,6 +542,38 @@ class EjecutarCasosPlaywright:
                             except Exception as e:
                                 self.logger.warning('EjecutarCaso', f"⚠️ No se pudo leer swal2-html-container: {e}")
                             
+                            # NUEVO: Verificar si es error de solicitud activa (manejarlo como éxito)
+                            if "solicitud activa" in error_text.lower() and "número de radicado" in error_text.lower():
+                                self.logger.info('EjecutarCaso', f"✅ SOLICITUD ACTIVA DETECTADA - Tratando como éxito")
+                                
+                                # Extraer el número de radicado
+                                numero_radicado = ""
+                                radicado_match = re.search(r'número de radicado\s*#?\s*(\d+)', error_text, re.IGNORECASE)
+                                if radicado_match:
+                                    numero_radicado = radicado_match.group(1)
+                                    self.logger.info('EjecutarCaso', f"📝 Número de radicado extraído: {numero_radicado}")
+                                else:
+                                    # Fallback: extraer cualquier número
+                                    numbers = re.findall(r'\d+', error_text)
+                                    numero_radicado = ''.join(numbers) if numbers else ""
+                                    self.logger.warning('EjecutarCaso', f"⚠️ Usando fallback para número: {numero_radicado}")
+                                
+                                # Guardar en archivo como caso exitoso
+                                with open("archivo.txt", 'a', encoding='utf-8') as archivo:
+                                    archivo.write(f"caso,SOLICITUD ACTIVA - {error_text},paciente,{data.identificacion},ordenCapita,{data.idItemOrden}\n")
+                                
+                                # Hacer clic OK y actualizar como completado
+                                self._hacer_clic_ok()
+                                
+                                # Actualizar como exitoso (estado "1") con el número de radicado y resultado_ejecucion
+                                self.actualizar_con_resultado_ejecucion(data, "1", numero_radicado, error_text)
+                                
+                                self.reinicio()
+                                time.sleep(5)
+                                self.alerta()
+                                return True  # ÉXITO: Solicitud activa tratada como completada
+                            
+                            # Si no es solicitud activa, manejar como error normal
                             # Extraer fragmento
                             fragment = None
                             m = re.search(r"(servicio\s*\d+\s*con el número de radicado\s*#\s*\d+)", error_text, re.IGNORECASE)
@@ -623,7 +622,7 @@ class EjecutarCasosPlaywright:
                                 archivo.write(f"caso,{success_text},paciente,{data.identificacion},ordenCapita,{data.idItemOrden}\n")
                             
                             self._hacer_clic_ok()
-                            self.actualizar(data, "1", numbers_str)
+                            self.actualizar(data, "3", numbers_str)
                             self.reinicio()
                             time.sleep(5)
                             self.alerta()
@@ -631,7 +630,7 @@ class EjecutarCasosPlaywright:
                         except:
                             print("No se pudo determinar el resultado")
                             self._hacer_clic_ok()
-                            self.actualizar(data, "3", "")
+                            self.actualizar(data, "19", "")
                             self.reinicio()
                             return False  # ERROR: No se pudo determinar resultado
                 except Exception as e:
@@ -785,13 +784,17 @@ class EjecutarCasosPlaywright:
                 """)
                 
                 current_scroll = self.page.evaluate("""
-                    const container = document.querySelector('.rc-virtual-list-holder');
-                    return container ? container.scrollTop : 0;
+                    (() => {
+                        const container = document.querySelector('.rc-virtual-list-holder');
+                        return container ? container.scrollTop : 0;
+                    })()
                 """)
                 
                 max_scroll = self.page.evaluate("""
-                    const container = document.querySelector('.rc-virtual-list-holder');
-                    return container ? container.scrollHeight - container.clientHeight : 0;
+                    (() => {
+                        const container = document.querySelector('.rc-virtual-list-holder');
+                        return container ? container.scrollHeight - container.clientHeight : 0;
+                    })()
                 """)
                 
                 if current_scroll >= max_scroll and attempts > 5:
@@ -880,6 +883,7 @@ class EjecutarCasosPlaywright:
         - "16" = Error - Timeout
         - "17" = Error - Otro
         - "18" = Error - No se encontró el botón
+        - "19" = Error - No se pudo determinar resultado
         """
         try:
             import requests
@@ -926,6 +930,97 @@ class EjecutarCasosPlaywright:
         except Exception as e:
             self.logger.error('EjecutarCaso', f"Error al actualizar estado: {e}", e)
             print(f"Error al actualizar estado: {e}")
+    
+    def actualizar_con_resultado_ejecucion(self, data, estado: str, numero_autorizacion: str = "", resultado_ejecucion: str = ""):
+        """
+        Actualizar tanto estadoCaso como resultado_ejecucion en la tabla programacion
+        """
+        try:
+            # 1. Actualizar estadoCaso como siempre
+            self.actualizar(data, estado, numero_autorizacion)
+            
+            # 2. NUEVO: Actualizar resultado_ejecucion en tabla programacion
+            if resultado_ejecucion:
+                url_programacion = f"{config.api_url_programacion_base.rstrip('/')}/programacion-ordenes/{data.idItemOrden}"
+                payload_programacion = {
+                    "resultado_ejecucion": resultado_ejecucion
+                }
+                
+                try:
+                    response = requests.put(url_programacion, json=payload_programacion, timeout=10)
+                    if response.status_code == 200:
+                        self.logger.info('EjecutarCaso', f"✅ resultado_ejecucion actualizado: {resultado_ejecucion[:50]}...")
+                    else:
+                        self.logger.warning('EjecutarCaso', f"⚠️ Error actualizando resultado_ejecucion: {response.status_code}")
+                except Exception as e:
+                    self.logger.warning('EjecutarCaso', f"⚠️ Error enviando resultado_ejecucion: {e}")
+        
+        except Exception as e:
+            self.logger.error('EjecutarCaso', f"Error al actualizar con resultado_ejecucion: {e}", e)
+    
+    def _obtener_archivo_pdf(self, data) -> str:
+        """
+        Método para obtener el archivo PDF - puede ser sobrescrito en clases hijas.
+        Por defecto genera el Anexo 3.
+        
+        Args:
+            data: Datos del paciente con atributos idAtencion, idOrden, idProcedimiento
+            
+        Returns:
+            Ruta del archivo PDF o cadena vacía si hay error
+        """
+        self.logger.info('EjecutarCaso', f"📄 === GENERANDO ANEXO 3 ===")
+        
+        try:
+            # Generar PDF del Anexo 3 usando los datos de la orden
+            file_path = self.pdf_service.generar_anexo3(
+                id_atencion=data.idAtencion,
+                id_orden=data.idOrden,
+                id_procedimiento=data.idProcedimiento
+            )
+            
+            self.logger.info('EjecutarCaso', f"✅ PDF generado: {file_path}")
+            
+            # Verificar que se generó correctamente
+            if not os.path.exists(file_path):
+                raise Exception("PDF del Anexo 3 no se generó correctamente")
+            
+            tamaño_archivo = os.path.getsize(file_path)
+            self.logger.info('EjecutarCaso', f"📊 Tamaño del archivo: {tamaño_archivo} bytes")
+            
+            if tamaño_archivo == 0:
+                raise Exception("PDF generado está vacío (0 bytes)")
+            elif tamaño_archivo < 1024:
+                self.logger.warning('EjecutarCaso', f"⚠️ ADVERTENCIA: El archivo es muy pequeño ({tamaño_archivo} bytes)")
+            
+            return file_path
+            
+        except Exception as e:
+            error_msg = f"Error al generar PDF del Anexo 3: {e}"
+            self.logger.error('EjecutarCaso', f"❌ {error_msg}", e)
+            self.crear_archivo_error(data, "ERROR_GENERAR_PDF", error_msg, "")
+            self.actualizar(data, "17", "")
+            self.reinicio()
+            return ""
+    
+    def _ingresar_servicios(self, data):
+        """
+        Método para ingresar servicios/CUPS - puede ser sobrescrito en clases hijas.
+        Por defecto usa el método de un solo CUPS.
+        
+        Args:
+            data: Datos del paciente con atributo 'cups'
+        """
+        # Servicios (XPATH SELENIUM EXACTO)
+        clic_Boton_servicios = self.page.wait_for_selector("//button[@aria-required='true'][contains(.,'Seleccionar Servicio')]", timeout=5000)
+        clic_Boton_servicios.click()
+        self.logger.info('EjecutarCaso', "Clicked Servicios combo")
+        
+        # Verificación de sesión antes de ingreso de items
+        self.verificar_sesion_activa(data, "ANTES DE INGRESO DE ITEMS")
+        
+        # Ingresar Items (un solo CUPS)
+        self.ingreso_items.IntemsAndFor(data)
     
     def reinicio(self):
         """Método de reinicio - XPATH SELENIUM EXACTO"""
