@@ -1,5 +1,5 @@
 # -*- mode: python ; coding: utf-8 -*-
-# Auto-generado por BootOroBuilder - 2026-02-16 11:40:12
+# Auto-generado por BootOroBuilder - 2026-02-19 21:14:04
 
 block_cipher = None
 
@@ -15,8 +15,7 @@ a = Analysis(
     (r'c:\python\boot-oro\resources\keys', r'resources/keys'),
     (r'c:\python\boot-oro\resources\images', r'resources/images'),
     (r'c:\python\boot-oro\src', r'src'),
-    (r'C:\Users\develop\AppData\Local\ms-playwright\chromium-1091', r'playwright/browsers/Local'),
-    (r'C:\Users\develop\AppData\Local\ms-playwright\chromium-1112', r'playwright/browsers/Local'),
+    (r'C:\Users\develop\AppData\Local\ms-playwright\chromium-1140', r'playwright/browsers/chromium-1140'),
     ],
     hiddenimports=[
     'cryptography',

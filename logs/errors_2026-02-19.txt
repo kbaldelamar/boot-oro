@@ -1,0 +1,637 @@
+[2026-02-19 00:28:47.287] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para LUISA  FERNANDA  BARRERA  RUIZ (estado ya actualizado)
+[2026-02-19 00:38:24.914] [⚠️ WARNING] [EjecutarCaso] ⚠️ No se pudo leer swal2-html-container: 'NoneType' object has no attribute 'text_content'
+[2026-02-19 00:38:43.305] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para EVA SANDRITH PEREZ CARDENAS (estado ya actualizado)
+[2026-02-19 00:43:08.912] [⚠️ WARNING] [EjecutarCaso] ⚠️ No se pudo leer swal2-html-container: 'NoneType' object has no attribute 'text_content'
+[2026-02-19 00:43:27.256] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para CARLOS DANIEL PERALTA SALCEDO (estado ya actualizado)
+[2026-02-19 01:15:51.593] [⚠️ WARNING] [EjecutarCaso] ⚠️ Modal visible pero sin título Error/Correcto después de 60s
+[2026-02-19 01:16:10.000] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para LORENA MARIA CABRERA PEREZ (estado ya actualizado)
+[2026-02-19 01:51:01.902] [⚠️ WARNING] [EjecutarCaso] ⚠️ No se pudo leer swal2-html-container: 'NoneType' object has no attribute 'text_content'
+[2026-02-19 01:51:20.247] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para MONICA    SILGADO SILGADO    (estado ya actualizado)
+[2026-02-19 02:11:43.504] [❌ ERROR] [IngresoItemsLaboratorio] [CUPS 1] ❌ Error: Page.wait_for_selector: Timeout 25000ms exceeded.
+Call log:
+waiting for locator("//div[@class='ant-select-item-option-content'][contains(.,'901305')]") to be visible
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+  -   locator resolved to 5 elements. Proceeding with the first one: <div class="ant-select-item-option-content">901305696 - CLINICA DENTSALUD IPS</div>
+
+[2026-02-19 02:11:44.123] [❌ ERROR] [EjecutarCasosLaboratorio] Error ingresando CUPS
+[2026-02-19 02:12:12.596] [❌ ERROR] [EjecutarCaso] ❌ Error al cargar archivo en campos de entrada: Locator.click: Timeout 5000ms exceeded.
+Call log:
+waiting for locator("#fileListOrdenMedica").locator("..").locator("button")
+  -   locator resolved to <button type="button" class="ant-btn ant-btn-default">…</button>
+  - attempting click action
+  -   waiting for element to be visible, enabled and stable
+  -   element is visible, enabled and stable
+  -   scrolling into view if needed
+  -   done scrolling
+  -   <div class="swal2-container swal2-center swal2-backdr…>…</div> intercepts pointer events
+  - retrying click action, attempt #1
+  -   waiting for element to be visible, enabled and stable
+  -   element is visible, enabled and stable
+  -   scrolling into view if needed
+  -   done scrolling
+  -   <div class="swal2-container swal2-center swal2-backdr…>…</div> intercepts pointer events
+  - retrying click action, attempt #2
+  -   waiting 20ms
+  -   waiting for element to be visible, enabled and stable
+  -   element is not stable
+  - retrying click action, attempt #3
+  -   waiting 100ms
+  -   waiting for element to be visible, enabled and stable
+  -   element is not stable
+  - retrying click action, attempt #4
+  -   waiting 100ms
+  -   waiting for element to be visible, enabled and stable
+  -   element is visible, enabled and stable
+  -   scrolling into view if needed
+  -   done scrolling
+  -   <div class="swal2-container swal2-center swal2-backdr…>…</div> intercepts pointer events
+  - retrying click action, attempt #5
+  -   waiting 500ms
+  -   waiting for element to be visible, enabled and stable
+  -   element is visible, enabled and stable
+  -   scrolling into view if needed
+  -   done scrolling
+  -   <div class="swal2-container swal2-center swal2-backdr…>…</div> intercepts pointer events
+  - retrying click action, attempt #6
+  -   waiting 500ms
+  -   waiting for element to be visible, enabled and stable
+  -   element is visible, enabled and stable
+  -   scrolling into view if needed
+  -   done scrolling
+  -   <div class="swal2-container swal2-center swal2-backdr…>…</div> intercepts pointer events
+  - retrying click action, attempt #7
+  -   waiting 500ms
+  -   waiting for element to be visible, enabled and stable
+  -   element is visible, enabled and stable
+  -   scrolling into view if needed
+  -   done scrolling
+  -   <div class="swal2-container swal2-center swal2-backdr…>…</div> intercepts pointer events
+  - retrying click action, attempt #8
+  -   waiting 500ms
+  -   waiting for element to be visible, enabled and stable
+  -   element is visible, enabled and stable
+  -   scrolling into view if needed
+  -   done scrolling
+  -   <div class="swal2-container swal2-center swal2-backdr…>…</div> intercepts pointer events
+  - retrying click action, attempt #9
+  -   waiting 500ms
+  -   waiting for element to be visible, enabled and stable
+  -   element is visible, enabled and stable
+  -   scrolling into view if needed
+  -   done scrolling
+  -   <div class="swal2-container swal2-center swal2-backdr…>…</div> intercepts pointer events
+  - retrying click action, attempt #10
+  -   waiting 500ms
+  -   waiting for element to be visible, enabled and stable
+  -   element is visible, enabled and stable
+  -   scrolling into view if needed
+  -   done scrolling
+  -   <div class="swal2-container swal2-center swal2-backdr…>…</div> intercepts pointer events
+  - retrying click action, attempt #11
+  -   waiting 500ms
+  -   waiting for element to be visible, enabled and stable
+  -   element is visible, enabled and stable
+  -   scrolling into view if needed
+  -   done scrolling
+  -   <div class="swal2-container swal2-center swal2-backdr…>…</div> intercepts pointer events
+  - retrying click action, attempt #12
+  -   waiting 500ms
+  -   waiting for element to be visible, enabled and stable
+  -   element is visible, enabled and stable
+  -   scrolling into view if needed
+  -   done scrolling
+  -   <div class="swal2-container swal2-center swal2-backdr…>…</div> intercepts pointer events
+  - retrying click action, attempt #13
+  -   waiting 500ms
+
+  Exception: TimeoutError: Locator.click: Timeout 5000ms exceeded.
+Call log:
+waiting for locator("#fileListOrdenMedica").locator("..").locator("button")
+  -   locator resolved to <button type="button" class="ant-btn ant-btn-default">…</button>
+  - attempting click action
+  -   waiting for element to be visible, enabled and stable
+  -   element is visible, enabled and stable
+  -   scrolling into view if needed
+  -   done scrolling
+  -   <div class="swal2-container swal2-center swal2-backdr…>…</div> intercepts pointer events
+  - retrying click action, attempt #1
+  -   waiting for element to be visible, enabled and stable
+  -   element is visible, enabled and stable
+  -   scrolling into view if needed
+  -   done scrolling
+  -   <div class="swal2-container swal2-center swal2-backdr…>…</div> intercepts pointer events
+  - retrying click action, attempt #2
+  -   waiting 20ms
+  -   waiting for element to be visible, enabled and stable
+  -   element is not stable
+  - retrying click action, attempt #3
+  -   waiting 100ms
+  -   waiting for element to be visible, enabled and stable
+  -   element is not stable
+  - retrying click action, attempt #4
+  -   waiting 100ms
+  -   waiting for element to be visible, enabled and stable
+  -   element is visible, enabled and stable
+  -   scrolling into view if needed
+  -   done scrolling
+  -   <div class="swal2-container swal2-center swal2-backdr…>…</div> intercepts pointer events
+  - retrying click action, attempt #5
+  -   waiting 500ms
+  -   waiting for element to be visible, enabled and stable
+  -   element is visible, enabled and stable
+  -   scrolling into view if needed
+  -   done scrolling
+  -   <div class="swal2-container swal2-center swal2-backdr…>…</div> intercepts pointer events
+  - retrying click action, attempt #6
+  -   waiting 500ms
+  -   waiting for element to be visible, enabled and stable
+  -   element is visible, enabled and stable
+  -   scrolling into view if needed
+  -   done scrolling
+  -   <div class="swal2-container swal2-center swal2-backdr…>…</div> intercepts pointer events
+  - retrying click action, attempt #7
+  -   waiting 500ms
+  -   waiting for element to be visible, enabled and stable
+  -   element is visible, enabled and stable
+  -   scrolling into view if needed
+  -   done scrolling
+  -   <div class="swal2-container swal2-center swal2-backdr…>…</div> intercepts pointer events
+  - retrying click action, attempt #8
+  -   waiting 500ms
+  -   waiting for element to be visible, enabled and stable
+  -   element is visible, enabled and stable
+  -   scrolling into view if needed
+  -   done scrolling
+  -   <div class="swal2-container swal2-center swal2-backdr…>…</div> intercepts pointer events
+  - retrying click action, attempt #9
+  -   waiting 500ms
+  -   waiting for element to be visible, enabled and stable
+  -   element is visible, enabled and stable
+  -   scrolling into view if needed
+  -   done scrolling
+  -   <div class="swal2-container swal2-center swal2-backdr…>…</div> intercepts pointer events
+  - retrying click action, attempt #10
+  -   waiting 500ms
+  -   waiting for element to be visible, enabled and stable
+  -   element is visible, enabled and stable
+  -   scrolling into view if needed
+  -   done scrolling
+  -   <div class="swal2-container swal2-center swal2-backdr…>…</div> intercepts pointer events
+  - retrying click action, attempt #11
+  -   waiting 500ms
+  -   waiting for element to be visible, enabled and stable
+  -   element is visible, enabled and stable
+  -   scrolling into view if needed
+  -   done scrolling
+  -   <div class="swal2-container swal2-center swal2-backdr…>…</div> intercepts pointer events
+  - retrying click action, attempt #12
+  -   waiting 500ms
+  -   waiting for element to be visible, enabled and stable
+  -   element is visible, enabled and stable
+  -   scrolling into view if needed
+  -   done scrolling
+  -   <div class="swal2-container swal2-center swal2-backdr…>…</div> intercepts pointer events
+  - retrying click action, attempt #13
+  -   waiting 500ms
+
+[2026-02-19 02:12:12.596] [❌ ERROR] [EjecutarCaso] Error creando archivo de errores: 'DataObject' object has no attribute 'facturaEvento'
+  Exception: AttributeError: 'DataObject' object has no attribute 'facturaEvento'
+[2026-02-19 02:12:12.603] [❌ ERROR] [EjecutarCaso] ⏰ TIMEOUT - ELEMENTO NO RESPONDIÓ A TIEMPO
+  Exception: TimeoutError: Locator.click: Timeout 5000ms exceeded.
+Call log:
+waiting for locator("#fileListOrdenMedica").locator("..").locator("button")
+  -   locator resolved to <button type="button" class="ant-btn ant-btn-default">…</button>
+  - attempting click action
+  -   waiting for element to be visible, enabled and stable
+  -   element is visible, enabled and stable
+  -   scrolling into view if needed
+  -   done scrolling
+  -   <div class="swal2-container swal2-center swal2-backdr…>…</div> intercepts pointer events
+  - retrying click action, attempt #1
+  -   waiting for element to be visible, enabled and stable
+  -   element is visible, enabled and stable
+  -   scrolling into view if needed
+  -   done scrolling
+  -   <div class="swal2-container swal2-center swal2-backdr…>…</div> intercepts pointer events
+  - retrying click action, attempt #2
+  -   waiting 20ms
+  -   waiting for element to be visible, enabled and stable
+  -   element is not stable
+  - retrying click action, attempt #3
+  -   waiting 100ms
+  -   waiting for element to be visible, enabled and stable
+  -   element is not stable
+  - retrying click action, attempt #4
+  -   waiting 100ms
+  -   waiting for element to be visible, enabled and stable
+  -   element is visible, enabled and stable
+  -   scrolling into view if needed
+  -   done scrolling
+  -   <div class="swal2-container swal2-center swal2-backdr…>…</div> intercepts pointer events
+  - retrying click action, attempt #5
+  -   waiting 500ms
+  -   waiting for element to be visible, enabled and stable
+  -   element is visible, enabled and stable
+  -   scrolling into view if needed
+  -   done scrolling
+  -   <div class="swal2-container swal2-center swal2-backdr…>…</div> intercepts pointer events
+  - retrying click action, attempt #6
+  -   waiting 500ms
+  -   waiting for element to be visible, enabled and stable
+  -   element is visible, enabled and stable
+  -   scrolling into view if needed
+  -   done scrolling
+  -   <div class="swal2-container swal2-center swal2-backdr…>…</div> intercepts pointer events
+  - retrying click action, attempt #7
+  -   waiting 500ms
+  -   waiting for element to be visible, enabled and stable
+  -   element is visible, enabled and stable
+  -   scrolling into view if needed
+  -   done scrolling
+  -   <div class="swal2-container swal2-center swal2-backdr…>…</div> intercepts pointer events
+  - retrying click action, attempt #8
+  -   waiting 500ms
+  -   waiting for element to be visible, enabled and stable
+  -   element is visible, enabled and stable
+  -   scrolling into view if needed
+  -   done scrolling
+  -   <div class="swal2-container swal2-center swal2-backdr…>…</div> intercepts pointer events
+  - retrying click action, attempt #9
+  -   waiting 500ms
+  -   waiting for element to be visible, enabled and stable
+  -   element is visible, enabled and stable
+  -   scrolling into view if needed
+  -   done scrolling
+  -   <div class="swal2-container swal2-center swal2-backdr…>…</div> intercepts pointer events
+  - retrying click action, attempt #10
+  -   waiting 500ms
+  -   waiting for element to be visible, enabled and stable
+  -   element is visible, enabled and stable
+  -   scrolling into view if needed
+  -   done scrolling
+  -   <div class="swal2-container swal2-center swal2-backdr…>…</div> intercepts pointer events
+  - retrying click action, attempt #11
+  -   waiting 500ms
+  -   waiting for element to be visible, enabled and stable
+  -   element is visible, enabled and stable
+  -   scrolling into view if needed
+  -   done scrolling
+  -   <div class="swal2-container swal2-center swal2-backdr…>…</div> intercepts pointer events
+  - retrying click action, attempt #12
+  -   waiting 500ms
+  -   waiting for element to be visible, enabled and stable
+  -   element is visible, enabled and stable
+  -   scrolling into view if needed
+  -   done scrolling
+  -   <div class="swal2-container swal2-center swal2-backdr…>…</div> intercepts pointer events
+  - retrying click action, attempt #13
+  -   waiting 500ms
+
+[2026-02-19 02:12:16.436] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para NATALY  CARRASCAL  GUEVARA (estado ya actualizado)
+[2026-02-19 02:32:54.603] [⚠️ WARNING] [EjecutarCaso] ⚠️ No se pudo leer swal2-html-container: 'NoneType' object has no attribute 'text_content'
+[2026-02-19 02:33:12.945] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para KATIA LUZ   SIERRA PEREZ    (estado ya actualizado)
+[2026-02-19 02:45:09.464] [⚠️ WARNING] [EjecutarCaso] Opción 'Cédula de extranjeria' no encontrada después de 6 intentos
+[2026-02-19 02:45:10.476] [⚠️ WARNING] [EjecutarCaso] No se pudo encontrar la opción: Cédula de extranjeria
+[2026-02-19 02:45:17.007] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para ALBERT  RICHARD  ROLDAN  (estado ya actualizado)
+[2026-02-19 03:12:51.879] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para MOISES DAVID   TORRES ORTEGA    (estado ya actualizado)
+[2026-02-19 03:56:31.335] [❌ ERROR] [EjecutarCaso] 📄 ARCHIVO PDF NO ENCONTRADO
+  Exception: Exception: PDF no encontrado - \\192.168.1.22\Compartida\Soportes\Facturacion\Ingresos\288_1711_HISTORIA CLINICA.pdf
+[2026-02-19 03:56:34.695] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para SISELA ANDREA   LARES VECINO    (estado ya actualizado)
+[2026-02-19 04:17:38.597] [⚠️ WARNING] [EjecutarCaso] ⚠️ Modal visible pero sin título Error/Correcto después de 60s
+[2026-02-19 04:17:56.962] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para EVERARDO    DOMINGUEZ SANTOS    (estado ya actualizado)
+[2026-02-19 04:24:48.218] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para ARIANNA ISABEL VERGARA SANTANDER (estado ya actualizado)
+[2026-02-19 04:27:47.088] [⚠️ WARNING] [EjecutarCaso] ⚠️ No se pudo leer swal2-html-container: 'NoneType' object has no attribute 'text_content'
+[2026-02-19 04:28:05.439] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para DELCY DEL SOCORRO  ANDRADES ARROYO    (estado ya actualizado)
+[2026-02-19 04:45:44.336] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para SANTIAGO    BERRIO SALCEDO    (estado ya actualizado)
+[2026-02-19 05:28:10.941] [⚠️ WARNING] [EjecutarCaso] ⚠️ No se pudo leer swal2-html-container: 'NoneType' object has no attribute 'text_content'
+[2026-02-19 05:28:29.293] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para LLEY CAROLINA MARTINEZ TORRES (estado ya actualizado)
+[2026-02-19 06:02:25.871] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para CLARA INES ESTRADA PEREZ (estado ya actualizado)
+[2026-02-19 06:21:57.457] [⚠️ WARNING] [EjecutarCaso] ⚠️ Modal visible pero sin título Error/Correcto después de 60s
+[2026-02-19 06:22:15.832] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para ALVARO MANUEL   URIEL BENITES    (estado ya actualizado)
+[2026-02-19 07:17:48.619] [⚠️ WARNING] [EjecutarCaso] ⚠️ Modal visible pero sin título Error/Correcto después de 60s
+[2026-02-19 07:18:06.974] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para ANIS ISABEL MERCADO RIOS (estado ya actualizado)
+[2026-02-19 07:28:19.839] [⚠️ WARNING] [EjecutarCaso] ⚠️ No se pudo leer swal2-html-container: 'NoneType' object has no attribute 'text_content'
+[2026-02-19 07:28:38.202] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para DEICY MARIA   GONZALEZ VARGAS    (estado ya actualizado)
+[2026-02-19 07:50:34.715] [⚠️ WARNING] [EjecutarCaso] ⚠️ No se pudo leer swal2-html-container: 'NoneType' object has no attribute 'text_content'
+[2026-02-19 07:50:53.055] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para WENDY PATRICIA ARRIETA MONTIEL (estado ya actualizado)
+[2026-02-19 08:03:07.933] [⚠️ WARNING] [EjecutarCaso] ⚠️ No se pudo leer swal2-html-container: 'NoneType' object has no attribute 'text_content'
+[2026-02-19 08:03:26.283] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para MADERLEIDYS  SUAREZ MARTINEZ (estado ya actualizado)
+[2026-02-19 08:16:39.552] [⚠️ WARNING] [EjecutarCaso] ⚠️ Error al verificar sesión (pero continuando): Event loop is closed! Is Playwright already stopped?
+[2026-02-19 08:16:39.553] [⚠️ WARNING] [EjecutarCaso] ⚠️ Error cerrando SweetAlert2: Event loop is closed! Is Playwright already stopped?
+[2026-02-19 08:16:40.558] [❌ ERROR] [EjecutarCaso] ❌ Error durante reinicio: Event loop is closed! Is Playwright already stopped?
+  Exception: Error: Event loop is closed! Is Playwright already stopped?
+[2026-02-19 12:18:24.987] [❌ ERROR] [Licencia] Error en consulta: HTTPConnectionPool(host='localhost', port=5000): Read timed out. (read timeout=10)
+[2026-02-19 12:18:24.988] [⚠️ WARNING] [Licencia] Validación fallida: Error consultando saldo
+[2026-02-19 12:19:16.862] [❌ ERROR] [Licencia] Error en consulta: HTTPConnectionPool(host='localhost', port=5000): Read timed out. (read timeout=10)
+[2026-02-19 12:19:16.866] [⚠️ WARNING] [Licencia] Validación fallida: Error consultando saldo
+[2026-02-19 12:24:36.617] [⚠️ WARNING] [EjecutarCaso] ⚠️ No se pudo leer swal2-html-container: 'NoneType' object has no attribute 'text_content'
+[2026-02-19 12:24:57.000] [❌ ERROR] [Worker] Error procesando JULIO NAVARRO
+  Exception: Exception: Error ejecutando caso
+[2026-02-19 12:24:57.009] [⚠️ WARNING] [Worker] ⚠️ Error desconocido, marcando como ERROR final: Error ejecutando caso
+[12:25:01] [📸 SCREENSHOT] Screenshot guardado: c:\python\boot-oro\screenshots\error_412915.png
+  Orden: 412915
+  Error: Error no clasificado: Error ejecutando caso
+[2026-02-19 12:25:01.557] [❌ ERROR] [Worker] ❌ Orden 412915 marcada como ERROR: Error no clasificado: Error ejecutando caso
+[2026-02-19 12:26:10.853] [⚠️ WARNING] [EjecutarCaso] ⚠️ No se pudo leer swal2-html-container: 'NoneType' object has no attribute 'text_content'
+[2026-02-19 12:26:31.937] [❌ ERROR] [Worker] Error procesando JULIO NAVARRO
+  Exception: Exception: Error ejecutando caso
+[2026-02-19 12:26:31.946] [⚠️ WARNING] [Worker] ⚠️ Error desconocido, marcando como ERROR final: Error ejecutando caso
+[12:26:36] [📸 SCREENSHOT] Screenshot guardado: c:\python\boot-oro\screenshots\error_412915.png
+  Orden: 412915
+  Error: Error no clasificado: Error ejecutando caso
+[2026-02-19 12:26:36.512] [❌ ERROR] [Worker] ❌ Orden 412915 marcada como ERROR: Error no clasificado: Error ejecutando caso
+[2026-02-19 12:38:11.633] [⚠️ WARNING] [Licencia] Saldo agotado - menús bloqueados
+[2026-02-19 12:43:37.534] [⚠️ WARNING] [EjecutarCaso] No se encontró la opción de sede
+[2026-02-19 13:15:58.306] [⚠️ WARNING] [EjecutarCaso] ⚠️ Modal visible pero sin título Error/Correcto después de 60s
+[2026-02-19 13:16:16.636] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para ARGENIDA MARIA ATENCIA SANTOS (estado ya actualizado)
+[2026-02-19 13:18:15.198] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para LAURA  VANESSA ALMARIO  TERAN (estado ya actualizado)
+[2026-02-19 13:26:52.000] [⚠️ WARNING] [EjecutarCaso] ⚠️ Modal visible pero sin título Error/Correcto después de 60s
+[2026-02-19 13:27:10.416] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para EDELMIRA    CUADRADO GARCES    (estado ya actualizado)
+[2026-02-19 13:32:37.744] [⚠️ WARNING] [EjecutarCaso] ⚠️ Modal visible pero sin título Error/Correcto después de 60s
+[2026-02-19 13:32:56.125] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para ESTEFANY PAOLA SIBAJA PADILLA (estado ya actualizado)
+[2026-02-19 13:35:02.618] [⚠️ WARNING] [EjecutarCaso] ⚠️ Modal visible pero sin título Error/Correcto después de 60s
+[2026-02-19 13:35:21.043] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para WENDY  CERVANTES PREN (estado ya actualizado)
+[2026-02-19 17:25:45.491] [⚠️ WARNING] [Playwright] Timeout en navegación, verificando si la página cargó: Page.goto: Timeout 15000ms exceeded.
+Call log:
+navigating to "https://portalsalud.coosalud.com/login", waiting until "domcontentloaded"
+
+[2026-02-19 17:32:37.501] [❌ ERROR] [IngresoItems] ❌ Error definitivo: No se encontró opción para CUPS 890282-CONSULTA DE PRIMERA VEZ POR ESPECIALISTA EN OTORRINOLARINGOLOGÍA
+[2026-02-19 17:32:37.514] [❌ ERROR] [IngresoItems] ❌ Error general en IntemsAndFor: No se encontró opción para CUPS 890282-CONSULTA DE PRIMERA VEZ POR ESPECIALISTA EN OTORRINOLARINGOLOGÍA
+  Exception: Exception: No se encontró opción para CUPS 890282-CONSULTA DE PRIMERA VEZ POR ESPECIALISTA EN OTORRINOLARINGOLOGÍA
+[2026-02-19 17:32:53.066] [❌ ERROR] [IngresoItems] ❌ Error al intentar hacer clic en Aceptar: Page.wait_for_selector: Timeout 15000ms exceeded.
+Call log:
+waiting for locator("//span[contains(.,'Aceptar')]") to be visible
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+
+  Exception: TimeoutError: Page.wait_for_selector: Timeout 15000ms exceeded.
+Call log:
+waiting for locator("//span[contains(.,'Aceptar')]") to be visible
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+
+[2026-02-19 17:32:53.072] [❌ ERROR] [EjecutarCaso] ⏰ TIMEOUT - ELEMENTO NO RESPONDIÓ A TIEMPO
+  Exception: TimeoutError: Page.wait_for_selector: Timeout 15000ms exceeded.
+Call log:
+waiting for locator("//span[contains(.,'Aceptar')]") to be visible
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+  -   locator resolved to hidden <span>Aceptar</span>
+
+[2026-02-19 17:32:58.371] [❌ ERROR] [Worker] Error procesando SADER CALIZ
+  Exception: Exception: Error ejecutando caso
+[2026-02-19 17:32:58.375] [⚠️ WARNING] [Worker] ⚠️ Error desconocido, marcando como ERROR final: Error ejecutando caso
+[17:33:02] [📸 SCREENSHOT] Screenshot guardado: c:\python\boot-oro\screenshots\error_413640.png
+  Orden: 413640
+  Error: Error no clasificado: Error ejecutando caso
+[2026-02-19 17:33:02.795] [❌ ERROR] [Worker] ❌ Orden 413640 marcada como ERROR: Error no clasificado: Error ejecutando caso
+[2026-02-19 20:35:25.251] [❌ ERROR] [EjecutarCaso] Error al manejar IPS Remitente: No se encontró la opción de IPS Remitente: 900293903 - OROSALUD CAUCASIA IPS S.A.S
+  Exception: Exception: No se encontró la opción de IPS Remitente: 900293903 - OROSALUD CAUCASIA IPS S.A.S
+[2026-02-19 20:35:26.271] [❌ ERROR] [EjecutarCaso] ❓ ERROR NO CLASIFICADO: No se encontró la opción de IPS Remitente: 900293903 - OROSALUD CAUCASIA IPS S.A.S
+  Exception: Exception: No se encontró la opción de IPS Remitente: 900293903 - OROSALUD CAUCASIA IPS S.A.S
+[2026-02-19 20:35:31.655] [❌ ERROR] [Worker] Error procesando CAREN MADERA
+  Exception: Exception: Error ejecutando caso
+[2026-02-19 20:35:31.664] [⚠️ WARNING] [Worker] ⚠️ Error desconocido, marcando como ERROR final: Error ejecutando caso
+[20:35:36] [📸 SCREENSHOT] Screenshot guardado: c:\python\boot-oro\screenshots\error_413548.png
+  Orden: 413548
+  Error: Error no clasificado: Error ejecutando caso
+[2026-02-19 20:35:36.213] [❌ ERROR] [Worker] ❌ Orden 413548 marcada como ERROR: Error no clasificado: Error ejecutando caso
+[2026-02-19 20:35:42.661] [❌ ERROR] [EjecutarCaso] ❓ ERROR NO CLASIFICADO: Worker pausado durante ejecución
+  Exception: PausedException: Worker pausado durante ejecución
+[2026-02-19 20:35:48.003] [❌ ERROR] [Worker] Error procesando SADER CALIZ
+  Exception: Exception: Error ejecutando caso
+[2026-02-19 20:35:48.011] [⚠️ WARNING] [Worker] ⚠️ Error desconocido, marcando como ERROR final: Error ejecutando caso
+[20:35:52] [📸 SCREENSHOT] Screenshot guardado: c:\python\boot-oro\screenshots\error_413640.png
+  Orden: 413640
+  Error: Error no clasificado: Error ejecutando caso
+[2026-02-19 20:35:52.474] [❌ ERROR] [Worker] ❌ Orden 413640 marcada como ERROR: Error no clasificado: Error ejecutando caso
+[2026-02-19 20:46:11.976] [⚠️ WARNING] [Playwright] Timeout en navegación, verificando si la página cargó: Page.goto: Timeout 15000ms exceeded.
+Call log:
+navigating to "https://portalsalud.coosalud.com/login", waiting until "domcontentloaded"
+
+[2026-02-19 20:48:25.098] [❌ ERROR] [EjecutarCaso] Error al manejar IPS Remitente: No se encontró la opción de IPS Remitente: 900293903 - OROSALUD CAUCASIA IPS S.A.S
+  Exception: Exception: No se encontró la opción de IPS Remitente: 900293903 - OROSALUD CAUCASIA IPS S.A.S
+[2026-02-19 20:48:26.128] [❌ ERROR] [EjecutarCaso] ❓ ERROR NO CLASIFICADO: No se encontró la opción de IPS Remitente: 900293903 - OROSALUD CAUCASIA IPS S.A.S
+  Exception: Exception: No se encontró la opción de IPS Remitente: 900293903 - OROSALUD CAUCASIA IPS S.A.S
+[2026-02-19 20:48:31.466] [❌ ERROR] [Worker] Error procesando EMMANUEL DELGADO
+  Exception: Exception: Error ejecutando caso
+[2026-02-19 20:48:31.477] [⚠️ WARNING] [Worker] ⚠️ Error desconocido, marcando como ERROR final: Error ejecutando caso
+[20:48:35] [📸 SCREENSHOT] Screenshot guardado: c:\python\boot-oro\screenshots\error_413588.png
+  Orden: 413588
+  Error: Error no clasificado: Error ejecutando caso
+[2026-02-19 20:48:35.986] [❌ ERROR] [Worker] ❌ Orden 413588 marcada como ERROR: Error no clasificado: Error ejecutando caso
+[2026-02-19 20:54:27.063] [❌ ERROR] [EjecutarCaso] Error al manejar IPS Remitente: ElementHandle.fill: Error: Element is not an <input>, <textarea> or [contenteditable] element
+Call log:
+  fill("")
+  - attempting fill action
+  -   waiting for element to be visible, enabled and editable
+
+  Exception: Error: ElementHandle.fill: Error: Element is not an <input>, <textarea> or [contenteditable] element
+Call log:
+  fill("")
+  - attempting fill action
+  -   waiting for element to be visible, enabled and editable
+
+[2026-02-19 20:54:28.091] [❌ ERROR] [EjecutarCaso] ❓ ERROR NO CLASIFICADO: ElementHandle.fill: Error: Element is not an <input>, <textarea> or [contenteditable] element
+Call l...
+  Exception: Error: ElementHandle.fill: Error: Element is not an <input>, <textarea> or [contenteditable] element
+Call log:
+  fill("")
+  - attempting fill action
+  -   waiting for element to be visible, enabled and editable
+
+[2026-02-19 20:54:33.367] [❌ ERROR] [Worker] Error procesando NARLIS TORDECILLA
+  Exception: Exception: Error ejecutando caso
+[2026-02-19 20:54:33.376] [⚠️ WARNING] [Worker] ⚠️ Error desconocido, marcando como ERROR final: Error ejecutando caso
+[20:54:37] [📸 SCREENSHOT] Screenshot guardado: c:\python\boot-oro\screenshots\error_413432.png
+  Orden: 413432
+  Error: Error no clasificado: Error ejecutando caso
+[2026-02-19 20:54:37.861] [❌ ERROR] [Worker] ❌ Orden 413432 marcada como ERROR: Error no clasificado: Error ejecutando caso
+[2026-02-19 20:54:49.561] [❌ ERROR] [EjecutarCaso] ❓ ERROR NO CLASIFICADO: Worker pausado durante ejecución
+  Exception: PausedException: Worker pausado durante ejecución
+[2026-02-19 20:54:54.805] [❌ ERROR] [Worker] Error procesando LUZ  DIAZ
+  Exception: Exception: Error ejecutando caso
+[2026-02-19 20:54:54.810] [⚠️ WARNING] [Worker] ⚠️ Error desconocido, marcando como ERROR final: Error ejecutando caso
+[20:54:59] [📸 SCREENSHOT] Screenshot guardado: c:\python\boot-oro\screenshots\error_413460.png
+  Orden: 413460
+  Error: Error no clasificado: Error ejecutando caso
+[2026-02-19 20:54:59.335] [❌ ERROR] [Worker] ❌ Orden 413460 marcada como ERROR: Error no clasificado: Error ejecutando caso
+[2026-02-19 21:03:04.904] [❌ ERROR] [EjecutarCaso] Error al manejar IPS Remitente: No se encontró IPS Remitente después de 4 intentos
+  Exception: Exception: No se encontró IPS Remitente después de 4 intentos
+[2026-02-19 21:03:05.934] [❌ ERROR] [EjecutarCaso] ❓ ERROR NO CLASIFICADO: No se encontró IPS Remitente después de 4 intentos
+  Exception: Exception: No se encontró IPS Remitente después de 4 intentos
+[2026-02-19 21:03:12.501] [❌ ERROR] [Worker] Error procesando JULIO ATENCIA
+  Exception: Exception: Error ejecutando caso
+[2026-02-19 21:03:12.510] [⚠️ WARNING] [Worker] ⚠️ Error desconocido, marcando como ERROR final: Error ejecutando caso
+[21:03:16] [📸 SCREENSHOT] Screenshot guardado: c:\python\boot-oro\screenshots\error_413568.png
+  Orden: 413568
+  Error: Error no clasificado: Error ejecutando caso
+[2026-02-19 21:03:16.989] [❌ ERROR] [Worker] ❌ Orden 413568 marcada como ERROR: Error no clasificado: Error ejecutando caso
+[2026-02-19 21:06:14.777] [⚠️ WARNING] [Playwright] Timeout en navegación, verificando si la página cargó: Page.goto: Timeout 15000ms exceeded.
+Call log:
+navigating to "https://portalsalud.coosalud.com/login", waiting until "domcontentloaded"
+
+[2026-02-19 21:10:19.341] [❌ ERROR] [Worker] Error descontando saldo: Campos faltantes en API /ips-saldos: ValorCaso
+[2026-02-19 21:12:00.251] [❌ ERROR] [Worker] Error descontando saldo: Campos faltantes en API /ips-saldos: ValorCaso
+[2026-02-19 21:13:35.949] [⚠️ WARNING] [Playwright] ⚠️ Error cerrando página: Cannot switch to a different thread
+	Current:  <greenlet.greenlet object at 0x0000024A9E6776C0 (otid=0x0000024AA010DA50) current active started main>
+	Expected: <greenlet.greenlet object at 0x0000024A9F9D7280 (otid=0x0000024A9F9D36C0) suspended active started main>
+[2026-02-19 21:13:35.958] [⚠️ WARNING] [Playwright] ⚠️ Error cerrando contexto: Cannot switch to a different thread
+	Current:  <greenlet.greenlet object at 0x0000024A9E6776C0 (otid=0x0000024AA010DA50) current active started main>
+	Expected: <greenlet.greenlet object at 0x0000024A9F9D7280 (otid=0x0000024A9F9D36C0) suspended active started main>
+[2026-02-19 21:13:35.962] [⚠️ WARNING] [Playwright] ⚠️ Error cerrando browser: Cannot switch to a different thread
+	Current:  <greenlet.greenlet object at 0x0000024A9E6776C0 (otid=0x0000024AA010DA50) current active started main>
+	Expected: <greenlet.greenlet object at 0x0000024A9F9D7280 (otid=0x0000024A9F9D36C0) suspended active started main>
+[2026-02-19 21:13:35.965] [⚠️ WARNING] [Playwright] ⚠️ Error deteniendo Playwright: Cannot switch to a different thread
+	Current:  <greenlet.greenlet object at 0x0000024A9E6776C0 (otid=0x0000024AA010DA50) current active started main>
+	Expected: <greenlet.greenlet object at 0x0000024A9F9D7280 (otid=0x0000024A9F9D36C0) suspended active started main>
+[2026-02-19 21:13:35.967] [⚠️ WARNING] [Playwright] 🧹 Cierre normal falló, ejecutando limpieza forzada...
+[2026-02-19 21:28:57.527] [❌ ERROR] [Licencia] Error en consulta: HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /ips-saldos (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000001D72499F910>: Failed to establish a new connection: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión'))
+[2026-02-19 21:28:57.528] [⚠️ WARNING] [Licencia] Validación fallida: Error consultando saldo
+[2026-02-19 21:33:19.984] [❌ ERROR] [Worker] Error descontando saldo: Campos faltantes en API /ips-saldos: ValorCaso

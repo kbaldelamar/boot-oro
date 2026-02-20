@@ -380,8 +380,12 @@ class ProgramacionPanel(ttk.Frame):
             self.btn_iniciar.config(state='disabled')
             self.btn_pausar.config(state='normal')
             self.btn_detener.config(state='normal')
+            self.navegador_label.config(text="Iniciando...", foreground='orange')
             
             self._agregar_log("✅ Worker iniciado correctamente")
+            
+            # Iniciar monitoreo del navegador
+            self.after(3000, self._actualizar_estado_navegador)  # Verificar después de 3 segundos
             
         except Exception as e:
             messagebox.showerror("Error", f"No se pudo iniciar el worker:\n{str(e)}")
@@ -397,10 +401,12 @@ class ProgramacionPanel(ttk.Frame):
             self.btn_pausar.config(text="⏸️ Pausar")
             self.status_label.config(text="🟢 ACTIVO", foreground='green')
             self._agregar_log("▶️ Worker reanudado")
+            self._actualizar_estado_navegador()
         else:
             self.worker.pausar()
             self.btn_pausar.config(text="▶️ Reanudar")
             self.status_label.config(text="🟡 PAUSADO", foreground='orange')
+            self.navegador_label.config(text="⏸️ Pausado", foreground='orange')
             self._agregar_log("⏸️ Worker pausado")
     
     def _detener_worker(self):
@@ -413,11 +419,22 @@ class ProgramacionPanel(ttk.Frame):
             
             self.worker.detener()
             
+            # Esperar a que el thread termine (máximo 5 segundos)
+            self._agregar_log("⏳ Esperando a que el thread termine...")
+            self.worker.join(timeout=5)
+            
+            if self.worker.is_alive():
+                self._agregar_log("⚠️ Worker no terminó completamente, forzando reset")
+            
+            # Limpiar referencia del worker
+            self.worker = None
+            
             # Actualizar UI
             self.status_label.config(text="⚪ INACTIVO", foreground='gray')
             self.btn_iniciar.config(state='normal')
             self.btn_pausar.config(state='disabled', text="⏸️ Pausar")
             self.btn_detener.config(state='disabled')
+            self.navegador_label.config(text="Sin sesión", foreground='gray')
             
             self._agregar_log("✅ Worker detenido")
     
@@ -426,6 +443,30 @@ class ProgramacionPanel(ttk.Frame):
         self.procesados_label.config(text=str(stats.get('procesados', 0)))
         self.exitosos_label.config(text=str(stats.get('exitosos', 0)))
         self.errores_label.config(text=str(stats.get('errores', 0)))
+    
+    def _actualizar_estado_navegador(self):
+        """Actualiza el indicador de estado del navegador"""
+        try:
+            if not self.worker or not self.worker.is_alive():
+                self.navegador_label.config(text="Sin sesión", foreground='gray')
+                return
+            
+            # Verificar si el worker está pausado
+            if self.worker.paused:
+                self.navegador_label.config(text="⏸️ Pausado", foreground='orange')
+                return
+            
+            # Verificar si tiene un navegador activo
+            if hasattr(self.worker, 'playwright_service') and self.worker.playwright_service:
+                if self.worker.playwright_service.esta_activo():
+                    self.navegador_label.config(text="🌐 Chrome activo", foreground='green')
+                else:
+                    self.navegador_label.config(text="🔄 Conectando...", foreground='orange')
+            else:
+                self.navegador_label.config(text="🔄 Conectando...", foreground='orange')
+        except Exception as e:
+            # En caso de error, no mostrar nada crítico
+            self.navegador_label.config(text="⚠️ Estado desconocido", foreground='gray')
     
     def _cargar_programados(self):
         """Carga las órdenes programadas desde la API"""
@@ -531,6 +572,7 @@ class ProgramacionPanel(ttk.Frame):
     def _refresh_loop(self):
         """Loop de refresco (cada minuto)"""
         self._cargar_programados()
+        self._actualizar_estado_navegador()  # Actualizar estado del navegador
         self.refresh_id = self.after(60000, self._refresh_loop)  # 60 segundos
     
     def destroy(self):

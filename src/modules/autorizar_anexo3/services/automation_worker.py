@@ -199,7 +199,8 @@ class AutomationWorker(threading.Thread):
             # Ejecutar caso - usar inicio_casos como en Selenium
             ejecutor = EjecutarCasosPlaywright(
                 self.playwright_service.page, 
-                self.logger
+                self.logger,
+                pause_callback=lambda: self.paused  # Callback para verificar pausa
             )
             
             # Convertir datos_paciente a objeto con atributos (como en Selenium)
@@ -231,6 +232,12 @@ class AutomationWorker(threading.Thread):
                 raise Exception("Error ejecutando caso")
             
         except Exception as e:
+            # Verificar si es una pausa (no es error)
+            from modules.autorizar_anexo3.playwright.ejecutar_casos_playwright import PausedException
+            if isinstance(e, PausedException):
+                self.logger.info('Worker', f'⏸️ Orden {id_item} pausada, se retomará después')
+                return  # No marcar como error, dejar pendiente
+            
             # Error en automatización
             error_msg = str(e).lower()
             self.logger.error('Worker', f'Error procesando {nombre_paciente}', e)

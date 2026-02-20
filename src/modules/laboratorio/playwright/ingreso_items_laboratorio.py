@@ -67,8 +67,8 @@ class IngresoItemsLaboratorio:
         cups_ingresados = 0
         
         try:
-            # Espera para estabilizar la página
-            time.sleep(2)
+            # Espera breve para estabilizar la página
+            time.sleep(0.5)
             
             # Procesar TODOS los CUPS de la lista
             for idx, codigo_cups in enumerate(cups_list, start=1):
@@ -87,7 +87,7 @@ class IngresoItemsLaboratorio:
             
             # Al final, hacer clic en Aceptar
             self._log("=== FINALIZANDO - Haciendo clic en Aceptar ===")
-            time.sleep(2)
+            time.sleep(0.5)
             clic_aceptar = self.page.wait_for_selector(self.XPATH_ACEPTAR, timeout=15000)
             clic_aceptar.click()
             self._log("✓ Clicked Aceptar - Proceso finalizado")
@@ -126,7 +126,7 @@ class IngresoItemsLaboratorio:
             self._log(f"[CUPS {numero}] ✓ Código ingresado: {codigo_cups}")
             
             # Espera para que aparezcan las opciones
-            time.sleep(3)
+            time.sleep(1.5)
             
             # Paso 4: Buscar opción en dropdown
             dynamic_xpath = self.XPATH_OPCION_CUPS.format(codigo_cups)
@@ -143,7 +143,6 @@ class IngresoItemsLaboratorio:
                 self._log(f"[CUPS {numero}] ✓ Opción encontrada en segundo intento")
             
             # Paso 5: Hacer clic en la opción
-            time.sleep(1)
             clic_opcion.click()
             self._log(f"[CUPS {numero}] ✓ CUPS {codigo_cups} seleccionado correctamente")
             

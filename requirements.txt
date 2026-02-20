@@ -14,8 +14,11 @@ requests>=2.31.0
 # Automatización web con Playwright
 playwright>=1.40.0
 
+# Monitoreo y gestión de procesos del sistema
+psutil>=5.9.0
+
 # Resolución de CAPTCHA
-twocaptcha-python>=1.2.0
+2captcha-python>=1.2.0
 
 # Generación de PDFs
 reportlab==3.6.13  # Compatible con Python 3.8

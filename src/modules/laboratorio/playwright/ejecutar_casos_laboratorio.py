@@ -25,13 +25,14 @@ class EjecutarCasosLaboratorio(EjecutarCasosPlaywright):
     - La búsqueda de PDF
     """
     
-    def __init__(self, page, logger: Optional[Logger] = None):
+    def __init__(self, page, logger: Optional[Logger] = None, pause_callback=None):
         """
         Args:
             page: Página de Playwright
             logger: Logger para registrar eventos
+            pause_callback: Función que retorna True si el worker está pausado
         """
-        super().__init__(page, logger)
+        super().__init__(page, logger, pause_callback)
         self.config = Config()
         self.ingreso_laboratorio = IngresoItemsLaboratorio(page, logger)
         self.cups_list = []  # Lista de CUPS para laboratorio
@@ -98,7 +99,10 @@ class EjecutarCasosLaboratorio(EjecutarCasosPlaywright):
             self._log(f"✅ Proceso completado para {paciente_data.get('nombre', 'N/A')}")
             return True
         else:
-            raise Exception("Error en automatización - inicio_casos retornó False")
+            # inicio_casos retornó False = ya actualizó el estado en la API
+            # Retornar False sin lanzar excepción para evitar doble actualización
+            self._log(f"⚠️ inicio_casos retornó False para {paciente_data.get('nombre', 'N/A')} (estado ya actualizado)", level="warning")
+            return False
     
     def _validar_datos_paciente(self, paciente_data: Dict[str, Any]) -> bool:
         """Valida que el paciente tenga los datos mínimos requeridos"""
@@ -205,6 +209,35 @@ class EjecutarCasosLaboratorio(EjecutarCasosPlaywright):
             raise Exception(f"PDF no encontrado - {ruta_completa}")
         
         return ruta_completa
+    
+    def _manejar_solicitud_activa(self, data, error_text: str) -> bool:
+        """
+        Override de Anexo 3: Para LABORATORIO, 'solicitud activa' NO es éxito.
+        
+        COMPORTAMIENTO LABORATORIO:
+        - Usa el texto COMPLETO del error (no solo el número)
+        - Actualiza con estado 6 (ya radicada) en lugar de 1
+        - Retorna True porque ya fue radicado (no reintentar)
+        
+        Args:
+            data: Datos del paciente
+            error_text: Texto completo del error con "solicitud activa"
+            
+        Returns:
+            True para evitar reintento (ya está radicado)
+        """
+        self._log(f"🔁 SOLICITUD ACTIVA DETECTADA - Marcando como ya radicada (estado 6)")
+        self._log(f"📝 Mensaje completo: {error_text}")
+        
+        # Registrar en archivo con mensaje completo
+        with open("archivo.txt", 'a', encoding='utf-8') as archivo:
+            archivo.write(f"caso,SOLICITUD ACTIVA (Lab) - {error_text},paciente,{data.identificacion},ordenCapita,{data.idItemOrden}\n")
+        
+        # Cerrar modal y actualizar con estado 6 y mensaje completo
+        self._hacer_clic_ok()
+        self.actualizar_con_resultado_ejecucion(data, "6", error_text, error_text)
+        self.reinicio()
+        return True  # True = no reintentar (ya está radicado)
     
     def actualizar_con_resultado_ejecucion(self, data, estado, numero_autorizacion="", resultado_ejecucion=""):
         """

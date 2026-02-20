@@ -195,7 +195,12 @@ class LicenseService:
             valor_caso = info_saldo.get("valor_caso")
             
             if saldo_actual is None or valor_caso is None:
-                result["message"] = "Datos de saldo o valor de caso no disponibles"
+                campos_faltantes = []
+                if saldo_actual is None:
+                    campos_faltantes.append("saldoRobot")
+                if valor_caso is None:
+                    campos_faltantes.append("ValorCaso")
+                result["message"] = f"Campos faltantes en API /ips-saldos: {', '.join(campos_faltantes)}"
                 return result
             
             # Convertir a float

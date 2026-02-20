@@ -38,7 +38,9 @@ class LaboratorioWorker(threading.Thread):
         super().__init__(daemon=True)
         self.ui_callback = ui_callback
         self.intervalo_espera = intervalo_espera
-        self.logger = logger or Logger()
+        # Pasar ui_callback al logger para que TODOS los módulos
+        # (EjecutarCaso, etc.) envíen logs a la UI
+        self.logger = logger or Logger(ui_callback=ui_callback)
         self.config = Config()
         
         # Control de estado
@@ -118,12 +120,14 @@ class LaboratorioWorker(threading.Thread):
         self._stop_event.set()
         self._pause_event.set()  # Desbloquear si está pausado
         
-        # Cerrar navegador
+        # Cerrar navegador inmediatamente para interrumpir operaciones Playwright
         if self.playwright_service:
             try:
                 self.playwright_service.cerrar_navegador()
             except Exception as e:
                 self._log(f"Error cerrando navegador: {e}", level="error")
+        
+        self._log("Señal de detención enviada")
     
     def run(self):
         """Método principal del worker"""
@@ -157,15 +161,20 @@ class LaboratorioWorker(threading.Thread):
                 
                 if not pacientes:
                     self._log(f"Sin pacientes pendientes. Esperando {self.intervalo_espera}s...")
-                    time.sleep(self.intervalo_espera)
+                    # Sleep interruptible - verificar stop cada segundo
+                    for _ in range(self.intervalo_espera):
+                        if self._stop_event.is_set():
+                            break
+                        time.sleep(1)
                     continue
                 
                 # Procesar el primer paciente
                 paciente = pacientes[0]
                 self._procesar_paciente(paciente)
                 
-                # Pequeña pausa entre procesamiento
-                time.sleep(1)
+                # Pequeña pausa entre procesamiento (interruptible)
+                if not self._stop_event.is_set():
+                    time.sleep(1)
                 
         except Exception as e:
             self._log(f"Error crítico en worker: {e}", level="error")
@@ -240,6 +249,10 @@ class LaboratorioWorker(threading.Thread):
         
         self._log(f"Procesando paciente: {nombre} (idOrdenProcedimiento: {id_orden_procedimiento})")
         
+        # Verificar si se solicitó detener
+        if self._stop_event.is_set():
+            return
+        
         try:
             # Marcar como en proceso (estado = 2)
             self._log(f"Actualizando idOrdenProcedimiento {id_orden_procedimiento} a estado EN PROCESO (2)...")
@@ -274,6 +287,11 @@ class LaboratorioWorker(threading.Thread):
                 self._reiniciar_formulario()
                 return
             
+            # Verificar si se solicitó detener antes de ejecutar
+            if self._stop_event.is_set():
+                self._log("⏹️ Detención solicitada, abortando procesamiento")
+                return
+            
             # Construir datos del paciente para el ejecutor
             paciente_data = self._construir_datos_paciente(paciente, procedimientos)
             self._log(f"📦 cups_list en paciente_data: {paciente_data.get('cups_list', [])}")
@@ -284,9 +302,18 @@ class LaboratorioWorker(threading.Thread):
             if resultado:
                 self._marcar_completado(id_orden_procedimiento, nombre)
             else:
-                raise Exception("Error en automatización - resultado False")
+                # inicio_casos retornó False: la clase padre YA actualizó el estado en la API
+                # Solo logueamos, NO volvemos a actualizar estado para evitar doble update
+                self._log(f"⚠️ Automatización retornó False para {nombre} (estado ya actualizado por ejecutor)", level="warning")
+                self._actualizar_stats(error=True)
                 
         except Exception as e:
+            # Verificar si es una pausa (no es error)
+            from modules.autorizar_anexo3.playwright.ejecutar_casos_playwright import PausedException
+            if isinstance(e, PausedException):
+                self._log(f"⏸️ Orden {id_orden_procedimiento} pausada, se retomará después")
+                return  # No marcar como error, dejar pendiente
+            
             error_message = str(e).lower()
             self._log(f"❌ Error procesando paciente {nombre}: {e}", level="error")
             
@@ -466,20 +493,12 @@ class LaboratorioWorker(threading.Thread):
             self.on_stats_update(self.stats)
     
     def _log(self, mensaje: str, level: str = "info"):
-        """Registra un mensaje en el log"""
+        """Registra un mensaje en el log (el logger ya envía a UI via ui_callback)"""
         modulo = "LaboratorioWorker"
-        # Log a archivo
         if level == "error":
             self.logger.error(modulo, mensaje)
         else:
             self.logger.info(modulo, mensaje)
-        
-        # Callback a UI - solo envía el mensaje
-        if self.ui_callback:
-            try:
-                self.ui_callback(mensaje)
-            except Exception as e:
-                print(f"Error en callback de UI: {e}")
     
     def _cleanup(self):
         """Limpieza al finalizar"""

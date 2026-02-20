@@ -20,7 +20,7 @@ class LaboratorioService:
         
     def obtener_pacientes(
         self, 
-        estado: int = 0, 
+        estado: Optional[int] = None, 
         documento: Optional[str] = None, 
         nombre: Optional[str] = None
     ) -> List[Dict[str, Any]]:
@@ -28,7 +28,7 @@ class LaboratorioService:
         Obtiene la lista de pacientes de laboratorio
         
         Args:
-            estado: Estado del paciente (0=Pendiente, 1=Exitoso, 2=En proceso)
+            estado: Estado del paciente (None=Todos, 0=Pendiente, 1=Exitoso, 2=En proceso, etc.)
             documento: Número de documento para filtrar
             nombre: Nombre del paciente para filtrar
             
@@ -37,7 +37,11 @@ class LaboratorioService:
         """
         import requests
         
-        params = {'estado': estado}
+        params = {}
+        
+        # Solo agregar estado si no es None (para "Todos")
+        if estado is not None:
+            params['estado'] = estado
         
         if documento:
             params['documento'] = documento
@@ -46,15 +50,33 @@ class LaboratorioService:
             
         url = f"{self.base_url}/list-pacientes-evento"
         
+        # LOG de la petición
+        print(f"\n[DEBUG API] ===== PETICIÓN GET =====")
+        print(f"[DEBUG API] URL: {url}")
+        print(f"[DEBUG API] Params: {params}")
+        
         try:
             response = requests.get(url, params=params, timeout=30)
+            print(f"[DEBUG API] Status Code: {response.status_code}")
+            print(f"[DEBUG API] URL completa: {response.url}")
+            print(f"[DEBUG API] Status Code: {response.status_code}")
+            print(f"[DEBUG API] URL completa: {response.url}")
             response.raise_for_status()
             data = response.json()
+            print(f"[DEBUG API] Respuesta tipo: {type(data)}")
+            if isinstance(data, list):
+                print(f"[DEBUG API] Total items: {len(data)}")
+            elif isinstance(data, dict) and 'data' in data:
+                print(f"[DEBUG API] Total items en data: {len(data.get('data', []))}")
+            print(f"[DEBUG API] ===========================\n")
+            
             # Si la respuesta tiene una estructura con 'data' o similar
             if isinstance(data, dict) and 'data' in data:
                 return data['data']
             return data if isinstance(data, list) else []
         except requests.RequestException as e:
+            print(f"[DEBUG API] ERROR: {e}")
+            print(f"[DEBUG API] ===========================\n")
             print(f"Error obteniendo pacientes: {e}")
             return []
     

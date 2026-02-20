@@ -30,7 +30,7 @@ class LaboratorioPanel(ttk.Frame):
         self.global_config = Config()
         self.api_service = LaboratorioService()
         self.refresh_id = None
-        self.estado_filtro = tk.StringVar(value="0")
+        self.estado_filtro = tk.StringVar(value="Pendiente")  # Inicializar con TEXTO, no valor
         self.documento_filtro = tk.StringVar(value="")
         self.nombre_filtro = tk.StringVar(value="")
         
@@ -311,20 +311,35 @@ class LaboratorioPanel(ttk.Frame):
         
         # Obtener valor de estado
         estado_texto = self.estado_filtro.get()
+        print(f"\n[DEBUG PANEL] ===== CARGANDO PACIENTES =====")
+        print(f"[DEBUG PANEL] estado_texto del combo: '{estado_texto}'")
+        
         estado_valor = self.estado_map.get(estado_texto, "0")
+        print(f"[DEBUG PANEL] estado_valor mapeado: '{estado_valor}'")
         
         # Si es "Todos", no filtramos por estado
         if estado_valor == "":
             estado_valor = None
+            print(f"[DEBUG PANEL] Estado es 'Todos' -> estado_valor = None")
         else:
             estado_valor = int(estado_valor)
+            print(f"[DEBUG PANEL] Estado convertido a int: {estado_valor}")
+        
+        # Log de parámetros que se enviarán
+        print(f"[DEBUG PANEL] Parámetros para API:")
+        print(f"  - estado: {estado_valor}")
+        print(f"  - documento: {self.documento_filtro.get() or None}")
+        print(f"  - nombre: {self.nombre_filtro.get() or None}")
         
         # Obtener pacientes
         pacientes = self.api_service.obtener_pacientes(
-            estado=estado_valor if estado_valor is not None else 0,
+            estado=estado_valor,  # Pasar None cuando es "Todos", valor específico en los demás casos
             documento=self.documento_filtro.get() or None,
             nombre=self.nombre_filtro.get() or None
         )
+        
+        print(f"[DEBUG PANEL] Pacientes recibidos: {len(pacientes) if isinstance(pacientes, list) else 'ERROR'}")
+        print(f"[DEBUG PANEL] ===========================\n")
         
         # Validar que sea una lista de diccionarios
         if not isinstance(pacientes, list):
@@ -458,12 +473,14 @@ class LaboratorioPanel(ttk.Frame):
         
         self._agregar_log("⏹️ Deteniendo worker...", 'warning')
         self.worker.detener()
-        
-        # Actualizar UI
+                # Detener el auto-refresh de la tabla
+        self._stop_auto_refresh()
+                # Actualizar UI inmediatamente sin esperar al thread
         self.start_btn.config(state='normal')
         self.pause_btn.config(state='disabled', text="⏸️ Pausar")
         self.stop_btn.config(state='disabled')
         self.worker_status_label.config(text="Estado: Detenido", foreground='gray')
+        self.worker = None
         
         self._agregar_log("⏹️ Worker detenido", 'info')
     
@@ -488,15 +505,20 @@ class LaboratorioPanel(ttk.Frame):
                 )
                 self._agregar_log(f"🔄 Orden {id_orden_proc} reprogramada", 'info')
             except Exception as e:
-                self._agregar_log(f"❌ Error reprogramando {id_orden}: {e}", 'error')
+                self._agregar_log(f"❌ Error reprogramando {id_orden_proc}: {e}", 'error')
         
         self._cargar_pacientes()
         self._agregar_log(f"✅ {len(seleccionados)} pacientes reprogramados", 'success')
     
     def _ui_log_callback(self, message: str):
-        """Callback para logs del worker - recibe string formateado"""
-        # Ejecutar en hilo principal de Tkinter
-        self.after(0, lambda: self._agregar_log(message, 'info'))
+        """Callback para logs del worker - recibe string ya formateado por el logger"""
+        # El mensaje ya viene con timestamp del logger, insertarlo directo
+        self.after(0, lambda: self._insertar_log_raw(message))
+    
+    def _insertar_log_raw(self, mensaje: str):
+        """Inserta un mensaje ya formateado directamente en el log"""
+        self.log_text.insert(tk.END, f"{mensaje}\n")
+        self.log_text.see(tk.END)
     
     def _actualizar_stats(self, stats: dict):
         """Actualiza las estadísticas en la UI"""

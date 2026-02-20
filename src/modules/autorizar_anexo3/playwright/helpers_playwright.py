@@ -93,7 +93,7 @@ class PlaywrightHelper:
             print(f"Error ingresando texto en {xpath}: {e}")
             return False
     
-    def fill_text_sequential(self, xpath: str, texto: str, delay: int = 100) -> bool:
+    def fill_text_sequential(self, xpath: str, texto: str, delay: int = 50) -> bool:
         """
         Ingresa texto carácter por carácter (útil para campos ant-select).
         
@@ -279,7 +279,7 @@ class PlaywrightHelper:
                 print(f"Error en fallback de ingresar_texto: {e2}")
                 return False
     
-    def ingresar_texto_secuencial(self, element, texto: str, delay: int = 100) -> bool:
+    def ingresar_texto_secuencial(self, element, texto: str, delay: int = 50) -> bool:
         """
         Ingresa texto carácter por carácter (compatible con Selenium).
         Útil para campos ant-select y búsquedas dinámicas.

@@ -6,7 +6,6 @@ import os
 import time
 import sys
 from pathlib import Path
-import sys
 from typing import Optional
 from playwright.sync_api import sync_playwright, Browser, BrowserContext, Page, Playwright
 from utils.logger import AdvancedLogger
@@ -39,6 +38,8 @@ class PlaywrightService:
     def iniciar_navegador(self, reutilizar_sesion: bool = True) -> bool:
         """
         Inicia el navegador Chromium con Playwright.
+        Cuando se ejecuta desde .exe, usa Google Chrome del sistema (channel='chrome').
+        Si Chrome no está disponible, intenta con Microsoft Edge (channel='msedge').
         
         Returns:
             True si se inició correctamente
@@ -53,9 +54,7 @@ class PlaywrightService:
             self.playwright = sync_playwright().start()
             self.logger.debug('Playwright', 'Playwright iniciado')
             
-            # 2. Lanzar Chromium con configuración más robusta
-            self.logger.info('Playwright', 'Lanzando navegador Chromium...')
-            
+            # 2. Lanzar navegador
             launch_options = {
                 'headless': False,
                 'args': [
@@ -71,46 +70,73 @@ class PlaywrightService:
                 ]
             }
             
-            # Si estamos en .exe, intentar usar navegadores empaquetados o Chrome del sistema
-            if is_frozen:
-                self.logger.info('Playwright', '🔄 Ejecutando desde .exe - Configurando navegadores...')
-                browser_path = self._configure_playwright_browsers()
-                if browser_path:
-                    launch_options['executable_path'] = browser_path
-                    self.logger.info('Playwright', f'✅ Usando navegador: {browser_path}')
-                else:
-                    self.logger.warning('Playwright', '⚠️ Navegador no encontrado, intentando con Playwright por defecto...')
+            # Cadena de fallback: Chromium empaquetado → Chromium instalado → Chrome → Edge
+            navegador_lanzado = False
             
-            self.browser = self.playwright.chromium.launch(**launch_options)
-            self.logger.success('Playwright', 'Navegador Chromium lanzado')
+            # 1. Si estamos en .exe, buscar Chromium empaquetado en sys._MEIPASS
+            if getattr(sys, 'frozen', False):
+                bundled_path = self._find_bundled_chromium()
+                if bundled_path:
+                    self.logger.info('Playwright', f'📦 Usando Chromium empaquetado: {bundled_path}')
+                    launch_options['executable_path'] = bundled_path
+                    try:
+                        self.browser = self.playwright.chromium.launch(**launch_options)
+                        self.logger.success('Playwright', '✅ Chromium empaquetado lanzado exitosamente')
+                        navegador_lanzado = True
+                    except Exception as bundled_error:
+                        self.logger.warning('Playwright', f'⚠️ Chromium empaquetado falló: {bundled_error}')
+                        launch_options.pop('executable_path', None)
+            
+            # 2. Intentar Chromium de Playwright instalado en el sistema
+            if not navegador_lanzado:
+                self.logger.info('Playwright', 'Intentando lanzar Chromium de Playwright...')
+                try:
+                    self.browser = self.playwright.chromium.launch(**launch_options)
+                    self.logger.success('Playwright', '✅ Chromium de Playwright lanzado exitosamente')
+                    navegador_lanzado = True
+                except Exception as chromium_error:
+                    self.logger.warning('Playwright', f'⚠️ Chromium no disponible: {chromium_error}')
+            
+            # 3. Fallback a Google Chrome del sistema
+            if not navegador_lanzado:
+                self.logger.info('Playwright', '🔄 Intentando con Google Chrome del sistema...')
+                launch_options['channel'] = 'chrome'
+                try:
+                    self.browser = self.playwright.chromium.launch(**launch_options)
+                    self.logger.success('Playwright', '✅ Google Chrome lanzado exitosamente')
+                    navegador_lanzado = True
+                except Exception as chrome_error:
+                    self.logger.warning('Playwright', f'⚠️ Google Chrome no disponible: {chrome_error}')
+            
+            # 4. Fallback a Microsoft Edge
+            if not navegador_lanzado:
+                self.logger.info('Playwright', '🔄 Intentando con Microsoft Edge como fallback...')
+                launch_options['channel'] = 'msedge'
+                try:
+                    self.browser = self.playwright.chromium.launch(**launch_options)
+                    self.logger.success('Playwright', '✅ Microsoft Edge lanzado exitosamente')
+                    navegador_lanzado = True
+                except Exception as edge_error:
+                    self.logger.error('Playwright', f'❌ Edge también falló: {edge_error}')
+            
+            if not navegador_lanzado:
+                self.logger.error('Playwright', '❌ No se encontró ningún navegador disponible')
+                self.cerrar()
+                return False
             
         except Exception as e:
             error_msg = str(e)
             self.logger.error('Playwright', f'Error al iniciar navegador: {error_msg}')
-            
-            # Si estamos en .exe y falló, intentar Edge como fallback
-            if is_frozen and 'Executable doesn\'t exist' in error_msg:
-                try:
-                    self.logger.info('Playwright', '🔄 Intentando con Microsoft Edge como fallback...')
-                    edge_path = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
-                    if os.path.exists(edge_path):
-                        launch_options['executable_path'] = edge_path
-                        self.browser = self.playwright.chromium.launch(**launch_options)
-                        self.logger.success('Playwright', '✅ Navegador Edge lanzado exitosamente')
-                    else:
-                        raise Exception("Edge tampoco está disponible")
-                except Exception as edge_error:
-                    self.logger.error('Playwright', f'Edge también falló: {edge_error}')
-                    self.cerrar()
-                    return False
-            else:
-                self.cerrar()
-                return False
+            self.cerrar()
+            return False
         
         try:
             # 3. Crear contexto con user agent real
+            # viewport=None permite que --start-maximized funcione correctamente
+            # y la página se adapte al tamaño real de la ventana del navegador
             self.context = self.browser.new_context(
-                viewport={'width': 1920, 'height': 1080},
+                viewport=None,
+                no_viewport=True,
                 user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
                 ignore_https_errors=True
             )
@@ -176,7 +202,8 @@ class PlaywrightService:
     def _create_new_context(self) -> BrowserContext:
         """Crea un nuevo contexto de navegación"""
         return self.browser.new_context(
-            viewport={'width': 1920, 'height': 1080}
+            viewport=None,
+            no_viewport=True
         )
     
     def _setup_event_listeners(self):
@@ -272,46 +299,122 @@ class PlaywrightService:
             return ""
     
     def cerrar_navegador(self):
-        """Cierra el navegador y limpia recursos"""
+        """Cierra el navegador y limpia recursos, matando procesos zombies si es necesario"""
         try:
             self.logger.info('Playwright', 'Cerrando navegador...')
+            cierre_exitoso = True
             
+            # 1. Cerrar página
             if self.page:
                 try:
                     self.page.close()
-                except:
-                    pass
-                self.page = None
+                    self.logger.debug('Playwright', '✓ Página cerrada')
+                except Exception as e:
+                    self.logger.warning('Playwright', f'⚠️ Error cerrando página: {e}')
+                    cierre_exitoso = False
+                finally:
+                    self.page = None
             
+            # 2. Cerrar contexto
             if self.context:
                 try:
                     self.context.close()
-                except:
-                    pass
-                self.context = None
+                    self.logger.debug('Playwright', '✓ Contexto cerrado')
+                except Exception as e:
+                    self.logger.warning('Playwright', f'⚠️ Error cerrando contexto: {e}')
+                    cierre_exitoso = False
+                finally:
+                    self.context = None
             
+            # 3. Cerrar navegador
             if self.browser:
                 try:
                     self.browser.close()
-                except:
-                    pass
-                self.browser = None
+                    self.logger.debug('Playwright', '✓ Browser cerrado')
+                except Exception as e:
+                    self.logger.warning('Playwright', f'⚠️ Error cerrando browser: {e}')
+                    cierre_exitoso = False
+                finally:
+                    self.browser = None
             
+            # 4. Detener Playwright
             if self.playwright:
                 try:
                     self.playwright.stop()
-                except:
-                    pass
-                self.playwright = None
+                    self.logger.debug('Playwright', '✓ Playwright detenido')
+                except Exception as e:
+                    self.logger.warning('Playwright', f'⚠️ Error deteniendo Playwright: {e}')
+                    cierre_exitoso = False
+                finally:
+                    self.playwright = None
+            
+            # 5. Si hubo errores, hacer limpieza forzada de procesos
+            if not cierre_exitoso:
+                self.logger.warning('Playwright', '🧹 Cierre normal falló, ejecutando limpieza forzada...')
+                time.sleep(1)  # Esperar 1 segundo antes de matar procesos
+                self._kill_chromium_processes()
             
             self.logger.success('Playwright', 'Navegador cerrado correctamente')
             
         except Exception as e:
-            self.logger.error('Playwright', 'Error cerrando navegador', e)
+            self.logger.error('Playwright', 'Error general cerrando navegador', e)
+            # Intentar limpieza forzada como último recurso
+            try:
+                time.sleep(1)
+                self._kill_chromium_processes()
+            except:
+                pass
 
     def cerrar(self):
         """Alias de cerrar_navegador() para compatibilidad"""
         self.cerrar_navegador()
+    
+    def _kill_chromium_processes(self):
+        """Mata procesos Chromium/Chrome huérfanos de forma forzada"""
+        try:
+            import psutil
+            killed = 0
+            process_names = ['chromium.exe', 'chrome.exe', 'msedge.exe']
+            
+            for proc in psutil.process_iter(['pid', 'name', 'cmdline']):
+                try:
+                    proc_name = proc.info['name'].lower() if proc.info['name'] else ''
+                    
+                    # Verificar si es un proceso de navegador
+                    is_browser = any(name.lower() in proc_name for name in process_names)
+                    
+                    # También verificar si fue lanzado por Playwright (contiene '--remote-debugging-port')
+                    is_playwright = False
+                    if proc.info.get('cmdline'):
+                        cmdline_str = ' '.join(proc.info['cmdline'])
+                        if '--remote-debugging-port' in cmdline_str or '--test-type' in cmdline_str:
+                            is_playwright = True
+                    
+                    if is_browser and is_playwright:
+                        proc.kill()
+                        killed += 1
+                        self.logger.debug('Playwright', f'🔪 Proceso eliminado: {proc_name} (PID: {proc.info["pid"]})')
+                        
+                except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                    pass
+            
+            if killed > 0:
+                self.logger.warning('Playwright', f'🧹 Limpiados {killed} procesos Chromium huérfanos')
+            else:
+                self.logger.debug('Playwright', 'No se encontraron procesos huérfanos para limpiar')
+                
+        except ImportError:
+            self.logger.warning('Playwright', '⚠️ psutil no disponible, no se pueden matar procesos huérfanos')
+        except Exception as e:
+            self.logger.error('Playwright', f'Error matando procesos: {e}')
+    
+    def __del__(self):
+        """Destructor: garantiza limpieza de recursos al destruir el objeto"""
+        try:
+            if self.browser or self.playwright:
+                self.cerrar_navegador()
+        except:
+            pass
     
     def esta_activo(self) -> bool:
         """
@@ -330,9 +433,46 @@ class PlaywrightService:
         except:
             return False
     
+    def _find_bundled_chromium(self) -> Optional[str]:
+        """
+        Busca Chromium empaquetado dentro del .exe (sys._MEIPASS).
+        
+        Returns:
+            Ruta al ejecutable chrome.exe empaquetado, o None si no se encuentra
+        """
+        try:
+            base_path = Path(sys._MEIPASS)
+            browsers_dir = base_path / 'playwright' / 'browsers'
+            
+            if not browsers_dir.exists():
+                self.logger.debug('Playwright', f'Directorio de browsers no existe: {browsers_dir}')
+                return None
+            
+            # Buscar la versión más reciente de Chromium empaquetado
+            chromium_dirs = sorted(
+                [d for d in browsers_dir.iterdir() if d.is_dir() and d.name.startswith('chromium-')],
+                key=lambda d: d.name,
+                reverse=True  # Más reciente primero
+            )
+            
+            for chromium_dir in chromium_dirs:
+                chrome_exe = chromium_dir / 'chrome-win' / 'chrome.exe'
+                if chrome_exe.exists():
+                    self.logger.info('Playwright', f'📦 Chromium empaquetado encontrado: {chrome_exe}')
+                    return str(chrome_exe)
+            
+            self.logger.warning('Playwright', 'No se encontró chrome.exe en browsers empaquetados')
+            return None
+            
+        except Exception as e:
+            self.logger.error('Playwright', f'Error buscando Chromium empaquetado: {e}')
+            return None
+
     def _find_system_chrome(self) -> Optional[str]:
         """
         Encuentra la instalación de Chrome del sistema.
+        NOTA: Método conservado como utilidad. El método iniciar_navegador()
+        ahora usa channel='chrome' que es más robusto.
         
         Returns:
             Ruta al ejecutable de Chrome si se encuentra, None sino
@@ -350,38 +490,3 @@ class PlaywrightService:
         
         self.logger.warning('Playwright', 'Chrome del sistema no encontrado en rutas comunes')
         return None
-    
-    def _configure_playwright_browsers(self) -> Optional[str]:
-        """
-        Configura el navegador Playwright para ejecución desde .exe empaquetado.
-        
-        Returns:
-            Ruta al ejecutable del navegador si se encuentra, None sino
-        """
-        # Comprobar si estamos ejecutando desde .exe empaquetado
-        if not getattr(sys, 'frozen', False):
-            return None
-        
-        try:
-            # Buscar navegadores en el directorio de recursos empaquetados
-            base_path = Path(sys._MEIPASS)
-            
-            # Buscar navegadores de Playwright empaquetados
-            playwright_browsers_dir = base_path / 'playwright' / 'browsers'
-            
-            if playwright_browsers_dir.exists():
-                # Buscar Chromium
-                for chromium_dir in playwright_browsers_dir.glob('chromium-*'):
-                    if chromium_dir.is_dir():
-                        chrome_exe = chromium_dir / 'chrome-win' / 'chrome.exe'
-                        if chrome_exe.exists():
-                            self.logger.info('Playwright', f'✅ Navegador Playwright empaquetado encontrado: {chrome_exe}')
-                            return str(chrome_exe)
-            
-            # Si no se encuentra navegador empaquetado, usar Chrome del sistema
-            self.logger.warning('Playwright', '⚠️ Navegador Playwright empaquetado no encontrado, usando Chrome del sistema')
-            return self._find_system_chrome()
-            
-        except Exception as e:
-            self.logger.error('Playwright', f'Error configurando navegadores: {e}')
-            return self._find_system_chrome()

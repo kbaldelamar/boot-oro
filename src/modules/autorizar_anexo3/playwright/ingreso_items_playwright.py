@@ -38,8 +38,8 @@ class IngresoItemsPlaywright:
             self.logger.info('IngresoItems', f"=== PROCESANDO CUPS {codigo_cups} ===")
             self.logger.info('IngresoItems', f"codigo: {codigo_cups}")
             
-            # Espera adicional para estabilizar la página
-            time.sleep(2)
+            # Espera breve para estabilizar la página
+            time.sleep(0.5)
             
             # Paso 1: Buscar campo CUPS con timeout aumentado (XPATH SELENIUM EXACTO)
             self.logger.info('IngresoItems', "Paso 1: Buscando campo CUPS...")
@@ -57,12 +57,26 @@ class IngresoItemsPlaywright:
             self.logger.info('IngresoItems', f"✓ Código ingresado: {codigo_cups}")
             
             # Espera para que aparezcan las opciones
-            time.sleep(3)
+            time.sleep(1.5)
             
-            # Paso 4: Buscar opción en dropdown con manejo robusto (XPATH SELENIUM EXACTO)
+            # Paso 4: Buscar opción en dropdown con manejo robusto (XPATH EXACTO - EXCLUYE VARIANTES NUMÉRICAS)
             self.logger.info('IngresoItems', "Paso 4: Buscando opción en dropdown...")
-            dynamic_xpath_dx = f"//div[@class='ant-select-item-option-content'][contains(.,'{codigo_cups}')]"
-            self.logger.info('IngresoItems', f"XPath de búsqueda: {dynamic_xpath_dx}")
+            # XPath que excluye variantes con sufijos numéricos (ej: 902210-1, 890282-01, etc.)
+            dynamic_xpath_dx = (
+                f"//div[@class='ant-select-item-option-content']"
+                f"[starts-with(text(),'{codigo_cups}-') "
+                f"and not(starts-with(substring-after(text(),'{codigo_cups}-'),'0')) "
+                f"and not(starts-with(substring-after(text(),'{codigo_cups}-'),'1')) "
+                f"and not(starts-with(substring-after(text(),'{codigo_cups}-'),'2')) "
+                f"and not(starts-with(substring-after(text(),'{codigo_cups}-'),'3')) "
+                f"and not(starts-with(substring-after(text(),'{codigo_cups}-'),'4')) "
+                f"and not(starts-with(substring-after(text(),'{codigo_cups}-'),'5')) "
+                f"and not(starts-with(substring-after(text(),'{codigo_cups}-'),'6')) "
+                f"and not(starts-with(substring-after(text(),'{codigo_cups}-'),'7')) "
+                f"and not(starts-with(substring-after(text(),'{codigo_cups}-'),'8')) "
+                f"and not(starts-with(substring-after(text(),'{codigo_cups}-'),'9'))]"
+            )
+            self.logger.info('IngresoItems', f"XPath de búsqueda (sin variantes numéricas): {dynamic_xpath_dx}")
             
             try:
                 # Primer intento con timeout estándar
@@ -100,7 +114,6 @@ class IngresoItemsPlaywright:
             
             # Paso 5: Hacer clic en la opción
             self.logger.info('IngresoItems', "Paso 5: Haciendo clic en opción...")
-            time.sleep(1)
             clic_Dx.click()
             self.logger.info('IngresoItems', f"✓ CUPS {codigo_cups} seleccionado correctamente")
             
@@ -114,7 +127,7 @@ class IngresoItemsPlaywright:
             try:
                 # Intentar hacer clic en Aceptar/Volver sin importar si hubo errores (XPATH SELENIUM EXACTO)
                 self.logger.info('IngresoItems', "=== FINALIZANDO - Haciendo clic en Aceptar ===")
-                time.sleep(2)
+                time.sleep(0.5)
                 clic_aceptar = self.page.wait_for_selector("//span[contains(.,'Aceptar')]", timeout=15000)
                 clic_aceptar.click()
                 self.logger.info('IngresoItems', "✓ Clicked Aceptar - Proceso finalizado")

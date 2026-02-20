@@ -1,0 +1,104 @@
+[2026-02-18 08:41:14.430] [❌ ERROR] [EjecutarCaso] ❓ ERROR NO CLASIFICADO: PDF no encontrado - \\192.168.1.22\Compartida\Soportes\Facturacion\Ingresos\335_322_HISTORIA CLINICA...
+  Exception: Exception: PDF no encontrado - \\192.168.1.22\Compartida\Soportes\Facturacion\Ingresos\335_322_HISTORIA CLINICA.pdf
+[2026-02-18 08:41:17.764] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente ETILVIA MARIA POLO DIAZ: Error en automatización - inicio_casos retornó False
+[2026-02-18 08:42:39.181] [❌ ERROR] [EjecutarCaso] ❓ ERROR NO CLASIFICADO: PDF no encontrado - \\192.168.1.22\Compartida\Soportes\Facturacion\Ingresos\503_325_HISTORIA CLINICA...
+  Exception: Exception: PDF no encontrado - \\192.168.1.22\Compartida\Soportes\Facturacion\Ingresos\503_325_HISTORIA CLINICA.pdf
+[2026-02-18 08:42:42.525] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente SARAY VALENTINA ALCAZAR MEDRANO: Error en automatización - inicio_casos retornó False
+[2026-02-18 10:46:40.850] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para ENILCE DEL SOCORRO LAGUNA OVIEDO (estado ya actualizado)
+[2026-02-18 10:53:18.667] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para NAYIBIS HERMINIA GAMARRA GONZALEZ (estado ya actualizado)
+[2026-02-18 11:07:02.315] [❌ ERROR] [EjecutarCaso] 📄 ARCHIVO PDF NO ENCONTRADO
+  Exception: Exception: PDF no encontrado - \\192.168.1.22\Compartida\Soportes\Facturacion\Ingresos\1_4_HISTORIA CLINICA.pdf
+[2026-02-18 11:07:05.649] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para MARIA DE LOS ANGELES ESPINOZA GONZALEZ (estado ya actualizado)
+[2026-02-18 11:58:37.491] [⚠️ WARNING] [EjecutarCaso] ⚠️ No se pudo cerrar modal con click: ElementHandle.click: Element is not attached to the DOM
+Call log:
+attempting click action
+  -   waiting for element to be visible, enabled and stable
+
+[2026-02-18 12:01:18.318] [⚠️ WARNING] [EjecutarCaso] ⚠️ No se pudo cerrar modal con click: ElementHandle.click: Element is not attached to the DOM
+Call log:
+attempting click action
+  -   waiting for element to be visible, enabled and stable
+
+[2026-02-18 12:07:48.375] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para ANA SOFIA   HOYOS BRAVO    (estado ya actualizado)
+[2026-02-18 12:19:38.020] [⚠️ WARNING] [EjecutarCaso] ⚠️ Archivos no registrados, reintentando carga...
+[2026-02-18 12:22:27.394] [⚠️ WARNING] [EjecutarCaso] ⚠️ Archivos no registrados, reintentando carga...
+[2026-02-18 12:26:06.993] [⚠️ WARNING] [EjecutarCaso] ⚠️ Archivos no registrados, reintentando carga...
+[2026-02-18 12:41:06.801] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para HERMELINDA   ALVAREZ  PEREZ (estado ya actualizado)
+[2026-02-18 12:44:34.348] [⚠️ WARNING] [EjecutarCaso] ⚠️ No se pudo cerrar modal con click: ElementHandle.click: Element is not attached to the DOM
+Call log:
+attempting click action
+  -   waiting for element to be visible, enabled and stable
+
+[2026-02-18 12:54:00.062] [⚠️ WARNING] [EjecutarCaso] ⚠️ No se pudo cerrar modal con click: ElementHandle.click: Element is not attached to the DOM
+Call log:
+attempting click action
+  -   waiting for element to be visible, enabled and stable
+
+[2026-02-18 12:58:50.453] [❌ ERROR] [EjecutarCaso] ⏰ TIMEOUT - ELEMENTO NO RESPONDIÓ A TIEMPO
+  Exception: TimeoutError: Page.wait_for_selector: Timeout 5000ms exceeded.
+Call log:
+waiting for locator("#descripcion") to be visible
+
+[2026-02-18 12:59:02.638] [❌ ERROR] [EjecutarCaso] ❌ Error haciendo clic en Urgencias: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+waiting for locator("//span[contains(.,'Reportar')]/parent::div/following-sibling::ul/li/span[contains(.,'Urgencias')]") to be visible
+
+  Exception: TimeoutError: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+waiting for locator("//span[contains(.,'Reportar')]/parent::div/following-sibling::ul/li/span[contains(.,'Urgencias')]") to be visible
+
+[2026-02-18 12:59:02.641] [❌ ERROR] [EjecutarCaso] ❌ Error durante reinicio: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+waiting for locator("//span[contains(.,'Reportar')]/parent::div/following-sibling::ul/li/span[contains(.,'Urgencias')]") to be visible
+
+  Exception: TimeoutError: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+waiting for locator("//span[contains(.,'Reportar')]/parent::div/following-sibling::ul/li/span[contains(.,'Urgencias')]") to be visible
+
+[2026-02-18 12:59:02.648] [❌ ERROR] [LaboratorioWorker] ❌ Error procesando paciente DAMASO JOSE CUELLO DURAN: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+waiting for locator("//span[contains(.,'Reportar')]/parent::div/following-sibling::ul/li/span[contains(.,'Urgencias')]") to be visible
+
+[2026-02-18 12:59:14.843] [❌ ERROR] [EjecutarCaso] ❌ Error haciendo clic en Urgencias: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+waiting for locator("//span[contains(.,'Reportar')]/parent::div/following-sibling::ul/li/span[contains(.,'Urgencias')]") to be visible
+
+  Exception: TimeoutError: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+waiting for locator("//span[contains(.,'Reportar')]/parent::div/following-sibling::ul/li/span[contains(.,'Urgencias')]") to be visible
+
+[2026-02-18 12:59:14.849] [❌ ERROR] [EjecutarCaso] ❌ Error durante reinicio: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+waiting for locator("//span[contains(.,'Reportar')]/parent::div/following-sibling::ul/li/span[contains(.,'Urgencias')]") to be visible
+
+  Exception: TimeoutError: Page.wait_for_selector: Timeout 10000ms exceeded.
+Call log:
+waiting for locator("//span[contains(.,'Reportar')]/parent::div/following-sibling::ul/li/span[contains(.,'Urgencias')]") to be visible
+
+[2026-02-18 13:11:26.228] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para CARMEN ROSA   BENITEZ CALY    (estado ya actualizado)
+[2026-02-18 13:15:31.180] [❌ ERROR] [EjecutarCaso] 📄 ARCHIVO PDF NO ENCONTRADO
+  Exception: Exception: PDF no encontrado - \\192.168.1.22\Compartida\Soportes\Facturacion\Ingresos\252_405_HISTORIA CLINICA.pdf
+[2026-02-18 13:15:35.285] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para DYLAN DANIEL MENDOZA RAMOS (estado ya actualizado)
+[2026-02-18 13:20:25.607] [⚠️ WARNING] [EjecutarCaso] ⚠️ No se pudo cerrar modal con click: ElementHandle.click: Element is not attached to the DOM
+Call log:
+attempting click action
+  -   waiting for element to be visible, enabled and stable
+
+[2026-02-18 17:07:00.738] [❌ ERROR] [EjecutarCaso] 📄 ARCHIVO PDF NO ENCONTRADO
+  Exception: Exception: PDF no encontrado - \\192.168.1.22\Compartida\Soportes\Facturacion\Ingresos\1873_1190_HISTORIA CLINICA.pdf
+[2026-02-18 17:07:04.099] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para ALEIDIS  GUERRERO  VILLEGAS (estado ya actualizado)
+[2026-02-18 17:07:59.748] [❌ ERROR] [EjecutarCaso] 📄 ARCHIVO PDF NO ENCONTRADO
+  Exception: Exception: PDF no encontrado - \\192.168.1.22\Compartida\Soportes\Facturacion\Ingresos\1840_1191_HISTORIA CLINICA.pdf
+[2026-02-18 17:08:03.072] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para YENIS   DEL CARMEN ORTIZ   VILLEGAS (estado ya actualizado)
+[2026-02-18 22:14:03.354] [❌ ERROR] [Licencia] Error en consulta: HTTPConnectionPool(host='192.168.1.21', port=5000): Max retries exceeded with url: /ips-saldos (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x000001B25BC666A0>, 'Connection to 192.168.1.21 timed out. (connect timeout=10)'))
+[2026-02-18 22:14:03.356] [⚠️ WARNING] [Licencia] Validación fallida: Error consultando saldo
+[2026-02-18 22:19:42.009] [❌ ERROR] [EjecutarCaso] 📄 ARCHIVO PDF NO ENCONTRADO
+  Exception: Exception: PDF no encontrado - \\192.168.1.22\Compartida\Soportes\Facturacion\Ingresos\216_1197_HISTORIA CLINICA.pdf
+[2026-02-18 22:19:45.332] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para AMPARO DEL CARMEN  TAPIA BUELVAS    (estado ya actualizado)
+[2026-02-18 22:39:45.647] [⚠️ WARNING] [EjecutarCaso] ⚠️ No se pudo leer swal2-html-container: 'NoneType' object has no attribute 'text_content'
+[2026-02-18 22:40:03.976] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para CARLOS SEGUNDO GALVAN MADERA (estado ya actualizado)
+[2026-02-18 22:54:46.827] [⚠️ WARNING] [EjecutarCaso] ⚠️ No se pudo leer swal2-html-container: 'NoneType' object has no attribute 'text_content'
+[2026-02-18 22:55:05.141] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para MARIA  ALEJANDRA  MERCADO  TOVAR (estado ya actualizado)
+[2026-02-18 23:20:50.353] [⚠️ WARNING] [EjecutarCaso] ⚠️ Modal visible pero sin título Error/Correcto después de 60s
+[2026-02-18 23:21:08.766] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para SUSANA PAOLA MAESTRE MARTINEZ (estado ya actualizado)
+[2026-02-18 23:36:34.845] [⚠️ WARNING] [EjecutarCasosLaboratorio] ⚠️ inicio_casos retornó False para YULIBETT   MARTINEZ  TAMARA (estado ya actualizado)

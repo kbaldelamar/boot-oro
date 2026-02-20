@@ -24,14 +24,22 @@ class SessionLostException(Exception):
         super().__init__(self.message)
 
 
+class PausedException(Exception):
+    """Excepción lanzada cuando el worker está en pausa y debe detener la ejecución actual"""
+    def __init__(self, message="Ejecución pausada por el usuario"):
+        self.message = message
+        super().__init__(self.message)
+
+
 class EjecutarCasosPlaywright:
     """Servicio para ejecutar casos completos de pacientes - USANDO XPATHS DE SELENIUM"""
     
-    def __init__(self, page: Page, logger: AdvancedLogger):
+    def __init__(self, page: Page, logger: AdvancedLogger, pause_callback=None):
         """
         Args:
             page: Página de Playwright
             logger: Logger
+            pause_callback: Función que retorna True si el worker está pausado
         """
         self.page = page
         self.logger = logger
@@ -39,7 +47,14 @@ class EjecutarCasosPlaywright:
         self.ingreso_items = IngresoItemsPlaywright(page, logger)
         self.pdf_service = PDFAnexo3Service(logger, config)
         self.modo_actual = config.get('MODE', 'REGULAR')  # CAPITATED o REGULAR
+        self.pause_callback = pause_callback  # Callback para verificar pausa
         print(f"Modo actual de operación: {self.modo_actual}")
+    
+    def _verificar_pausa(self):
+        """Verifica si el worker está pausado y lanza excepción si es así"""
+        if self.pause_callback and self.pause_callback():
+            self.logger.info('EjecutarCaso', '⏸️ Ejecución pausada por el usuario')
+            raise PausedException("Worker pausado durante ejecución")
     
     def inicio_casos(self, data) -> bool:
         """
@@ -51,6 +66,7 @@ class EjecutarCasosPlaywright:
         texto = None
         
         try:
+            self._verificar_pausa()  # Verificar pausa al inicio
             self.verificar_sesion_activa(data, "Error: Sesión del navegador no está activa al inicio del proceso de casos")
             
             self.logger.info('EjecutarCaso', f"tipoIdentificacion: {data.tipoIdentificacion}")
@@ -58,7 +74,7 @@ class EjecutarCasosPlaywright:
             
             # ====== SELECCIÓN DE TIPO DE IDENTIFICACIÓN ======
             if data.tipoIdentificacion == "Cédula de Ciudadanía":
-                # Lógica especial para cédula
+                # Cédula es la opción por defecto o está visible sin scroll
                 self.comboIdentidad()
                 dynamic_xpath = f"//div[@class='ant-select-item-option-content'][contains(.,'{data.tipoIdentificacion}')]"
                 combo_tipo_identidad = self.esperar_y_clickear(dynamic_xpath)
@@ -74,30 +90,19 @@ class EjecutarCasosPlaywright:
                 else:
                     self.logger.warning('EjecutarCaso', f"Elemento no fue clickeable después de intentar scroll.")
             else:
-                # Lógica general para otros tipos de documento
+                # Para otros tipos: abrir combo y buscar directo con scroll (como Selenium)
                 self.comboIdentidad()
-                dynamic_xpath = f"//div[@class='ant-select-item-option-content'][contains(.,'{data.tipoIdentificacion}')]"
-                combo_tipo_identidad = self.esperar_y_clickear(dynamic_xpath)
-                if not combo_tipo_identidad:
-                    for i in range(4):
-                        self.verificar_sesion_activa(data, "DURANTE SCROLL DE IDENTIFICACIÓN")
-                        self.scroll_list_to(100 * (i + 1))
-                        combo_tipo_identidad = self.esperar_y_clickear(dynamic_xpath)
-                        if combo_tipo_identidad:
-                            break
-                if combo_tipo_identidad:
-                    self.logger.info('EjecutarCaso', f"Clicked on combo tipo identidad dinámico: {data.tipoIdentificacion}")
+                self.page.wait_for_selector('.rc-virtual-list-holder', timeout=5000)
+                option = self.scroll_list_and_find_option(data.tipoIdentificacion)
+                time.sleep(1)
+                if option:
+                    self.click_option(option)
+                    self.logger.info('EjecutarCaso', f"Opción '{data.tipoIdentificacion}' seleccionada con éxito.")
                 else:
-                    self.page.wait_for_selector('.rc-virtual-list-holder', timeout=5000)
-                    option = self.scroll_list_and_find_option(data.tipoIdentificacion)
-                    time.sleep(1)
-                    if option:
-                        self.click_option(option)
-                        print(f"Opción '{data.tipoIdentificacion}' seleccionada con éxito.")
-                    else:
-                        print(f"No se pudo encontrar la opción: {data.tipoIdentificacion}")
+                    self.logger.warning('EjecutarCaso', f"No se pudo encontrar la opción: {data.tipoIdentificacion}")
             
             # ====== VERIFICACIÓN DE SESIÓN ANTES DE CONTINUAR ======
+            self._verificar_pausa()  # Verificar pausa
             self.verificar_sesion_activa(data, "DESPUÉS DE SELECCIÓN DE IDENTIFICACIÓN")
             
             # ====== INGRESO DE NÚMERO DE IDENTIFICACIÓN ====== (XPATH SELENIUM EXACTO)
@@ -110,7 +115,7 @@ class EjecutarCasosPlaywright:
             boton_buscar = self.page.wait_for_selector("//button[@width='100%'][contains(.,'Buscar')]", timeout=5000)
             boton_buscar.click()
             self.logger.info('EjecutarCaso', "Clicked on buton buscar")
-            time.sleep(3)
+            time.sleep(2)
             
             # ====== VERIFICACIÓN DE ERRORES DESPUÉS DE BÚSQUEDA ======
             componentes = ["//div/h2[contains(.,'Error')]"]
@@ -134,6 +139,7 @@ class EjecutarCasosPlaywright:
                 return False  # ERROR: tipo de documento incorrecto
             else:
                 # ====== LLENADO DE FORMULARIO PRINCIPAL ======
+                self._verificar_pausa()  # Verificar pausa
                 self.verificar_sesion_activa(data, "ANTES DE LLENAR FORMULARIO")
                 
                 # Correo (XPATH SELENIUM EXACTO)
@@ -141,8 +147,10 @@ class EjecutarCasosPlaywright:
                 input_correo.click()
                 self.logger.info('EjecutarCaso', "Clicked on email input")
                 input_correo.fill("")
-                self.helper.ingresar_texto(input_correo, "GENOMA@GENOMA.com")
-                self.logger.info('EjecutarCaso', f"Ingresó GENOMA@GENOMA.com")
+                # Usar email del paciente si existe, sino usar fallback
+                email_paciente = getattr(data, 'email', None) or getattr(data, 'correo', None) or "GENOMA@GENOMA.com"
+                self.helper.ingresar_texto(input_correo, email_paciente)
+                self.logger.info('EjecutarCaso', f"Ingresó {email_paciente}")
                 
                 # Nombre de emergencia (XPATH SELENIUM EXACTO)
                 input_nombre_e = self.page.wait_for_selector("#emergencyContactName", timeout=5000)
@@ -220,11 +228,12 @@ class EjecutarCasosPlaywright:
                     self.logger.info('EjecutarCaso', f"Ingresó dirrecion")
                 
                 # ====== VERIFICACIÓN DE SESIÓN ANTES DE CONTINUAR CON FECHA ======
+                self._verificar_pausa()  # Verificar pausa
                 self.verificar_sesion_activa(data, "ANTES DE INGRESAR FECHA")
                 
                 # Fecha de orden (XPATH SELENIUM EXACTO)
                 self.page.evaluate("window.scrollBy(0, 400);")
-                time.sleep(2)
+                time.sleep(1)
                 input_fecha_orden = self.page.wait_for_selector("//input[contains(@placeholder,'Select date')]", timeout=5000)
                 input_fecha_orden.click()
                 self.logger.info('EjecutarCaso', "Clicked on date input")
@@ -232,69 +241,103 @@ class EjecutarCasosPlaywright:
                 self.helper.ingresar_texto(input_fecha_orden, data.fechaFacturaEvento)
                 input_fecha_orden.press("Enter")
                 self.logger.info('EjecutarCaso', f"Ingresó la fecha: {data.fechaFacturaEvento}")
-                time.sleep(1)
+                time.sleep(0.5)
                 
-                # IPS REMITENTE (XPATH SELENIUM EXACTO)
+                # IPS REMITENTE (XPATH SELENIUM EXACTO CON MÚLTIPLES CANDIDATOS)
                 try:
                     input_IPSREMITE = self.page.wait_for_selector("//label[@class='form-label'][contains(.,'* IPS Remitente:')]/parent::div/div/div", timeout=5000)
                     input_IPSREMITE.click()
                     self.logger.info('EjecutarCaso', "Clicked on IPS Remitente input")
-                    time.sleep(1)
+                    time.sleep(0.5)
                     
-                    # IPS Remitente: usar NITIPS + NOMBREIPS del .env
+                    # IPS Remitente: construir CANDIDATOS igual que Selenium
                     nit_config = (config.nit_ips or "").strip()
                     nombre_config = (config.nombre_ips or "").strip()
-                    if nit_config and nombre_config:
-                        nombre_ips_remitente = f"{nit_config} - {nombre_config}"
-                    else:
-                        nombre_ips_remitente = nombre_config or nit_config
-                    self.logger.info('EjecutarCaso', f"IPS Remitente desde config: '{nombre_ips_remitente}'")
                     
-                    if not nombre_ips_remitente:
+                    # Construir lista de candidatos (igual que Selenium para máxima compatibilidad)
+                    candidatos = []
+                    if nit_config:
+                        candidatos.append(nit_config)
+                    if nit_config and nombre_config:
+                        candidatos.append(f"{nit_config} - {nombre_config}")
+                        candidatos.append(f"{nit_config}-{nombre_config}")
+                    if nombre_config:
+                        candidatos.append(nombre_config)
+                    
+                    if not candidatos:
                         raise Exception("No se encontró NITIPS/NOMBREIPS en configuración")
                     
-                    # Extraer el NIT (primer parte antes del guión) para búsqueda
-                    nit_busqueda = nit_config or (nombre_ips_remitente.split('-')[0].strip() if '-' in nombre_ips_remitente else nombre_ips_remitente)
+                    self.logger.info('EjecutarCaso', f"Candidatos para búsqueda: {candidatos}")
                     
-                    if not self.helper.ingresar_texto_secuencial(input_IPSREMITE, nit_busqueda):
-                        self.logger.info('EjecutarCaso', f"No se pudo ingresar texto secuencialmente: '{nit_busqueda}'")
-                        raise Exception(f"No se pudo ingresar el NIT de IPS Remitente: {nit_busqueda}")
+                    # Intentar con cada candidato hasta encontrar la opción
+                    seleccion_realizada = False
+                    ultima_excepcion = None
                     
-                    time.sleep(2)
-                    try:
-                        self.page.wait_for_selector("//div[@class='ant-select-dropdown']", timeout=5000)
-                    except:
-                        self.logger.info('EjecutarCaso', "Dropdown no apareció, reintentando input")
-                        input_IPSREMITE.click()
-                        time.sleep(1)
-                    
-                    # Buscar opción que contenga el NIT
-                    opciones_a_buscar = [
-                        f"//div[@class='ant-select-item-option-content'][contains(text(),'{nit_busqueda}')]",
-                        f"//div[contains(@class,'ant-select-item-option-content')][contains(.,'{nit_busqueda}')]"
-                    ]
-                    
-                    option = None
-                    for xpath_opcion in opciones_a_buscar:
+                    for search_text in candidatos:
                         try:
-                            option = self.page.wait_for_selector(xpath_opcion, timeout=3000)
-                            self.logger.info('EjecutarCaso', f"Opción encontrada with XPath: {xpath_opcion}")
-                            break
-                        except:
+                            self.logger.info('EjecutarCaso', f"Intentando con candidato: '{search_text}'")
+                            
+                            # Limpiar input y escribir nuevo texto
+                            input_IPSREMITE.click()
+                            time.sleep(0.3)
+                            
+                            if not self.helper.ingresar_texto_secuencial(input_IPSREMITE, search_text):
+                                self.logger.info('EjecutarCaso', f"No se pudo ingresar texto: '{search_text}'")
+                                continue
+                            
+                            time.sleep(2)
+                            try:
+                                # Esperar el dropdown específico de ipsSender
+                                self.page.wait_for_selector("//div[@id='ipsSender_list']", timeout=5000)
+                                self.logger.info('EjecutarCaso', f"Dropdown ipsSender_list detectado")
+                            except:
+                                self.logger.info('EjecutarCaso', "Dropdown no apareció, reintentando")
+                                input_IPSREMITE.click()
+                                time.sleep(1)
+                            
+                            # Buscar opción con XPath MÁS SIMPLE - buscar en CUALQUIER dropdown visible
+                            # Esto funciona porque el dropdown de ipsSender es el único abierto en este momento
+                            opciones_a_buscar = [
+                                f"//div[contains(@class,'ant-select-dropdown') and not(contains(@style,'display: none'))]//div[@class='ant-select-item-option-content'][contains(.,'{search_text}')]",
+                                f"//div[@class='ant-select-item-option-content'][contains(.,'{search_text}')]"
+                            ]
+                            
+                            option = None
+                            for xpath_opcion in opciones_a_buscar:
+                                try:
+                                    option = self.page.wait_for_selector(xpath_opcion, timeout=3000)
+                                    self.logger.info('EjecutarCaso', f"Opción encontrada: {xpath_opcion}")
+                                    break
+                                except:
+                                    continue
+                            
+                            if option:
+                                option.click()
+                                self.logger.info('EjecutarCaso', f"✅ IPS Remitente seleccionada con: '{search_text}'")
+                                seleccion_realizada = True
+                                break
+                            else:
+                                self.logger.info('EjecutarCaso', f"No encontrada con '{search_text}', probando siguiente...")
+                                
+                        except Exception as inner_e:
+                            ultima_excepcion = inner_e
+                            self.logger.info('EjecutarCaso', f"Error con candidato '{search_text}': {inner_e}")
                             continue
                     
-                    if option:
-                        option.click()
-                        self.logger.info('EjecutarCaso', f"IPS Remitente seleccionada: {nombre_ips_remitente}")
-                    else:
+                    if not seleccion_realizada:
+                        # Listar opciones disponibles para debug
                         try:
-                            opciones_disponibles = self.page.query_selector_all("//div[@class='ant-select-item-option-content']")
-                            self.logger.info('EjecutarCaso', f"Opciones disponibles: {len(opciones_disponibles)}")
-                            for i, opcion in enumerate(opciones_disponibles[:5]):
+                            # Usar el mismo XPath simple para listar opciones
+                            opciones_disponibles = self.page.query_selector_all("//div[contains(@class,'ant-select-dropdown') and not(contains(@style,'display: none'))]//div[@class='ant-select-item-option-content']")
+                            self.logger.info('EjecutarCaso', f"Opciones disponibles en dropdown visible: {len(opciones_disponibles)}")
+                            for i, opcion in enumerate(opciones_disponibles[:10]):
                                 self.logger.info('EjecutarCaso', f"Opción {i+1}: {opcion.text_content()}")
                         except Exception as e:
-                            self.logger.info('EjecutarCaso', f"Error al listar opciones disponibles: {e}")
-                        raise Exception(f"No se encontró la opción de IPS Remitente: {nombre_ips_remitente}")
+                            self.logger.info('EjecutarCaso', f"Error al listar opciones: {e}")
+                        
+                        if ultima_excepcion:
+                            raise ultima_excepcion
+                        raise Exception(f"No se encontró IPS Remitente después de {len(candidatos)} intentos")
                 
                 except Exception as e:
                     print(f"Error detallado en IPS REMITENTE: {str(e)}")
@@ -311,12 +354,11 @@ class EjecutarCasosPlaywright:
                     input_causa = self.page.wait_for_selector("//label[@class='form-label'][contains(.,'* Causa que Motiva la Atención:')]/parent::div/div/div", timeout=5000)
                     input_causa.click()
                     self.logger.info('EjecutarCaso', "Clicked on Causa input")
-                    time.sleep(1)
                     
                     search_text = "Enfermedad"
                     if self.helper.ingresar_texto_secuencial(input_causa, search_text):
                         self.logger.info('EjecutarCaso', "Texto ingresado correctamente")
-                        time.sleep(1)
+                        time.sleep(0.5)
                         
                         # XPATH SELENIUM EXACTO
                         option_xpath = "//div[@class='ant-select-item-option-content'][contains(.,'38 - Enfermedad general')]"
@@ -337,7 +379,6 @@ class EjecutarCasosPlaywright:
                 if element:
                     # Playwright usa funciones de flecha, no arguments
                     element.evaluate("el => el.style.visibility = 'visible'")
-                time.sleep(1)
                 input_prioridad = self.page.wait_for_selector("//label[@class='form-label'][contains(.,'* Prioridad de la atención')]/parent::div/div", timeout=5000)
                 input_prioridad.click()
                 self.logger.info('EjecutarCaso', "Clicked prioridad")
@@ -346,7 +387,7 @@ class EjecutarCasosPlaywright:
                 clic_prioridad = self.page.wait_for_selector("//div[@class='ant-select-item-option-content'][contains(.,'No prioritaria')]", timeout=5000)
                 clic_prioridad.click()
                 self.logger.info('EjecutarCaso', "Clicked prioritaria combo")
-                time.sleep(1)
+                time.sleep(0.3)
                 
                 # ====== VERIFICACIÓN DE SESIÓN ANTES DE DIAGNÓSTICO ======
                 self.verificar_sesion_activa(data, "ANTES DE INGRESAR DIAGNÓSTICO")
@@ -356,18 +397,17 @@ class EjecutarCasosPlaywright:
                     input_dx = self.page.wait_for_selector("//input[contains(@aria-owns,'diagnostico_list')]", timeout=5000)
                     input_dx.click()
                     self.logger.info('EjecutarCaso', "Clicked on Diagnóstico input")
-                    time.sleep(1)
                     
                     if self.helper.ingresar_texto_secuencial(input_dx, data.diagnostico):
                         self.logger.info('EjecutarCaso', f"Texto ingresado correctamente: {data.diagnostico}")
-                        time.sleep(2)
+                        time.sleep(0.5)
                         
                         # XPATH SELENIUM EXACTO
                         dynamic_xpath_dx = f"//div[@class='ant-select-item-option-content'][contains(.,'{data.diagnostico}')]"
                         option = self.page.wait_for_selector(dynamic_xpath_dx, timeout=5000)
                         option.click()
                         self.logger.info('EjecutarCaso', "Seleccionado Diagnóstico correctamente")
-                        time.sleep(1)
+                        time.sleep(0.3)
                     else:
                         raise Exception("No se pudo ingresar el texto en el campo Diagnóstico")
                 
@@ -381,24 +421,23 @@ class EjecutarCasosPlaywright:
                     input_modalidad = self.page.query_selector("//label[@class='form-label'][contains(.,'* Modalidad de realización de la tecnologia de salud')]/parent::div/div/div")
                     if input_modalidad:
                         input_modalidad.scroll_into_view_if_needed()
-                    time.sleep(1)
+                    time.sleep(0.3)
                     
                     input_modalidad = self.page.wait_for_selector("//label[@class='form-label'][contains(.,'* Modalidad de realización de la tecnologia de salud')]/parent::div/div/div", timeout=5000)
                     input_modalidad.click()
                     self.logger.info('EjecutarCaso', "Clicked on Modalidad input")
-                    time.sleep(1)
                     
                     search_text = "Intramural"
                     if self.helper.ingresar_texto_secuencial(input_modalidad, search_text):
                         self.logger.info('EjecutarCaso', "Texto ingresado correctamente")
-                        time.sleep(1)
+                        time.sleep(0.5)
                         
                         # XPATH SELENIUM EXACTO
                         option_xpath = "//div[@class='ant-select-item-option-content'][contains(.,'Intramural')]"
                         option = self.page.wait_for_selector(option_xpath, timeout=5000)
                         option.click()
                         self.logger.info('EjecutarCaso', "Seleccionada Modalidad Intramural")
-                        time.sleep(1)
+                        time.sleep(0.3)
                     else:
                         raise Exception("No se pudo ingresar el texto en el campo Modalidad")
                 
@@ -408,6 +447,7 @@ class EjecutarCasosPlaywright:
                     raise
                 
                 # ====== INGRESO DE SERVICIOS (método sobrescribible) ======
+                self._verificar_pausa()  # Verificar pausa antes de ingresar servicios
                 self._ingresar_servicios(data)
                 
                 time.sleep(1)
@@ -420,19 +460,18 @@ class EjecutarCasosPlaywright:
                     time.sleep(1)
                     input_condicion.click()
                     self.logger.info('EjecutarCaso', "Clicked on Condición y Destino input")
-                    time.sleep(1)
                     
                     search_text = "Paciente"
                     if self.helper.ingresar_texto_secuencial(input_condicion, search_text):
                         self.logger.info('EjecutarCaso', "Texto ingresado correctamente")
-                        time.sleep(1)
+                        time.sleep(0.5)
                         
                         # XPATH SELENIUM EXACTO
                         option_xpath = "//div[@class='ant-select-item-option-content'][contains(.,'Paciente con destino a su domicilio')]"
                         option = self.page.wait_for_selector(option_xpath, timeout=5000)
                         option.click()
                         self.logger.info('EjecutarCaso', "Seleccionada Condición: Paciente con destino a su domicilio")
-                        time.sleep(1)
+                        time.sleep(0.3)
                     else:
                         raise Exception("No se pudo ingresar el texto en el campo Condición y Destino")
                 
@@ -450,9 +489,8 @@ class EjecutarCasosPlaywright:
                 
                 # XPATH SELENIUM EXACTO
                 clic_Finalidad = self.page.wait_for_selector("//div[@class='ant-select-item-option-content'][contains(.,'15 - Diagnostico')]", timeout=5000)
-                time.sleep(1)
                 self.page.evaluate("window.scrollBy(0, 100)")
-                time.sleep(1)
+                time.sleep(0.3)
                 clic_Finalidad.click()
                 self.logger.info('EjecutarCaso', f"Clicked on combo finalidad")
                 
@@ -474,6 +512,7 @@ class EjecutarCasosPlaywright:
                     return False  # ERROR: IPS no encontrada
                 
                 # ====== OBTENCIÓN DE ARCHIVO PDF (método sobrescribible) ======
+                self._verificar_pausa()  # Verificar pausa antes de generar/obtener PDF
                 file_path = self._obtener_archivo_pdf(data)
                 if not file_path:
                     return False  # El método ya manejó el error y reinicio
@@ -482,14 +521,24 @@ class EjecutarCasosPlaywright:
                 self.verificar_sesion_activa(data, "ANTES DE SUBIR ARCHIVOS")
                 
                 try:
-                    # USANDO IDs SELENIUM EXACTOS
-                    file_input = self.page.query_selector("#fileListOrdenMedica")
-                    file_input.set_input_files(file_path)
-                    self.logger.info('EjecutarCaso', f"✅ Archivo cargado en fileListOrdenMedica")
+                    # === SUBIR ARCHIVO A ORDEN MÉDICA ===
+                    # Usar expect_file_chooser para simular flujo real (como Selenium send_keys)
+                    boton_orden = self.page.locator("#fileListOrdenMedica").locator("xpath=..").locator("button")
+                    with self.page.expect_file_chooser() as fc_info:
+                        boton_orden.click(timeout=5000)
+                    file_chooser = fc_info.value
+                    file_chooser.set_files(file_path)
+                    time.sleep(1)
+                    self.logger.info('EjecutarCaso', f"✅ Archivo cargado en Orden Médica")
                     
-                    file_input_hc = self.page.query_selector("#fileListHistoriaClinica")
-                    file_input_hc.set_input_files(file_path)
-                    self.logger.info('EjecutarCaso', f"✅ Archivo cargado en fileListHistoriaClinica")
+                    # === SUBIR ARCHIVO A HISTORIA CLÍNICA ===
+                    boton_hc = self.page.locator("#fileListHistoriaClinica").locator("xpath=..").locator("button")
+                    with self.page.expect_file_chooser() as fc_info2:
+                        boton_hc.click(timeout=5000)
+                    file_chooser2 = fc_info2.value
+                    file_chooser2.set_files(file_path)
+                    time.sleep(1)
+                    self.logger.info('EjecutarCaso', f"✅ Archivo cargado en Historia Clínica")
                     
                     time.sleep(1)
                 except Exception as e:
@@ -499,19 +548,18 @@ class EjecutarCasosPlaywright:
                     raise
                 
                 self.page.evaluate("window.scrollBy(0, 100)")
-                time.sleep(2)
+                time.sleep(0.5)
                 
                 # XPATH SELENIUM EXACTO - Usar justificación del JSON
                 txt_area = self.page.wait_for_selector("#descripcion", timeout=5000)
                 txt_area.fill("")
                 print("area")
-                time.sleep(1)
                 justificacion_texto = getattr(data, 'justificacion', '') or 'Orden de autorización'
                 # Limpiar comillas extra si las hay
                 justificacion_texto = justificacion_texto.strip('"').strip()
                 self.helper.ingresar_texto(txt_area, justificacion_texto)
                 self.logger.info('EjecutarCaso', f"ingreso input justificación: {justificacion_texto[:50]}...")
-                time.sleep(2)
+                time.sleep(1)
                 
                 self.page.evaluate("window.scrollBy(0, 400)")
                 time.sleep(1)
@@ -519,120 +567,195 @@ class EjecutarCasosPlaywright:
                 # ====== VERIFICACIÓN DE SESIÓN ANTES DE GUARDAR ======
                 self.verificar_sesion_activa(data, "ANTES DE GUARDAR")
                 
-                # XPATH SELENIUM EXACTO
-                bonton_guardar = self.page.wait_for_selector("//button[@type='submit'][contains(.,'Guardar')]", timeout=10000)
+                # ====== CERRAR DROPDOWNS ABIERTOS Y PREPARAR BOTÓN GUARDAR ======
+                # Cerrar cualquier dropdown de Ant Design que haya quedado abierto
+                try:
+                    dropdowns_abiertos = self.page.query_selector_all("div.ant-select-dropdown:not(.ant-select-dropdown-hidden)")
+                    if dropdowns_abiertos:
+                        self.logger.info('EjecutarCaso', f"⚠️ {len(dropdowns_abiertos)} dropdown(s) abierto(s) detectado(s), cerrando...")
+                        self.page.evaluate("document.body.click();")
+                        time.sleep(1)
+                except Exception as e:
+                    self.logger.warning('EjecutarCaso', f"⚠️ Error al verificar dropdowns: {e}")
+                
+                # Buscar el botón Guardar con múltiples estrategias
+                self._verificar_pausa()  # Verificar pausa antes de guardar
+                time.sleep(1)
+                bonton_guardar = None
+                
+                # Estrategia 1: CSS selector (más rápido que XPath)
+                try:
+                    bonton_guardar = self.page.wait_for_selector("button[type='submit'].ant-btn-primary", timeout=5000)
+                    self.logger.info('EjecutarCaso', "✅ Botón Guardar encontrado por CSS selector")
+                except Exception:
+                    pass
+                
+                # Estrategia 2: XPath como fallback
+                if not bonton_guardar:
+                    try:
+                        bonton_guardar = self.page.wait_for_selector("//button[@type='submit'][contains(.,'Guardar')]", timeout=5000)
+                        self.logger.info('EjecutarCaso', "✅ Botón Guardar encontrado por XPath")
+                    except Exception:
+                        pass
+                
+                # Estrategia 3: query_selector directo (sin esperas)
+                if not bonton_guardar:
+                    try:
+                        bonton_guardar = self.page.query_selector("button[type='submit'].ant-btn-primary")
+                        if not bonton_guardar:
+                            bonton_guardar = self.page.query_selector("button.ant-btn-primary.btn-primary")
+                        if bonton_guardar:
+                            self.logger.info('EjecutarCaso', "✅ Botón Guardar encontrado por query_selector")
+                    except Exception:
+                        pass
+                
+                if not bonton_guardar:
+                    raise Exception("No se encontró el botón Guardar con ninguna estrategia")
+                
                 print("bonton_guardar")
-                bonton_guardar.click()
+                
+                # Limpiar residuo de animación del clic anterior (2do paciente en adelante)
+                try:
+                    self.page.evaluate("""(btn) => {
+                        btn.removeAttribute('ant-click-animating-without-extra-node');
+                        btn.classList.remove('ant-click-animating');
+                    }""", bonton_guardar)
+                except Exception:
+                    pass
+                
+                # Scroll al botón y clic con force=True (como Selenium, sin actionability checks)
+                try:
+                    bonton_guardar.scroll_into_view_if_needed()
+                except Exception:
+                    self.page.evaluate("window.scrollTo(0, document.body.scrollHeight);")
+                time.sleep(1)
+                
+                bonton_guardar.click(force=True)
+                
                 self.logger.info('EjecutarCaso', f"clic boton guardar")
-                time.sleep(7)
+                time.sleep(3)
                 
                 try:
-                    # Buscar modal de respuesta
-                    modal = self.page.wait_for_selector("//div[@aria-labelledby='swal2-title']", timeout=30000)
-                    modal.click()
+                    # ====== DETECCIÓN ROBUSTA DEL MODAL DE RESPUESTA ======
+                    # Esperar directamente por el h2 FINAL (Error o Correcto)
+                    # NO esperar por swal2-title genérico (puede ser modal de "cargando")
+                    tipo_resultado = None
+                    h2_element = None
+                    max_espera_total = 60  # 60 segundos máximo esperando respuesta del servidor
+                    intervalo_polling = 2  # cada 2 segundos
+                    intentos_totales = max_espera_total // intervalo_polling
                     
-                    # Verificar si hay error
-                    try:
+                    self.logger.info('EjecutarCaso', f"⏳ Esperando respuesta del servidor (máx {max_espera_total}s)...")
+                    
+                    for intento in range(intentos_totales):
+                        # Buscar Error
                         error_title = self.page.query_selector("//h2[contains(.,'Error')]")
                         if error_title and error_title.is_visible():
-                            error_text = "Error sin detalle"
-                            try:
-                                error_el = self.page.query_selector("//div[contains(@class,'swal2-html-container') or @id='swal2-html-container']")
-                                error_text = (error_el.text_content() or "").strip() or error_text
-                            except Exception as e:
-                                self.logger.warning('EjecutarCaso', f"⚠️ No se pudo leer swal2-html-container: {e}")
-                            
-                            # NUEVO: Verificar si es error de solicitud activa (manejarlo como éxito)
-                            if "solicitud activa" in error_text.lower() and "número de radicado" in error_text.lower():
-                                self.logger.info('EjecutarCaso', f"✅ SOLICITUD ACTIVA DETECTADA - Tratando como éxito")
-                                
-                                # Extraer el número de radicado
-                                numero_radicado = ""
-                                radicado_match = re.search(r'número de radicado\s*#?\s*(\d+)', error_text, re.IGNORECASE)
-                                if radicado_match:
-                                    numero_radicado = radicado_match.group(1)
-                                    self.logger.info('EjecutarCaso', f"📝 Número de radicado extraído: {numero_radicado}")
-                                else:
-                                    # Fallback: extraer cualquier número
-                                    numbers = re.findall(r'\d+', error_text)
-                                    numero_radicado = ''.join(numbers) if numbers else ""
-                                    self.logger.warning('EjecutarCaso', f"⚠️ Usando fallback para número: {numero_radicado}")
-                                
-                                # Guardar en archivo como caso exitoso
-                                with open("archivo.txt", 'a', encoding='utf-8') as archivo:
-                                    archivo.write(f"caso,SOLICITUD ACTIVA - {error_text},paciente,{data.identificacion},ordenCapita,{data.idItemOrden}\n")
-                                
-                                # Hacer clic OK y actualizar como completado
-                                self._hacer_clic_ok()
-                                
-                                # Actualizar como exitoso (estado "1") con el número de radicado y resultado_ejecucion
-                                self.actualizar_con_resultado_ejecucion(data, "1", numero_radicado, error_text)
-                                
-                                self.reinicio()
-                                time.sleep(5)
-                                self.alerta()
-                                return True  # ÉXITO: Solicitud activa tratada como completada
-                            
-                            # Si no es solicitud activa, manejar como error normal
-                            # Extraer fragmento
-                            fragment = None
-                            m = re.search(r"(servicio\s*\d+\s*con el número de radicado\s*#\s*\d+)", error_text, re.IGNORECASE)
-                            if m:
-                                fragment = m.group(1).strip()
-                            else:
-                                m1 = re.search(r"servicio\s*(\d+)", error_text, re.IGNORECASE)
-                                m2 = re.search(r"#\s*(\d+)", error_text)
-                                if m1 and m2:
-                                    fragment = f"servicio {m1.group(1)} con el número de radicado #{m2.group(1)}"
-                                else:
-                                    fragment = (error_text or "Error sin detalle").strip()[:250]
-                            
-                            print(f"ERROR (capturado): {fragment}")
-                            try:
-                                with open("archivo.txt", 'a', encoding='utf-8') as archivo:
-                                    archivo.write(f"caso,{fragment},paciente,{data.identificacion},ordenCapita,{data.idItemOrden}\n")
-                            except Exception as e:
-                                self.logger.warning('EjecutarCaso', f"⚠️ No se pudo escribir archivo.txt: {e}")
-                            
-                            try:
-                                self.actualizar(data, "3", "")
-                            except Exception as e:
-                                self.logger.warning('EjecutarCaso', f"⚠️ Falló actualizar con mensaje de error: {e}")
-                            
-                            try:
-                                self._hacer_clic_ok()
-                            except Exception as e:
-                                self.logger.warning('EjecutarCaso', f"⚠️ Falló al hacer clic en OK del modal: {e}")
-                            
-                            self.reinicio()
-                            return False  # ERROR: Servicio duplicado/ya reportado
-                        else:
-                            raise Exception("No es error")
-                    except:
-                        # NO HAY ERROR - ES ÉXITO
+                            tipo_resultado = 'error'
+                            h2_element = error_title
+                            self.logger.info('EjecutarCaso', f"🔍 Modal tipo 'Error' detectado ({intento * intervalo_polling}s)")
+                            break
+                        
+                        # Buscar Correcto
+                        success_title = self.page.query_selector("//h2[contains(.,'Correcto')]")
+                        if success_title and success_title.is_visible():
+                            tipo_resultado = 'correcto'
+                            h2_element = success_title
+                            self.logger.info('EjecutarCaso', f"🔍 Modal tipo 'Correcto' detectado ({intento * intervalo_polling}s)")
+                            break
+                        
+                        if intento < intentos_totales - 1:
+                            if intento % 5 == 0 and intento > 0:
+                                self.logger.info('EjecutarCaso', f"⏳ Aún esperando respuesta... ({intento * intervalo_polling}s)")
+                            time.sleep(intervalo_polling)
+                    
+                    # ====== CAPTURAR TEXTOS ANTES DE CERRAR ======
+                    success_text = None
+                    error_text = None
+                    
+                    if tipo_resultado == 'correcto':
+                        success_text = h2_element.text_content()
+                        self.logger.info('EjecutarCaso', f"📝 Texto éxito capturado: {success_text}")
+                    elif tipo_resultado == 'error':
+                        error_text = "Error sin detalle"
                         try:
-                            success_element = self.page.query_selector("//h2[contains(.,'Correcto')]")
-                            success_text = success_element.text_content()
-                            print(f"ÉXITO: {success_text}")
-                            
-                            numbers = re.findall(r'\d+', success_text)
-                            numbers_str = ''.join(numbers)
-                            
+                            error_el = self.page.query_selector("//div[contains(@class,'swal2-html-container') or @id='swal2-html-container']")
+                            if error_el:
+                                error_text = (error_el.text_content() or "").strip() or error_text
+                                self.logger.info('EjecutarCaso', f"📝 Texto error capturado: {error_text[:100]}...")
+                            else:
+                                self.logger.warning('EjecutarCaso', f"⚠️ Elemento swal2-html-container no encontrado")
+                        except Exception as e:
+                            self.logger.warning('EjecutarCaso', f"⚠️ No se pudo leer swal2-html-container: {e}")
+                    
+                    # Cerrar el modal SweetAlert2 DESPUÉS de capturar los textos
+                    self._cerrar_swal2()
+                    
+                    # ====== PROCESAR SEGÚN TIPO DE RESULTADO ======
+                    if tipo_resultado == 'correcto':
+                        # ====== ÉXITO ======
+                        print(f"ÉXITO: {success_text}")
+                        
+                        numbers = re.findall(r'\d+', success_text)
+                        numbers_str = ''.join(numbers)
+                        
+                        with open("archivo.txt", 'a', encoding='utf-8') as archivo:
+                            archivo.write(f"caso,{success_text},paciente,{data.identificacion},ordenCapita,{data.idItemOrden}\n")
+                        
+                        self._hacer_clic_ok()
+                        self.actualizar(data, "3", numbers_str)
+                        self.reinicio()
+                        time.sleep(2)
+                        self.alerta()
+                        return True  # ÉXITO: Caso completado correctamente
+                    
+                    elif tipo_resultado == 'error':
+                        # ====== ERROR - Procesar detalle ya capturado ======
+                        
+                        # Verificar si es solicitud activa (método sobrescribible por clases hijas)
+                        if "solicitud activa" in error_text.lower() and "número de radicado" in error_text.lower():
+                            return self._manejar_solicitud_activa(data, error_text)
+                        
+                        # Error normal - extraer fragmento
+                        fragment = None
+                        m = re.search(r"(servicio\s*\d+\s*con el número de radicado\s*#\s*\d+)", error_text, re.IGNORECASE)
+                        if m:
+                            fragment = m.group(1).strip()
+                        else:
+                            m1 = re.search(r"servicio\s*(\d+)", error_text, re.IGNORECASE)
+                            m2 = re.search(r"#\s*(\d+)", error_text)
+                            if m1 and m2:
+                                fragment = f"servicio {m1.group(1)} con el número de radicado #{m2.group(1)}"
+                            else:
+                                fragment = (error_text or "Error sin detalle").strip()[:250]
+                        
+                        print(f"ERROR (capturado): {fragment}")
+                        try:
                             with open("archivo.txt", 'a', encoding='utf-8') as archivo:
-                                archivo.write(f"caso,{success_text},paciente,{data.identificacion},ordenCapita,{data.idItemOrden}\n")
-                            
+                                archivo.write(f"caso,{fragment},paciente,{data.identificacion},ordenCapita,{data.idItemOrden}\n")
+                        except Exception as e:
+                            self.logger.warning('EjecutarCaso', f"⚠️ No se pudo escribir archivo.txt: {e}")
+                        
+                        try:
+                            self.actualizar(data, "3", "")
+                        except Exception as e:
+                            self.logger.warning('EjecutarCaso', f"⚠️ Falló actualizar con mensaje de error: {e}")
+                        
+                        try:
                             self._hacer_clic_ok()
-                            self.actualizar(data, "3", numbers_str)
-                            self.reinicio()
-                            time.sleep(5)
-                            self.alerta()
-                            return True  # ÉXITO: Caso completado correctamente
-                        except:
-                            print("No se pudo determinar el resultado")
-                            self._hacer_clic_ok()
-                            self.actualizar(data, "19", "")
-                            self.reinicio()
-                            return False  # ERROR: No se pudo determinar resultado
+                        except Exception as e:
+                            self.logger.warning('EjecutarCaso', f"⚠️ Falló al hacer clic en OK del modal: {e}")
+                        
+                        self.reinicio()
+                        return False  # ERROR: Servicio duplicado/ya reportado
+                    
+                    else:
+                        # No se encontró ni Error ni Correcto después de todos los intentos
+                        self.logger.warning('EjecutarCaso', f"⚠️ Modal visible pero sin título Error/Correcto después de {max_espera_total}s")
+                        self._hacer_clic_ok()
+                        self.actualizar(data, "19", "")
+                        self.reinicio()
+                        return False  # ERROR: No se pudo determinar resultado
                 except Exception as e:
                     print(f"Error en manejo de respuesta: {e}")
                     self.actualizar(data, "11", "")
@@ -663,10 +786,10 @@ class EjecutarCasosPlaywright:
                 self.logger.error('EjecutarCaso', f"🌐 ERROR DE CONEXIÓN A INTERNET", e)
                 print(f"[SIN INTERNET] Paciente {data.identificacion} - Problemas de conexión")
                 self.actualizar(data, "16", "")
-            elif "no se pudo encontrar" in error_message and "archivo" in error_message:
+            elif any(keyword in error_message for keyword in ["no se pudo encontrar", "pdf no encontrado", "pdf no existe", "pdf faltante"]):
                 self.logger.error('EjecutarCaso', f"📄 ARCHIVO PDF NO ENCONTRADO", e)
                 print(f"[PDF FALTANTE] Paciente {data.identificacion} - Documento no encontrado")
-                self.actualizar(data, "17", "")
+                self.actualizar(data, "5", "")
             elif any(keyword in error_message for keyword in ["permission", "access denied", "forbidden"]):
                 self.logger.error('EjecutarCaso', f"🔒 ERROR DE PERMISOS O ACCESO DENEGADO", e)
                 print(f"[SIN PERMISOS] Paciente {data.identificacion} - Acceso denegado")
@@ -758,7 +881,7 @@ class EjecutarCasosPlaywright:
         
         while attempts < max_attempts:
             try:
-                time.sleep(0.8)
+                time.sleep(0.3)
                 
                 options = self.page.query_selector_all("//div[contains(@class, 'ant-select-item-option-content')]")
                 
@@ -767,12 +890,11 @@ class EjecutarCasosPlaywright:
                         option_content = option.text_content().strip()
                         if option_content:
                             found_options.add(option_content)
-                            self.logger.debug('EjecutarCaso', f"Comparando opción visible: '{option_content}' con opción buscada: '{option_text}'")
                             
                             if option_content == option_text:
                                 self.logger.info('EjecutarCaso', f"Opción encontrada: {option_content}")
                                 option.scroll_into_view_if_needed()
-                                time.sleep(0.5)
+                                time.sleep(0.3)
                                 return option
                     except:
                         continue
@@ -1022,6 +1144,73 @@ class EjecutarCasosPlaywright:
         # Ingresar Items (un solo CUPS)
         self.ingreso_items.IntemsAndFor(data)
     
+    def _manejar_solicitud_activa(self, data, error_text: str) -> bool:
+        """
+        Maneja el caso de 'solicitud activa' detectado en el modal de error.
+        Este método puede ser sobrescrito por clases hijas (ej: Laboratorio) para comportamiento diferente.
+        
+        COMPORTAMIENTO POR DEFECTO (ANEXO 3):
+        - Extrae solo el número de radicado
+        - Actualiza con estado 1 (éxito)
+        - Retorna True (caso completado)
+        
+        Args:
+            data: Datos del paciente
+            error_text: Texto completo del error con "solicitud activa"
+            
+        Returns:
+            True para indicar éxito, False para error
+        """
+        self.logger.info('EjecutarCaso', f"✅ SOLICITUD ACTIVA DETECTADA - Tratando como éxito (Anexo 3)")
+        
+        # Extraer SOLO el número de radicado (comportamiento Anexo 3)
+        numero_radicado = ""
+        radicado_match = re.search(r'número de radicado\s*#?\s*(\d+)', error_text, re.IGNORECASE)
+        if radicado_match:
+            numero_radicado = radicado_match.group(1)
+            self.logger.info('EjecutarCaso', f"📝 Número de radicado extraído: {numero_radicado}")
+        else:
+            numbers = re.findall(r'\d+', error_text)
+            numero_radicado = ''.join(numbers) if numbers else ""
+            self.logger.warning('EjecutarCaso', f"⚠️ Usando fallback para número: {numero_radicado}")
+        
+        # Registrar en archivo
+        with open("archivo.txt", 'a', encoding='utf-8') as archivo:
+            archivo.write(f"caso,SOLICITUD ACTIVA - {error_text},paciente,{data.identificacion},ordenCapita,{data.idItemOrden}\n")
+        
+        # Cerrar modal y actualizar
+        self._hacer_clic_ok()
+        self.actualizar_con_resultado_ejecucion(data, "1", numero_radicado, error_text)
+        self.reinicio()
+        time.sleep(2)
+        self.alerta()
+        return True  # ÉXITO: Solicitud activa tratada como completada
+    
+    def _cerrar_swal2(self):
+        """Cerrar cualquier modal SweetAlert2 abierto usando JavaScript"""
+        try:
+            cerrado = self.page.evaluate("""
+                (() => {
+                    const container = document.querySelector('.swal2-container');
+                    if (container) {
+                        // Intentar clic en botón OK/Confirm primero
+                        const btn = container.querySelector('.swal2-confirm');
+                        if (btn) { btn.click(); return 'btn'; }
+                        // Si no hay botón, cerrar con Swal.close()
+                        if (typeof Swal !== 'undefined' && Swal.close) { Swal.close(); return 'swal'; }
+                        // Último recurso: remover el container
+                        container.remove();
+                        return 'remove';
+                    }
+                    return 'none';
+                })()
+            """)
+            if cerrado != 'none':
+                self.logger.info('EjecutarCaso', f"🧹 SweetAlert2 cerrado via JS ({cerrado})")
+                time.sleep(0.5)
+        except Exception as e:
+            self.logger.warning('EjecutarCaso', f"⚠️ Error cerrando SweetAlert2: {e}")
+    
     def reinicio(self):
         """Método de reinicio - XPATH SELENIUM EXACTO"""
         try:
@@ -1030,6 +1219,9 @@ class EjecutarCasosPlaywright:
             if not self.verificar_sesion_activa():
                 self.logger.error('EjecutarCaso', "❌ Sesión no activa, no se puede realizar reinicio", None)
                 raise SessionLostException("Sesión perdida durante reinicio")
+            
+            # Cerrar cualquier SweetAlert2 que esté bloqueando la página
+            self._cerrar_swal2()
             
             time.sleep(1)
             self.page.evaluate("window.scrollTo(0, 0);")
@@ -1040,20 +1232,26 @@ class EjecutarCasosPlaywright:
                 self.logger.error('EjecutarCaso', f"❌ No estamos en la página correcta: {url_actual}", None)
                 raise Exception("Página incorrecta para reinicio")
             
-            # XPATH SELENIUM EXACTO
+            # XPATH SELENIUM EXACTO - con force=True para evitar overlay intercepts
             try:
                 bonton_urg = self.page.wait_for_selector("//span[contains(.,'Reportar')]/parent::div/following-sibling::ul/li/span[contains(.,'Urgencias')]", timeout=10000)
-                bonton_urg.click()
+                try:
+                    bonton_urg.click(force=True)
+                except Exception:
+                    self.page.evaluate("""(el) => el.click()""", bonton_urg)
                 self.logger.info('EjecutarCaso', "✅ Clic en botón Urgencias")
                 time.sleep(1)
             except Exception as e:
                 self.logger.error('EjecutarCaso', f"❌ Error haciendo clic en Urgencias: {e}", e)
                 raise
             
-            # XPATH SELENIUM EXACTO
+            # XPATH SELENIUM EXACTO - con force=True para evitar overlay intercepts
             try:
                 bonton_amb = self.page.wait_for_selector("//span[contains(.,'Reportar')]/parent::div/following-sibling::ul/li/span[contains(.,'Ambulatoria')]", timeout=10000)
-                bonton_amb.click()
+                try:
+                    bonton_amb.click(force=True)
+                except Exception:
+                    self.page.evaluate("""(el) => el.click()""", bonton_amb)
                 self.logger.info('EjecutarCaso', "✅ Clic en botón Ambulatoria")
                 self.logger.info('EjecutarCaso', "✅ Reinicio completado exitosamente")
             except Exception as e:
@@ -1066,6 +1264,7 @@ class EjecutarCasosPlaywright:
     def alerta(self):
         """Manejar alertas"""
         componentes = ["//div/h2[contains(.,'Alerta')]"]
+        texto = None
         for componente in componentes:
             texto = self.obtener_texto_componente(componente)
             if texto is not None:
@@ -1073,10 +1272,8 @@ class EjecutarCasosPlaywright:
                 break
         
         if texto is not None:
-            bonton_ok = self.page.wait_for_selector("body > div.swal2-container.swal2-center.swal2-backdrop-show > div > div.swal2-actions > button.swal2-confirm.swal2-styled", timeout=5000)
-            print("bonton_ok")
-            bonton_ok.click()
-            self.logger.info('EjecutarCaso', f"clic boton bonton_ok")
+            self._hacer_clic_ok()
+            self.logger.info('EjecutarCaso', f"clic boton bonton_ok alerta")
             self.reinicio()
     
     def buscar_y_clickear_ips(self, nombre_ips_atencion: str) -> bool:
@@ -1097,7 +1294,7 @@ class EjecutarCasosPlaywright:
             print("🖱️ Paso 2: Haciendo clic en el campo...")
             input_IPS.click()
             self.logger.info('EjecutarCaso', "Clicked on IPS de atención input")
-            time.sleep(1)
+            time.sleep(0.5)
             
             nombre_ips_atencion = (nombre_ips_atencion or "").strip()
             if not nombre_ips_atencion:
@@ -1114,15 +1311,15 @@ class EjecutarCasosPlaywright:
                 print("✅ Texto ingresado correctamente")
                 
                 print("⏳ Paso 4: Esperando dropdown...")
-                time.sleep(2)
+                time.sleep(1)
                 
                 # Esperar opciones
-                max_intentos = 15
+                max_intentos = 10
                 opciones_con_texto = []
                 
                 for intento in range(max_intentos):
                     try:
-                        time.sleep(0.5)
+                        time.sleep(0.3)
                         selector = ".ant-select-dropdown:not([style*='display: none']) .ant-select-item-option"
                         opciones = self.page.query_selector_all(selector)
                         
@@ -1292,7 +1489,7 @@ class EjecutarCasosPlaywright:
             self.logger.error('EjecutarCaso', f"Error creando archivo de errores: {e}", e)
     
     def _hacer_clic_ok(self) -> bool:
-        """Método para hacer clic en OK"""
+        """Método para hacer clic en OK - con force y JS fallback"""
         try:
             selectors = [
                 "//button[contains(@class,'swal2-confirm')]",
@@ -1303,15 +1500,19 @@ class EjecutarCasosPlaywright:
             for selector in selectors:
                 try:
                     boton = self.page.wait_for_selector(selector, timeout=5000)
-                    boton.click()
+                    try:
+                        boton.click(force=True)
+                    except Exception:
+                        self.page.evaluate("""(el) => el.click()""", boton)
                     print("Clic en OK exitoso")
                     time.sleep(1)
                     return True
                 except:
                     continue
             
-            print("No se encontró botón OK")
-            return False
+            # Último recurso: cerrar via JS
+            self._cerrar_swal2()
+            return True
         except Exception as e:
             print(f"Error haciendo clic en OK: {e}")
             return False

@@ -70,7 +70,7 @@ class BootOroBuilder:
         playwright_browsers = self._find_playwright_browsers()
         if playwright_browsers:
             for browser_path in playwright_browsers:
-                browser_name = Path(browser_path).parent.parent.name  # Ej: chromium-1091
+                browser_name = Path(browser_path).name  # Ej: chromium-1112
                 items.append((str(browser_path), f"playwright/browsers/{browser_name}"))
             print(f"  ✅ {len(playwright_browsers)} navegador(es) Playwright empaquetado(s)")
 
@@ -258,12 +258,13 @@ exe = EXE(
     
     def _find_playwright_browsers(self) -> list:
         """
-        Encuentra instalaciones de navegadores Playwright en el sistema.
+        Encuentra la instalación más reciente de Chromium de Playwright.
+        Solo empaqueta la versión más reciente para no inflar el .exe.
         
         Returns:
-            Lista de rutas a directorios de navegadores encontrados
+            Lista con la ruta al directorio de Chromium más reciente (máximo 1)
         """
-        browsers_found = []
+        chromium_versions = []
         
         # Rutas comunes donde Playwright instala navegadores
         possible_locations = [
@@ -276,17 +277,27 @@ exe = EXE(
             if not location.exists():
                 continue
             
-            # Buscar subdirectorios de navegadores (chromium-*, firefox-*, webkit-*)
+            # Buscar solo directorios chromium-*
             for browser_dir in location.iterdir():
-                if browser_dir.is_dir() and any(browser_dir.name.startswith(prefix) for prefix in ["chromium-", "firefox-", "webkit-"]):
-                    # Verificar que tenga estructura válida de navegador
-                    if browser_dir.name.startswith("chromium-"):
-                        chrome_exe = browser_dir / "chrome-win" / "chrome.exe"
-                        if chrome_exe.exists():
-                            browsers_found.append(str(browser_dir))
-                            print(f"  📦 Navegador encontrado: {browser_dir.name}")
+                if browser_dir.is_dir() and browser_dir.name.startswith("chromium-"):
+                    chrome_exe = browser_dir / "chrome-win" / "chrome.exe"
+                    if chrome_exe.exists():
+                        chromium_versions.append(browser_dir)
+                        print(f"  📦 Chromium encontrado: {browser_dir.name}")
         
-        return browsers_found
+        if not chromium_versions:
+            return []
+        
+        # Ordenar por nombre (versión) y tomar solo la más reciente
+        chromium_versions.sort(key=lambda d: d.name, reverse=True)
+        latest = chromium_versions[0]
+        print(f"  ✅ Empaquetando versión más reciente: {latest.name}")
+        
+        if len(chromium_versions) > 1:
+            skipped = [d.name for d in chromium_versions[1:]]
+            print(f"  ⏭️ Omitiendo versiones anteriores: {', '.join(skipped)}")
+        
+        return [str(latest)]
     
     def _configure_playwright_browsers(self) -> None:
         """
