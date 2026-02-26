@@ -84,8 +84,18 @@ class AutorizarAnexo3Panel(ttk.Frame):
             "1 - Exitoso",
             "2 - Programado",
             "3 - En proceso",
-            "4 - Error",
-            "5 - Estado 5",
+            "4 - Datos inválidos",
+            "5 - PDF no encontrado",
+            "11 - Error no clasificado",
+            "12 - Sesión perdida",
+            "13 - Timeout",
+            "14 - Elemento no encontrado",
+            "15 - Elemento obsoleto",
+            "16 - Error de conexión",
+            "17 - Otro error",
+            "18 - Acceso denegado",
+            "19 - Resultado indeterminado",
+            "20 - Teléfono inválido",
             "99 - Anulado"
         ]
         combo_estado = ttk.Combobox(
@@ -161,7 +171,7 @@ class AutorizarAnexo3Panel(ttk.Frame):
         # Frame para la tabla con checkboxes
         columns = (
             "seleccion", "idOrden", "idItemOrden", "TipoDoc", "NoDocumento", "Paciente", 
-            "cups", "procedimiento", "FechaOrden", "estadoCaso", "telefono"
+            "convenio", "cups", "procedimiento", "FechaOrden", "estadoCaso", "telefono"
         )
         
         self.tree = ttk.Treeview(
@@ -187,6 +197,7 @@ class AutorizarAnexo3Panel(ttk.Frame):
         self.tree.heading("TipoDoc", text="Tipo Doc")
         self.tree.heading("NoDocumento", text="Documento")
         self.tree.heading("Paciente", text="Paciente")
+        self.tree.heading("convenio", text="Convenio")
         self.tree.heading("cups", text="CUPS")
         self.tree.heading("procedimiento", text="Procedimiento")
         self.tree.heading("FechaOrden", text="Fecha Orden")
@@ -200,6 +211,7 @@ class AutorizarAnexo3Panel(ttk.Frame):
         self.tree.column("TipoDoc", width=50, anchor=tk.CENTER)
         self.tree.column("NoDocumento", width=100, anchor=tk.CENTER)
         self.tree.column("Paciente", width=200)
+        self.tree.column("convenio", width=200)
         self.tree.column("cups", width=80, anchor=tk.CENTER)
         self.tree.column("procedimiento", width=400)
         self.tree.column("FechaOrden", width=150, anchor=tk.CENTER)

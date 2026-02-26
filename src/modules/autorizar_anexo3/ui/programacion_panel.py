@@ -183,11 +183,13 @@ class ProgramacionPanel(ttk.Frame):
         vsb = ttk.Scrollbar(table_container, orient="vertical")
         hsb = ttk.Scrollbar(table_container, orient="horizontal")
         
-        columns = ("id_item", "paciente", "orden", "estado", "intentos", "fecha", "resultado")
+        # Columnas: id_item es oculta pero necesaria para operaciones
+        columns = ("id_item", "id_prog", "paciente", "documento", "orden", "cups", "procedimiento", "estado", "intentos", "fecha", "resultado")
         self.tree_programados = ttk.Treeview(
             table_container,
             columns=columns,
             show='headings',
+            displaycolumns=("id_prog", "paciente", "documento", "orden", "cups", "procedimiento", "estado", "intentos", "fecha", "resultado"),  # Excluir id_item de visualización
             yscrollcommand=vsb.set,
             xscrollcommand=hsb.set,
             height=10
@@ -196,22 +198,28 @@ class ProgramacionPanel(ttk.Frame):
         vsb.config(command=self.tree_programados.yview)
         hsb.config(command=self.tree_programados.xview)
         
-        # Configurar columnas
-        self.tree_programados.heading("id_item", text="ID Item")
+        # Configurar columnas (id_item no necesita configuración ya que está oculta)
+        self.tree_programados.heading("id_prog", text="ID Prog")
         self.tree_programados.heading("paciente", text="Paciente")
-        self.tree_programados.heading("orden", text="ID Orden")
+        self.tree_programados.heading("documento", text="Documento")
+        self.tree_programados.heading("orden", text="Orden")
+        self.tree_programados.heading("cups", text="CUPS")
+        self.tree_programados.heading("procedimiento", text="Procedimiento")
         self.tree_programados.heading("estado", text="Estado")
         self.tree_programados.heading("intentos", text="Intentos")
         self.tree_programados.heading("fecha", text="Fecha Prog.")
         self.tree_programados.heading("resultado", text="Resultado")
         
-        self.tree_programados.column("id_item", width=80, anchor=tk.CENTER)
+        self.tree_programados.column("id_prog", width=70, anchor=tk.CENTER)
         self.tree_programados.column("paciente", width=200)
-        self.tree_programados.column("orden", width=80, anchor=tk.CENTER)
+        self.tree_programados.column("documento", width=90, anchor=tk.CENTER)
+        self.tree_programados.column("orden", width=70, anchor=tk.CENTER)
+        self.tree_programados.column("cups", width=70, anchor=tk.CENTER)
+        self.tree_programados.column("procedimiento", width=250)
         self.tree_programados.column("estado", width=120, anchor=tk.CENTER)
-        self.tree_programados.column("intentos", width=80, anchor=tk.CENTER)
-        self.tree_programados.column("fecha", width=150, anchor=tk.CENTER)
-        self.tree_programados.column("resultado", width=200)
+        self.tree_programados.column("intentos", width=70, anchor=tk.CENTER)
+        self.tree_programados.column("fecha", width=140, anchor=tk.CENTER)
+        self.tree_programados.column("resultado", width=120, anchor=tk.CENTER)
         
         # Tags para colores
         self.tree_programados.tag_configure('PENDIENTE', background='#fffacd')
@@ -495,18 +503,31 @@ class ProgramacionPanel(ttk.Frame):
                 ordenes = data_wrapper.get('programaciones', [])
                 
                 for orden in ordenes:
-                    # Obtener nombre del paciente (necesitamos hacer otra llamada o tener el dato)
-                    paciente = f"Orden {orden.get('id_orden', 'N/A')}"
+                    # Extraer datos del nuevo formato JSON
+                    id_item = orden.get('id_item_orden_proced', '')
+                    id_prog = orden.get('id_programacion', '')
+                    paciente = orden.get('paciente', 'N/A')
+                    documento = orden.get('NoDocumento', '')
+                    cups = orden.get('C_Homologado', '')
+                    procedimiento_nombre = orden.get('Nbre', '')
+                    
+                    # Truncar procedimiento a 40 caracteres
+                    procedimiento = procedimiento_nombre[:40] + '...' if len(procedimiento_nombre) > 40 else procedimiento_nombre
                     
                     # Manejar valores None en resultado y mensaje de error
                     resultado = orden.get('resultado_ejecucion') or ''
                     mensaje_error = orden.get('mensaje_error') or ''
-                    resultado_texto = resultado[:50] or mensaje_error[:50] or '-'
+                    resultado_texto = resultado or mensaje_error or '-'
                     
+                    # id_item va primero (oculto), luego el resto
                     valores = (
-                        orden.get('id_item_orden_proced', ''),
+                        id_item,  # Columna oculta
+                        id_prog,
                         paciente,
+                        documento,
                         orden.get('id_orden', ''),
+                        cups,
+                        procedimiento,
                         self._format_estado(orden.get('estado', 'PENDIENTE')),
                         f"{orden.get('intentos_realizados', 0)}/{orden.get('intentos_maximos', 2)}",
                         self._format_fecha(orden.get('fecha_programacion', '')),

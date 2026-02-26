@@ -56,6 +56,11 @@ class EjecutarCasosPlaywright:
             self.logger.info('EjecutarCaso', '⏸️ Ejecución pausada por el usuario')
             raise PausedException("Worker pausado durante ejecución")
     
+    @staticmethod
+    def _es_telefono_valido(telefono: str) -> bool:
+        """Valida que un teléfono tenga 10 dígitos y empiece con 3."""
+        return bool(telefono) and len(telefono) == 10 and telefono.startswith('3') and telefono.isdigit()
+    
     def inicio_casos(self, data) -> bool:
         """
         MÉTODO PRINCIPAL - Migrado de Selenium
@@ -64,6 +69,7 @@ class EjecutarCasosPlaywright:
         telefono_value = None
         telefono_value1 = None
         texto = None
+        telefono_final = None  # Se determinará después de leer el formulario
         
         try:
             self._verificar_pausa()  # Verificar pausa al inicio
@@ -148,7 +154,7 @@ class EjecutarCasosPlaywright:
                 self.logger.info('EjecutarCaso', "Clicked on email input")
                 input_correo.fill("")
                 # Usar email del paciente si existe, sino usar fallback
-                email_paciente = getattr(data, 'email', None) or getattr(data, 'correo', None) or "GENOMA@GENOMA.com"
+                email_paciente = getattr(data, 'email', None) or getattr(data, 'correo', None) or "Notiene@gmail.com"
                 self.helper.ingresar_texto(input_correo, email_paciente)
                 self.logger.info('EjecutarCaso', f"Ingresó {email_paciente}")
                 
@@ -159,45 +165,58 @@ class EjecutarCasosPlaywright:
                 self.helper.ingresar_texto(input_nombre_e, "emergencia")
                 self.logger.info('EjecutarCaso', f"Ingresó emergencia")
                 
-                # Teléfono principal (XPATH SELENIUM EXACTO)
+                # === TELÉFONO PRINCIPAL - Lógica 3 niveles ===
+                # 1) Leer valor actual del campo en el formulario (RAW y limpio)
                 input_telefono = self.page.wait_for_selector("#telefono", timeout=5000)
-                telefono_value = input_telefono.get_attribute('value')
-                self.logger.info('EjecutarCaso', f"Valor actual del campo de teléfono: {telefono_value}")
-                
-                if telefono_value:
-                    self.logger.info('EjecutarCaso', "El campo de teléfono tiene un valor.")
-                    if len(telefono_value) == 10:
-                        print("El número de teléfono tiene 10 caracteres.")
+                telefono_form_raw = input_telefono.get_attribute('value') or ''
+                telefono_form = telefono_form_raw.strip()
+                telefono_data = str(data.telefono).strip() if hasattr(data, 'telefono') else ''
+
+                if self._es_telefono_valido(telefono_form):
+                    # El formulario tiene un teléfono válido (después de strip)
+                    telefono_final = telefono_form
+                    if telefono_form_raw != telefono_form:
+                        # Valor válido pero con espacios/basura → limpiar campo
+                        input_telefono.click()
+                        input_telefono.fill("")
+                        self.helper.ingresar_texto(input_telefono, telefono_final)
+                        self.logger.info('EjecutarCaso', f"✅ Teléfono del formulario limpiado: '{telefono_form_raw}' → '{telefono_final}'")
                     else:
-                        input_telefono.click(click_count=2)
-                        input_telefono.press("Delete")
-                        self.helper.ingresar_texto(input_telefono, str(data.telefono))
-                else:
-                    self.logger.info('EjecutarCaso', "El campo de teléfono está vacío.")
+                        self.logger.info('EjecutarCaso', f"✅ Teléfono del formulario válido, se conserva: {telefono_form}")
+                elif self._es_telefono_valido(telefono_data):
+                    # El formulario no tiene válido, pero la data sí → colocar
+                    telefono_final = telefono_data
                     input_telefono.click()
                     input_telefono.fill("")
-                    self.helper.ingresar_texto(input_telefono, str(data.telefono))
-                    self.logger.info('EjecutarCaso', f"Ingresó telefono")
-                
-                # Teléfono de emergencia (XPATH SELENIUM EXACTO)
-                input_telefono_1 = self.page.wait_for_selector("#emergencyContactPhone", timeout=5000)
-                telefono_value1 = input_telefono_1.get_attribute('value')
-                self.logger.info('EjecutarCaso', f"Valor actual del campo de teléfono de emergencia: {telefono_value1}")
-                
-                if telefono_value1:
-                    self.logger.info('EjecutarCaso', "El campo de teléfono de emergencia tiene un valor.")
-                    if len(telefono_value1) == 10:
-                        print("El número de teléfono tiene 10 caracteres.")
-                    else:
-                        input_telefono_1.click(click_count=2)
-                        input_telefono_1.press("Delete")
-                        self.helper.ingresar_texto(input_telefono_1, str(data.telefono))
+                    self.helper.ingresar_texto(input_telefono, telefono_final)
+                    self.logger.info('EjecutarCaso', f"✅ Teléfono corregido desde data: '{telefono_form_raw}' → '{telefono_final}'")
                 else:
-                    self.logger.info('EjecutarCaso', "El campo de teléfono de emergencia está vacío.")
+                    # Ninguno tiene teléfono válido → saltar
+                    self.logger.warning('EjecutarCaso', f"⚠️ TELÉFONO INVÁLIDO - formulario: '{telefono_form_raw}', data: '{telefono_data}' (debe ser 10 dígitos, empezar con 3)")
+                    self.logger.warning('EjecutarCaso', f"   Paciente: {data.identificacion} - Orden: {data.idItemOrden}")
+                    self.actualizar(data, "20", "")
+                    self.reinicio()
+                    return False
+
+                # Teléfono de emergencia - usar el teléfono final determinado
+                input_telefono_1 = self.page.wait_for_selector("#emergencyContactPhone", timeout=5000)
+                telefono_emer_raw = input_telefono_1.get_attribute('value') or ''
+                telefono_emer = telefono_emer_raw.strip()
+
+                if not self._es_telefono_valido(telefono_emer):
+                    # No válido → reemplazar con el teléfono final
                     input_telefono_1.click()
                     input_telefono_1.fill("")
-                    self.helper.ingresar_texto(input_telefono_1, str(data.telefono))
-                    self.logger.info('EjecutarCaso', f"Ingresó telefono")
+                    self.helper.ingresar_texto(input_telefono_1, telefono_final)
+                    self.logger.info('EjecutarCaso', f"✅ Teléfono emergencia corregido: '{telefono_emer_raw}' → '{telefono_final}'")
+                elif telefono_emer_raw != telefono_emer:
+                    # Válido pero con espacios → limpiar
+                    input_telefono_1.click()
+                    input_telefono_1.fill("")
+                    self.helper.ingresar_texto(input_telefono_1, telefono_emer)
+                    self.logger.info('EjecutarCaso', f"✅ Teléfono emergencia limpiado: '{telefono_emer_raw}' → '{telefono_emer}'")
+                else:
+                    self.logger.info('EjecutarCaso', f"✅ Teléfono emergencia válido, se conserva: {telefono_emer}")
                 
                 # Dirección principal (XPATH SELENIUM EXACTO)
                 dirreccion = self.page.wait_for_selector("#root > div > section > section > section > main > div.w-100.col > div > div > div > form > div > div > div > div:nth-child(3) > div:nth-child(2) > input", timeout=5000)
@@ -703,7 +722,7 @@ class EjecutarCasosPlaywright:
                             archivo.write(f"caso,{success_text},paciente,{data.identificacion},ordenCapita,{data.idItemOrden}\n")
                         
                         self._hacer_clic_ok()
-                        self.actualizar(data, "3", numbers_str)
+                        self.actualizar(data, "1", numbers_str)  # Estado 1 = Exitoso
                         self.reinicio()
                         time.sleep(2)
                         self.alerta()
@@ -993,19 +1012,21 @@ class EjecutarCasosPlaywright:
         """
         Actualizar el estadoCaso en la base de datos usando la API.
         
-        Mapeo de estados (de Selenium):
-        - "1" = Completado/OK (envía numeroAutorizacion)
-        - "3" = En proceso (con número de orden)
-        - "4" = Error - error por tipo de documento 
-        - "11" = Error - No se encontró paciente
-        - "12" = Error - Sesión perdida
-        - "13" = Error - No se encontró diagnóstico  
-        - "14" = Error - No se pudo seleccionar IPS
-        - "15" = Error - No se pudo guardar
-        - "16" = Error - Timeout
-        - "17" = Error - Otro
-        - "18" = Error - No se encontró el botón
-        - "19" = Error - No se pudo determinar resultado
+        Mapeo de estados:
+        - "1" = ✅ Completado/OK (envía numeroAutorizacion)
+        - "3" = ⏳ En proceso (servicio duplicado/ya reportado)
+        - "4" = ❌ Datos del paciente inválidos (documento inválido)
+        - "5" = 📄 Archivo PDF no encontrado
+        - "11" = ❓ Error no clasificado / No se encontró paciente
+        - "12" = 🔌 Sesión del navegador perdida
+        - "13" = ⏰ Timeout (elemento no respondió)
+        - "14" = 🎯 Elemento no encontrado en la página
+        - "15" = 🔄 Elemento obsoleto (página se actualizó)
+        - "16" = 🌐 Error de conexión a internet
+        - "17" = ❓ Otro error no especificado
+        - "18" = 🔒 Permisos o acceso denegado
+        - "19" = ❔ No se pudo determinar resultado del modal
+        - "20" = 📞 Teléfono inválido o faltante (no cumple formato)
         """
         try:
             import requests
@@ -1222,6 +1243,34 @@ class EjecutarCasosPlaywright:
             
             # Cerrar cualquier SweetAlert2 que esté bloqueando la página
             self._cerrar_swal2()
+            
+            # === CERRAR MODALES DE ANT DESIGN QUE PUEDAN ESTAR ABIERTOS ===
+            try:
+                self.logger.info('EjecutarCaso', "🧹 Verificando modales de Ant Design abiertos...")
+                modales_cerrados = self.page.evaluate("""
+                    (() => {
+                        let count = 0;
+                        // Cerrar todos los modales visibles
+                        document.querySelectorAll('.ant-modal-wrap:not([style*="display: none"])').forEach(modal => {
+                            modal.remove();
+                            count++;
+                        });
+                        // Cerrar backdrops
+                        document.querySelectorAll('.ant-modal-mask').forEach(mask => {
+                            mask.remove();
+                        });
+                        // Cerrar dropdowns abiertos
+                        document.querySelectorAll('.ant-select-dropdown:not(.ant-select-dropdown-hidden)').forEach(dd => {
+                            dd.remove();
+                        });
+                        return count;
+                    })()
+                """)
+                if modales_cerrados > 0:
+                    self.logger.info('EjecutarCaso', f"✅ {modales_cerrados} modal(es) de Ant Design cerrado(s)")
+                time.sleep(0.5)
+            except Exception as e:
+                self.logger.warning('EjecutarCaso', f"⚠️ Error al cerrar modales Ant Design: {e}")
             
             time.sleep(1)
             self.page.evaluate("window.scrollTo(0, 0);")

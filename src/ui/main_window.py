@@ -92,6 +92,10 @@ class MainWindow:
             label="Worker Automatización Laboratorio",
             command=lambda: self._open_panel('worker_laboratorio')
         )
+        self.procesos_menu.add_command(
+            label="Finalizar Casos Laboratorio",
+            command=lambda: self._open_panel('finalizar_casos_laboratorio')
+        )
         # Aquí se pueden agregar más opciones de menú para otros paneles
         
         # Menú Estadísticas
@@ -143,11 +147,13 @@ class MainWindow:
         try:
             from modules.autorizar_anexo3 import AutorizarAnexo3Panel, ProgramacionPanel
             from modules.laboratorio import LaboratorioPanel, EstadisticasCreadosPanel, EstadisticasAsistidosPanel
+            from modules.finalizar_casos import FinalizarCasosPanel
             self.panels_registry['autorizar_anexo3'] = AutorizarAnexo3Panel
             self.panels_registry['worker_automatizacion'] = ProgramacionPanel
             self.panels_registry['worker_laboratorio'] = LaboratorioPanel
             self.panels_registry['casos_creados_laboratorio'] = EstadisticasCreadosPanel
             self.panels_registry['casos_asistidos_laboratorio'] = EstadisticasAsistidosPanel
+            self.panels_registry['finalizar_casos_laboratorio'] = FinalizarCasosPanel
             self.panels_registry['recarga_saldo'] = RecargaSaldoPanel
             self.panels_registry['empresas_casos_boot'] = EmpresasCasosBootPanel
             self.panels_registry['procedimientos_boot'] = ProcedimientosBootPanel

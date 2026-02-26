@@ -58,8 +58,8 @@ class LaboratorioPanel(ttk.Frame):
             ("Todos", ""),
             ("Pendiente", "0"),
             ("Exitoso", "1"),
-            ("En proceso", "2"),
-            ("Doc incorrecto", "4"),
+            ("En proceso", "3"),
+            ("Datos inválidos", "4"),
             ("PDF no encontrado", "5"),
             ("Solicitud activa", "6"),
             ("Error no clasificado", "11"),
@@ -68,7 +68,10 @@ class LaboratorioPanel(ttk.Frame):
             ("Elemento no encontrado", "14"),
             ("Elemento obsoleto", "15"),
             ("Error de conexión", "16"),
-            ("Error de permisos", "18")
+            ("Otro error", "17"),
+            ("Error de permisos", "18"),
+            ("Resultado indeterminado", "19"),
+            ("Teléfono inválido", "20")
         ]
         combo_estado = ttk.Combobox(
             filtros_row,

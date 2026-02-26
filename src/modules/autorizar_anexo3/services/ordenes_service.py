@@ -110,6 +110,7 @@ class AutorizarAnexo3Service:
             tipo_doc,
             no_doc,
             nombre_completo,
+            orden.get('convenio', ''),
             orden.get('cups', ''),
             orden.get('procedimiento', ''),
             fecha_orden,

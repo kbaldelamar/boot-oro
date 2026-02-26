@@ -23,6 +23,11 @@ psutil>=5.9.0
 # Generación de PDFs
 reportlab==3.6.13  # Compatible con Python 3.8
 PyMuPDF  # Para generación de PDFs con control preciso
+fpdf2>=2.7.0  # Conversión PNG→PDF para evidencias
+Pillow>=10.0.0  # Manipulación de imágenes
+
+# Conexión SMB (servidor de archivos)
+smbprotocol>=1.10.0  # Cliente SMB para subir archivos
 
 # Criptografía para licencia
 cryptography>=42.0.0

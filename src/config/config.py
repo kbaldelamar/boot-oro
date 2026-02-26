@@ -209,6 +209,90 @@ class Config:
         """Ruta donde están los PDFs de órdenes médicas para laboratorio"""
         return self.get('LABORATORIO_PDF_PATH', 'C:\\boot\\temp\\laboratorio')
 
+    # ===================================
+    # FINALIZAR CASOS LABORATORIO
+    # ===================================
+    @property
+    def fc_profesional(self) -> str:
+        """Nombre del profesional para asignar cita (Finalizar Casos)"""
+        return self.get('FC_PROFESIONAL', '')
+
+    @property
+    def fc_direccion(self) -> str:
+        """Dirección de la IPS para asignar cita (Finalizar Casos)"""
+        return self.get('FC_DIRECCION', '')
+
+    @property
+    def fc_observacion(self) -> str:
+        """Texto de observación para Finalizar Casos"""
+        return self.get('FC_OBSERVACION', 'EXAMENES DE LABORATORIOS CLINICOS')
+
+    @property
+    def fc_logo_path(self) -> str:
+        """Ruta al logo de la IPS para PDF de resultados (Finalizar Casos)"""
+        return self.get('FC_LOGO_PATH', '')
+
+    @property
+    def fc_firmas_path(self) -> str:
+        """Carpeta base de firmas. Se concatena con url_FirmaValida del API."""
+        return self.get('FC_FIRMAS_PATH', '')
+
+    @property
+    def fc_pdf_output_dir(self) -> str:
+        """Carpeta de salida de PDFs generados (Finalizar Casos)"""
+        return self.get('FC_PDF_OUTPUT_DIR', '')
+
+    # ===================================
+    # EVIDENCIAS - RUTAS LOCALES
+    # ===================================
+    @property
+    def ruta_evidencia(self) -> str:
+        """Carpeta local para capturas de pantalla (screenshots PNG)"""
+        return self.get('RUTA_EVIDENCIA', '')
+
+    @property
+    def ruta_genera_evidencia(self) -> str:
+        """Carpeta local donde se generan los PDFs de evidencia"""
+        return self.get('RUTA_GENERA_EVIDENCIA', '')
+
+    # ===================================
+    # SERVIDOR SMB
+    # ===================================
+    @property
+    def smb_server(self) -> str:
+        """IP del servidor SMB"""
+        return self.get('SMB_SERVER', '')
+
+    @property
+    def smb_share(self) -> str:
+        """Nombre del share SMB"""
+        return self.get('SMB_SHARE', '')
+
+    @property
+    def smb_username(self) -> str:
+        """Usuario para autenticación SMB"""
+        return self.get('SMB_USERNAME', '')
+
+    @property
+    def smb_password(self) -> str:
+        """Contraseña para autenticación SMB"""
+        return self.get('SMB_PASSWORD', '')
+
+    @property
+    def smb_evidencia_path(self) -> str:
+        """Ruta relativa en el share SMB para evidencias"""
+        return self.get('SMB_EVIDENCIA_PATH', '')
+
+    @property
+    def smb_resultados_path(self) -> str:
+        """Ruta relativa en el share SMB para resultados externos"""
+        return self.get('SMB_RESULTADOS_PATH', '')
+
+    @property
+    def smb_fallback_local_path(self) -> str:
+        """Ruta local de fallback cuando el servidor SMB no está disponible"""
+        return self.get('SMB_FALLBACK_LOCAL_PATH', '')
+
 
 # Crear una instancia global para facilitar el acceso
 config = Config()

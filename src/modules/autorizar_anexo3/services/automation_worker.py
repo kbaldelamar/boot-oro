@@ -75,7 +75,7 @@ class AutomationWorker(threading.Thread):
                     try:
                         if saldo_actual is not None and float(saldo_actual) <= 0:
                             self.logger.error('Worker', '🛑 SALDO AGOTADO - Deteniendo worker')
-                            self.stop()
+                            self.detener()
                             break
                     except (TypeError, ValueError):
                         pass
@@ -88,9 +88,11 @@ class AutomationWorker(threading.Thread):
                     self.ultima_actividad = time.time()
                     
                     # Asegurar que el navegador esté activo
+                    if not self.running:
+                        break
                     if not self.asegurar_navegador_activo():
                         self.logger.error('Worker', 'No se pudo iniciar navegador, esperando...')
-                        time.sleep(30)
+                        self._sleep_interruptible(30)
                         continue
                     
                     # Procesar cada orden
@@ -110,11 +112,11 @@ class AutomationWorker(threading.Thread):
                     self.verificar_inactividad()
                 
                 # Esperar antes de siguiente consulta
-                time.sleep(self.poll_interval)
+                self._sleep_interruptible(self.poll_interval)
                 
             except Exception as e:
                 self.logger.error('Worker', 'Error en loop principal', e)
-                time.sleep(10)  # Esperar más tiempo en caso de error
+                self._sleep_interruptible(10)  # Esperar más tiempo en caso de error
         
         self.logger.info('Worker', '⏹️ Worker detenido')
         self.cerrar_navegador()
@@ -213,7 +215,9 @@ class AutomationWorker(threading.Thread):
             # La API devuelve Id_TipoIdentificacion (ej: "CC", "TI", "CE")
             data.tipoIdentificacion = datos_paciente.get('Id_TipoIdentificacion', '') or datos_paciente.get('TipoIdentificacion', 'Cédula de Ciudadanía')
             data.identificacion = datos_paciente.get('NoDocumento', '')
-            data.telefono = datos_paciente.get('telefono', '')
+            # Validar y limpiar teléfono: 10 dígitos, empieza con 3, solo números
+            telefono_raw = datos_paciente.get('telefono', '').strip()
+            data.telefono = telefono_raw if (len(telefono_raw) == 10 and telefono_raw.startswith('3') and telefono_raw.isdigit()) else ''
             data.fechaFacturaEvento = datos_paciente.get('FechaOrden', '')
             data.diagnostico = datos_paciente.get('DxIngreso', '')
             data.idItemOrden = datos_paciente.get('idItemOrden', id_item)
@@ -225,11 +229,13 @@ class AutomationWorker(threading.Thread):
             data.cups = datos_paciente.get('cups', '')
             
             if ejecutor.inicio_casos(data):
-                # ÉXITO
+                # ÉXITO - El ejecutor ya actualizó estadoCaso a 1
                 self.marcar_completado(id_item, nombre_paciente)
             else:
-                # FALLO - Determinar si es error permanente o temporal
-                raise Exception("Error ejecutando caso")
+                # FALLO - El ejecutor YA actualizó estadoCaso con código específico (20, 4, 11, etc.)
+                # Solo actualizamos la tabla de programación, NO tocamos estadoCaso
+                self.logger.warning('Worker', f'⚠️ inicio_casos retornó False para {nombre_paciente} (estadoCaso ya actualizado por ejecutor)')
+                self.marcar_error_solo_programacion(id_item, "Error ejecutando caso")
             
         except Exception as e:
             # Verificar si es una pausa (no es error)
@@ -291,7 +297,8 @@ class AutomationWorker(threading.Thread):
                 self.marcar_error(id_item, f"Error no clasificado: {str(e)}")
     
     def marcar_completado(self, id_item: int, nombre_paciente: str):
-        """Marca una orden como completada exitosamente"""
+        """Marca una orden como completada exitosamente.
+        NOTA: El ejecutor ya actualizó estadoCaso a 1, solo actualizamos programación."""
         fecha_fin = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         
         self.api_service.actualizar_estado_programacion(
@@ -302,7 +309,7 @@ class AutomationWorker(threading.Thread):
             usuario_ejecuto="worker_automatico",
             resultado="OK"
         )
-        self.api_service.actualizar_estado_caso(id_item, 1)  # 1 = Completado
+        # NO llamar actualizar_estado_caso aquí - el ejecutor ya lo hizo en inicio_casos()
         
         # Descontar saldo por caso exitoso
         resultado_descuento = self.license_service.descontar_caso_exitoso()
@@ -315,7 +322,7 @@ class AutomationWorker(threading.Thread):
             # Verificar si el saldo se agotó
             if resultado_descuento.get("saldo_agotado"):
                 self.logger.warning('Worker', '⚠️ SALDO AGOTADO - Deteniendo worker')
-                self.stop()
+                self.detener()
                 self.logger.error('Worker', '🛑 Worker detenido por saldo agotado')
         else:
             self.logger.error('Worker', f'Error descontando saldo: {resultado_descuento.get("message")}')
@@ -327,7 +334,9 @@ class AutomationWorker(threading.Thread):
         self.logger.success('Worker', f'✅ Orden {id_item} ({nombre_paciente}) COMPLETADA')
     
     def marcar_error(self, id_item: int, error: str):
-        """Marca una orden con error final"""
+        """Marca una orden con error final.
+        Actualiza TANTO programación como estadoCaso.
+        Usar solo cuando el ejecutor NO actualizó estadoCaso (ej: error antes de llamar inicio_casos)."""
         fecha_fin = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         
         self.api_service.actualizar_estado_programacion(
@@ -339,7 +348,7 @@ class AutomationWorker(threading.Thread):
             resultado="ERROR",
             mensaje_error=error
         )
-        self.api_service.actualizar_estado_caso(id_item, 4)  # 4 = Error
+        self.api_service.actualizar_estado_caso(id_item, 4)  # 4 = Error (ejecutor NO lo hizo)
         
         # Screenshot de error
         if self.playwright_service and self.playwright_service.page:
@@ -351,6 +360,38 @@ class AutomationWorker(threading.Thread):
         self.actualizar_estadisticas()
         
         self.logger.error('Worker', f'❌ Orden {id_item} marcada como ERROR: {error}')
+        
+        # Alertar si muchos errores consecutivos
+        if self.errores >= 5 and self.exitosos == 0:
+            self.logger.critical('Worker', '🚨 ALERTA: 5 errores consecutivos detectados')
+            self.reproducir_sonido_error()
+    
+    def marcar_error_solo_programacion(self, id_item: int, error: str):
+        """Marca error SOLO en tabla de programación, sin tocar estadoCaso.
+        Usar cuando el ejecutor (inicio_casos) YA actualizó estadoCaso con un código específico."""
+        fecha_fin = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        
+        self.api_service.actualizar_estado_programacion(
+            id_item,
+            "ERROR",
+            fecha_inicio=getattr(self, 'fecha_inicio_actual', None),
+            fecha_fin=fecha_fin,
+            usuario_ejecuto="worker_automatico",
+            resultado="ERROR",
+            mensaje_error=error
+        )
+        # NO llamar actualizar_estado_caso - el ejecutor ya lo hizo con código específico
+        
+        # Screenshot de error
+        if self.playwright_service and self.playwright_service.page:
+            screenshot_path = self.playwright_service.take_screenshot(f"error_{id_item}")
+            self.logger.save_screenshot_info(screenshot_path, str(id_item), error)
+        
+        self.errores += 1
+        self.procesados += 1
+        self.actualizar_estadisticas()
+        
+        self.logger.error('Worker', f'❌ Orden {id_item} marcada como ERROR (estadoCaso preservado del ejecutor): {error}')
         
         # Alertar si muchos errores consecutivos
         if self.errores >= 5 and self.exitosos == 0:
@@ -377,6 +418,10 @@ class AutomationWorker(threading.Thread):
             True si el navegador está listo
         """
         try:
+            # Verificar si el worker fue detenido
+            if not self.running:
+                return False
+            
             # Si no hay servicio, crear
             if not self.playwright_service:
                 self.logger.info('Worker', 'Creando servicio Playwright...')
@@ -389,6 +434,8 @@ class AutomationWorker(threading.Thread):
                     return False
             
             # Verificar sesión
+            if not self.running:
+                return False
             if not self.playwright_service.sesion_valida():
                 self.logger.info('Worker', 'Sesión no válida, haciendo login...')
                 if not self.hacer_login():
@@ -405,6 +452,10 @@ class AutomationWorker(threading.Thread):
     def hacer_login(self) -> bool:
         """Ejecuta el proceso de login completo"""
         try:
+            # Verificar si el worker fue detenido
+            if not self.running:
+                return False
+            
             # Ya estamos en la página (se navegó en iniciar_navegador)
             # Solo ejecutar login
             login_service = LoginPlaywright(self.playwright_service.page, self.logger)
@@ -468,6 +519,14 @@ class AutomationWorker(threading.Thread):
             self.cerrar_navegador()
             self.ultima_actividad = None
     
+    def _sleep_interruptible(self, seconds: int):
+        """Duerme por `seconds` pero se interrumpe si self.running cambia a False.
+        Verifica cada segundo para permitir detención rápida."""
+        for _ in range(seconds):
+            if not self.running:
+                return
+            time.sleep(1)
+    
     def cerrar_navegador(self):
         """Cierra el navegador y limpia recursos"""
         if self.playwright_service:
@@ -518,5 +577,12 @@ class AutomationWorker(threading.Thread):
         self.running = False
         self.paused = True
         self.logger.info('Worker', '⏹️ Deteniendo worker...')
-        # Cerrar navegador inmediatamente para cortar la automatizacion
-        self.cerrar_navegador()
+        # NO usar cerrar_navegador() aquí — Playwright no permite operaciones cross-thread.
+        # En su lugar, matamos los procesos de Chromium vía psutil (funciona desde cualquier hilo).
+        # Esto interrumpe inmediatamente cualquier operación de Playwright en curso
+        # (login, CAPTCHA, navegación, etc.) causando excepciones que fuerzan la salida del worker.
+        if self.playwright_service:
+            try:
+                self.playwright_service._kill_chromium_processes()
+            except Exception as e:
+                self.logger.warning('Worker', f'⚠️ Error matando procesos del navegador: {e}')

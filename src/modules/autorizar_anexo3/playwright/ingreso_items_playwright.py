@@ -80,7 +80,7 @@ class IngresoItemsPlaywright:
             
             try:
                 # Primer intento con timeout estándar
-                clic_Dx = self.page.wait_for_selector(dynamic_xpath_dx, timeout=15000)
+                clic_cups = self.page.wait_for_selector(dynamic_xpath_dx, timeout=15000)
                 self.logger.info('IngresoItems', "✓ Opción encontrada en primer intento")
                 
             except Exception as timeout_error:
@@ -106,7 +106,7 @@ class IngresoItemsPlaywright:
                 
                 # Segundo intento con timeout más largo
                 try:
-                    clic_Dx = self.page.wait_for_selector(dynamic_xpath_dx, timeout=25000)
+                    clic_cups = self.page.wait_for_selector(dynamic_xpath_dx, timeout=25000)
                     self.logger.info('IngresoItems', "✓ Opción encontrada en segundo intento")
                 except:
                     self.logger.error('IngresoItems', f"❌ Error definitivo: No se encontró opción para CUPS {codigo_cups}")
@@ -114,7 +114,7 @@ class IngresoItemsPlaywright:
             
             # Paso 5: Hacer clic en la opción
             self.logger.info('IngresoItems', "Paso 5: Haciendo clic en opción...")
-            clic_Dx.click()
+            clic_cups.click(timeout=15000)  # Timeout de 15s en lugar de 60s por defecto
             self.logger.info('IngresoItems', f"✓ CUPS {codigo_cups} seleccionado correctamente")
             
         except Exception as e:
@@ -124,14 +124,93 @@ class IngresoItemsPlaywright:
             raise
         
         finally:
+            # === CERRAR MODAL DE PROCEDIMIENTOS CON MÚLTIPLES ESTRATEGIAS ===
+            self.logger.info('IngresoItems', "=== FINALIZANDO - Cerrando modal de procedimientos ===")
+            modal_cerrado = False
+            
+            # Estrategia 1: Botón "Aceptar" (flujo normal)
             try:
-                # Intentar hacer clic en Aceptar/Volver sin importar si hubo errores (XPATH SELENIUM EXACTO)
-                self.logger.info('IngresoItems', "=== FINALIZANDO - Haciendo clic en Aceptar ===")
                 time.sleep(0.5)
-                clic_aceptar = self.page.wait_for_selector("//span[contains(.,'Aceptar')]", timeout=15000)
-                clic_aceptar.click()
-                self.logger.info('IngresoItems', "✓ Clicked Aceptar - Proceso finalizado")
-            except Exception as volver_error:
-                self.logger.error('IngresoItems', f"❌ Error al intentar hacer clic en Aceptar: {str(volver_error)}", volver_error)
-                print(f"Error al intentar hacer clic en Aceptar: {str(volver_error)}")
-                raise  # Lanzar el error si no se puede hacer clic en Aceptar
+                clic_aceptar = self.page.wait_for_selector("//span[contains(.,'Aceptar')]", timeout=8000)
+                if clic_aceptar and clic_aceptar.is_visible():
+                    clic_aceptar.click()
+                    time.sleep(1)
+                    self.logger.info('IngresoItems', "✅ Modal cerrado con botón Aceptar")
+                    modal_cerrado = True
+            except Exception as e:
+                self.logger.warning('IngresoItems', f"⚠️ Estrategia 1 falló (botón Aceptar): {str(e)}")
+            
+            # Estrategia 2: Verificar si el modal aún está visible y usar ESC
+            if not modal_cerrado:
+                try:
+                    modal_visible = self.page.query_selector(".ant-modal-wrap:not([style*='display: none'])")
+                    if modal_visible and modal_visible.is_visible():
+                        self.logger.info('IngresoItems', "⚠️ Modal aún visible, presionando ESC...")
+                        self.page.keyboard.press("Escape")
+                        time.sleep(1)
+                        self.logger.info('IngresoItems', "✅ Modal cerrado con ESC")
+                        modal_cerrado = True
+                except Exception as e:
+                    self.logger.warning('IngresoItems', f"⚠️ Estrategia 2 falló (ESC): {str(e)}")
+            
+            # Estrategia 3: Botón X de cerrar modal
+            if not modal_cerrado:
+                try:
+                    boton_cerrar = self.page.query_selector(".ant-modal-close, .ant-modal-close-x")
+                    if boton_cerrar and boton_cerrar.is_visible():
+                        self.logger.info('IngresoItems', "⚠️ Intentando cerrar con botón X...")
+                        boton_cerrar.click()
+                        time.sleep(1)
+                        self.logger.info('IngresoItems', "✅ Modal cerrado con botón X")
+                        modal_cerrado = True
+                except Exception as e:
+                    self.logger.warning('IngresoItems', f"⚠️ Estrategia 3 falló (botón X): {str(e)}")
+            
+            # Estrategia 4: Clic en overlay (backdrop) del modal
+            if not modal_cerrado:
+                try:
+                    overlay = self.page.query_selector(".ant-modal-wrap")
+                    if overlay and overlay.is_visible():
+                        self.logger.info('IngresoItems', "⚠️ Intentando cerrar con clic en overlay...")
+                        # Hacer clic en las coordenadas del overlay (fuera del contenido del modal)
+                        overlay.click(position={"x": 10, "y": 10})
+                        time.sleep(1)
+                        self.logger.info('IngresoItems', "✅ Modal cerrado con clic en overlay")
+                        modal_cerrado = True
+                except Exception as e:
+                    self.logger.warning('IngresoItems', f"⚠️ Estrategia 4 falló (overlay): {str(e)}")
+            
+            # Estrategia 5: JavaScript directo para remover el modal (último recurso)
+            if not modal_cerrado:
+                try:
+                    self.logger.warning('IngresoItems', "⚠️ Último recurso: Removiendo modal con JavaScript...")
+                    resultado = self.page.evaluate("""
+                        (() => {
+                            // Buscar modal de Ant Design
+                            const modal = document.querySelector('.ant-modal-wrap');
+                            if (modal) {
+                                modal.remove();
+                                return 'removed_modal';
+                            }
+                            // Buscar backdrop
+                            const backdrop = document.querySelector('.ant-modal-mask');
+                            if (backdrop) {
+                                backdrop.remove();
+                                return 'removed_backdrop';
+                            }
+                            return 'none';
+                        })()
+                    """)
+                    if resultado != 'none':
+                        self.logger.info('IngresoItems', f"✅ Modal removido con JavaScript ({resultado})")
+                        modal_cerrado = True
+                    time.sleep(0.5)
+                except Exception as e:
+                    self.logger.error('IngresoItems', f"❌ Estrategia 5 falló (JavaScript): {str(e)}")
+            
+            # Resultado final
+            if modal_cerrado:
+                self.logger.info('IngresoItems', "✅ Proceso finalizado - Modal cerrado correctamente")
+            else:
+                self.logger.error('IngresoItems', "❌ ADVERTENCIA: No se pudo confirmar el cierre del modal")
+            # NO lanzar excepción aquí - continuar el flujo

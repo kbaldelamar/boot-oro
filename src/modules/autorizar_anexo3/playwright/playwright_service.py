@@ -370,27 +370,46 @@ class PlaywrightService:
         self.cerrar_navegador()
     
     def _kill_chromium_processes(self):
-        """Mata procesos Chromium/Chrome huérfanos de forma forzada"""
+        """Mata procesos Chromium/Chrome lanzados por Playwright de forma forzada.
+        Usa psutil que funciona desde cualquier hilo (no depende de la API de Playwright)."""
         try:
             import psutil
             killed = 0
             process_names = ['chromium.exe', 'chrome.exe', 'msedge.exe']
             
-            for proc in psutil.process_iter(['pid', 'name', 'cmdline']):
+            # Flags que Playwright usa al lanzar navegadores
+            playwright_markers = [
+                '--remote-debugging-pipe',   # Playwright usa pipe, no port
+                '--remote-debugging-port',   # Algunas versiones usan port
+                '--test-type',               # Marcador de test
+                'ms-playwright',             # Ruta de instalación de Playwright
+            ]
+            
+            for proc in psutil.process_iter(['pid', 'name', 'cmdline', 'exe']):
                 try:
                     proc_name = proc.info['name'].lower() if proc.info['name'] else ''
                     
                     # Verificar si es un proceso de navegador
                     is_browser = any(name.lower() in proc_name for name in process_names)
                     
-                    # También verificar si fue lanzado por Playwright (contiene '--remote-debugging-port')
+                    if not is_browser:
+                        continue
+                    
+                    # Verificar si fue lanzado por Playwright
                     is_playwright = False
-                    if proc.info.get('cmdline'):
-                        cmdline_str = ' '.join(proc.info['cmdline'])
-                        if '--remote-debugging-port' in cmdline_str or '--test-type' in cmdline_str:
+                    
+                    # Verificar en la ruta del ejecutable
+                    exe_path = (proc.info.get('exe') or '').lower()
+                    if 'ms-playwright' in exe_path:
+                        is_playwright = True
+                    
+                    # Verificar en los argumentos de línea de comandos
+                    if not is_playwright and proc.info.get('cmdline'):
+                        cmdline_str = ' '.join(proc.info['cmdline']).lower()
+                        if any(marker in cmdline_str for marker in playwright_markers):
                             is_playwright = True
                     
-                    if is_browser and is_playwright:
+                    if is_playwright:
                         proc.kill()
                         killed += 1
                         self.logger.debug('Playwright', f'🔪 Proceso eliminado: {proc_name} (PID: {proc.info["pid"]})')
@@ -399,12 +418,12 @@ class PlaywrightService:
                     pass
             
             if killed > 0:
-                self.logger.warning('Playwright', f'🧹 Limpiados {killed} procesos Chromium huérfanos')
+                self.logger.warning('Playwright', f'🧹 Limpiados {killed} procesos Chromium de Playwright')
             else:
-                self.logger.debug('Playwright', 'No se encontraron procesos huérfanos para limpiar')
+                self.logger.debug('Playwright', 'No se encontraron procesos de Playwright para limpiar')
                 
         except ImportError:
-            self.logger.warning('Playwright', '⚠️ psutil no disponible, no se pueden matar procesos huérfanos')
+            self.logger.warning('Playwright', '⚠️ psutil no disponible, no se pueden matar procesos')
         except Exception as e:
             self.logger.error('Playwright', f'Error matando procesos: {e}')
     
