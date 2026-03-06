@@ -436,3 +436,5 @@ caso,SOLICITUD ACTIVA - El afiliado cuenta con una solicitud activa para el serv
 caso,SOLICITUD ACTIVA - El afiliado cuenta con una solicitud activa para el servicio 890266 con el número de radicado #17749578,paciente,1038648261,ordenCapita,412902
 caso,Correcto Caso # 17761197,paciente,1038648261,ordenCapita,412903
 caso,SOLICITUD ACTIVA - El afiliado cuenta con una solicitud activa para el servicio 890206 con el número de radicado #11992586,paciente,21589454,ordenCapita,412907
+caso,SOLICITUD ACTIVA - El afiliado cuenta con una solicitud activa para el servicio 871121 con el número de radicado #18078512,paciente,1038151198,ordenCapita,418342
+caso,SOLICITUD ACTIVA - El afiliado cuenta con una solicitud activa para el servicio 881610 con el número de radicado #18001251,paciente,39266372,ordenCapita,417440

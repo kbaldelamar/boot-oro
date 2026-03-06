@@ -289,6 +289,11 @@ class Config:
         return self.get('SMB_RESULTADOS_PATH', '')
 
     @property
+    def smb_remision_search_path(self) -> str:
+        """Ruta dentro del share SMB donde buscar PDFs de remisión"""
+        return self.get('SMB_REMISION_SEARCH_PATH', '')
+
+    @property
     def smb_fallback_local_path(self) -> str:
         """Ruta local de fallback cuando el servidor SMB no está disponible"""
         return self.get('SMB_FALLBACK_LOCAL_PATH', '')

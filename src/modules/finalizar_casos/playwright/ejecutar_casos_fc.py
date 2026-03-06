@@ -346,38 +346,61 @@ class EjecutarCasosFC:
             self._log("Clic en 'Asistida'")
 
             # --- Validar PDF de remisión si aplica ---
+            archivo_remision = None
+            path_remision_local = None
+
             if remision == 1:
                 self._log(f"🔍 Verificando PDF de remisión para idRecepcion={id_recepcion}")
                 response = self.api_service.buscar_pdf_remision(id_recepcion)
 
                 if response is None:
-                    self._log("❌ ERROR CRÍTICO: API de evidencias no respondió")
-                    self.api_service.marcar_sin_pdf_remision(id_orden)
+                    # API no respondió en absoluto → error de API, saltar caso
+                    self._log("❌ ERROR: API /buscar-pdf-remision no respondió (estado 15)")
+                    self.api_service.marcar_error_api_remision(id_orden)
                     self._cerrar_panel_x()
                     time.sleep(1)
                     return True, None
 
-                # Verificar status
                 status_code = response.get('statusCode', 0)
-                if status_code != 200:
-                    self._log(f"❌ PDF remisión no encontrado (status {status_code})")
-                    self.api_service.marcar_sin_pdf_remision(id_orden)
+
+                if status_code == 200:
+                    # API respondió OK — extraer nombre del archivo
+                    data_resp = response.get('data', {})
+                    pdfs = data_resp.get('pdfs', [])
+                    archivo_remision = pdfs[0].get('archivoResultadoExterno', '') if pdfs else ''
+
+                    if archivo_remision:
+                        # Tiene nombre de archivo → buscar y descargar desde SMB
+                        self._log(f"📄 PDF remisión indicado por API: {archivo_remision}")
+                        path_remision_local = self.smb_service.descargar_archivo_smb(
+                            remote_filename=archivo_remision,
+                            local_dest_path=self.ruta_genera_evidencia,
+                        )
+
+                        if not path_remision_local:
+                            # Archivo no encontrado en SMB → estado 14, saltar caso
+                            self._log(f"❌ PDF remisión no encontrado en servidor SMB (estado 14)")
+                            self.api_service.marcar_remision_no_encontrada_smb(id_orden)
+                            self._cerrar_panel_x()
+                            time.sleep(1)
+                            return True, None
+
+                        self._log(f"✅ PDF remisión descargado: {archivo_remision}")
+                    else:
+                        # API 200 pero sin nombre de archivo → continuar normalmente sin remisión
+                        self._log("ℹ️ API 200 pero sin nombre de PDF remisión. Continuando con PDF de resultados.")
+
+                elif status_code == 404:
+                    # No existe PDF de remisión para esta recepción → continuar normalmente
+                    self._log(f"ℹ️ No hay PDF de remisión para idRecepcion={id_recepcion} (404). Continuando con PDF de resultados.")
+
+                else:
+                    # Error HTTP (400, 500, etc.) → error de API, saltar caso
+                    self._log(f"❌ ERROR: API /buscar-pdf-remision respondió con status {status_code} (estado 15)")
+                    self.api_service.marcar_error_api_remision(id_orden)
                     self._cerrar_panel_x()
                     time.sleep(1)
                     return True, None
-
-                # Verificar que haya PDFs
-                data_resp = response.get('data', {})
-                pdfs = data_resp.get('pdfs', [])
-                if not pdfs:
-                    self._log("❌ PDF remisión vacío en la respuesta")
-                    self.api_service.marcar_sin_pdf_remision(id_orden)
-                    self._cerrar_panel_x()
-                    time.sleep(1)
-                    return True, None
-
-                archivo_remision = pdfs[0].get('archivoResultadoExterno', '')
-                self._log(f"✅ PDF remisión encontrado: {archivo_remision}")
 
             # --- Consultar encabezado para generar PDF ---
             self._log(f"📄 Consultando encabezado para idRecepcion={id_recepcion}")
@@ -433,6 +456,21 @@ class EjecutarCasosFC:
 
                 # Guardar evidencia y subir a SMB
                 self._guardar_evidencia_y_subir(data)
+
+                # Subir PDF de remisión a SMB_EVIDENCIA_PATH si aplica
+                if remision == 1 and path_remision_local:
+                    self._log(f"📤 Subiendo PDF de remisión a SMB_EVIDENCIA_PATH...")
+                    exito_remision = self.smb_service.subir_evidencia(
+                        path_remision_local, os.path.basename(path_remision_local)
+                    )
+                    if exito_remision:
+                        metodo_rem = self.smb_service.ultimo_metodo or 'desconocido'
+                        if metodo_rem == 'smb':
+                            self._log(f"✅ PDF remisión subido a SMB: {os.path.basename(path_remision_local)}")
+                        else:
+                            self._log(f"⚠️ PDF remisión guardado en FALLBACK LOCAL: {os.path.basename(path_remision_local)}")
+                    else:
+                        self._log(f"❌ No se pudo subir PDF de remisión a SMB")
             else:
                 self._log(f"❌ No se pudo generar PDF para caso {caso}")
                 self.api_service.marcar_sin_pdf_resultados(id_orden)

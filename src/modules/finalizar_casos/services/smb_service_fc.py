@@ -8,7 +8,7 @@ Configuración desde endpoint.env:
   SMB_EVIDENCIA_PATH, SMB_RESULTADOS_PATH
 """
 import os
-from typing import Optional, Callable
+from typing import Optional, Callable, List
 
 from config.config import Config
 
@@ -31,6 +31,7 @@ class SMBServiceFC:
         self.password = config.smb_password
         self.evidencia_path = config.smb_evidencia_path
         self.resultados_path = config.smb_resultados_path
+        self.remision_search_path = config.smb_remision_search_path
         self.fallback_local_path = config.smb_fallback_local_path
 
         # Flag para indicar si la última operación usó SMB real o fallback local
@@ -175,3 +176,100 @@ class SMBServiceFC:
     def subir_resultado(self, local_path: str, remote_filename: str) -> bool:
         """Sube archivo de resultado a SMB_RESULTADOS_PATH."""
         return self.subir_archivo(local_path, remote_filename, self.resultados_path)
+
+    # ==================================================================
+    # Buscar archivo en SMB
+    # ==================================================================
+
+    def buscar_archivo_remision(
+        self,
+        patron: str,
+        remote_folder: Optional[str] = None,
+    ) -> Optional[str]:
+        """
+        Busca un archivo en el servidor SMB cuyo nombre contenga `patron`.
+
+        Args:
+            patron: Texto parcial que debe aparecer en el nombre del archivo
+            remote_folder: Carpeta remota (default: SMB_REMISION_SEARCH_PATH)
+
+        Returns:
+            Nombre del primer archivo que coincida, o None si no se encontró.
+        """
+        if not remote_folder:
+            remote_folder = self.remision_search_path
+
+        if not self.server or not self.share:
+            self.log("❌ Configuración SMB incompleta para buscar remisión")
+            return None
+
+        try:
+            import smbclient
+
+            smbclient.register_session(
+                self.server,
+                username=self.username,
+                password=self.password,
+            )
+
+            remote_dir = f"\\\\{self.server}\\{self.share}\\{remote_folder}"
+            self.log(f"🔍 Buscando en SMB: {remote_dir} (patrón: {patron})")
+
+            archivos = smbclient.listdir(remote_dir)
+            for archivo in archivos:
+                if patron in archivo and archivo.lower().endswith('.pdf'):
+                    self.log(f"✅ Archivo remisión encontrado en SMB: {archivo}")
+                    return archivo
+
+            self.log(f"❌ No se encontró archivo con patrón '{patron}' en {remote_dir}")
+            return None
+
+        except ImportError:
+            self.log("❌ smbprotocol no instalado para buscar remisión")
+            return None
+        except Exception as e:
+            self.log(f"❌ Error buscando archivo en SMB: {e}")
+            return None
+
+    def descargar_archivo_smb(
+        self,
+        remote_filename: str,
+        local_dest_path: str,
+        remote_folder: Optional[str] = None,
+    ) -> Optional[str]:
+        """
+        Descarga un archivo del servidor SMB a una ruta local.
+
+        Args:
+            remote_filename: Nombre del archivo remoto
+            local_dest_path: Carpeta local de destino
+            remote_folder: Carpeta remota (default: SMB_REMISION_SEARCH_PATH)
+
+        Returns:
+            Ruta local completa del archivo descargado, o None si falló.
+        """
+        if not remote_folder:
+            remote_folder = self.remision_search_path
+
+        try:
+            import smbclient
+            from smbclient import shutil as smb_shutil
+
+            smbclient.register_session(
+                self.server,
+                username=self.username,
+                password=self.password,
+            )
+
+            remote_path = f"\\\\{self.server}\\{self.share}\\{remote_folder}\\{remote_filename}"
+            os.makedirs(local_dest_path, exist_ok=True)
+            local_path = os.path.join(local_dest_path, remote_filename)
+
+            self.log(f"📥 Descargando de SMB: {remote_path}")
+            smb_shutil.copy2(remote_path, local_path)
+            self.log(f"✅ Descargado a: {local_path}")
+            return local_path
+
+        except Exception as e:
+            self.log(f"❌ Error descargando de SMB: {e}")
+            return None

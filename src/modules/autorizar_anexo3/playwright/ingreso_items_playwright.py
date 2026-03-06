@@ -117,6 +117,28 @@ class IngresoItemsPlaywright:
             clic_cups.click(timeout=15000)  # Timeout de 15s en lugar de 60s por defecto
             self.logger.info('IngresoItems', f"✓ CUPS {codigo_cups} seleccionado correctamente")
             
+            # Paso 6: Ingresar cantidad (SIEMPRE, no solo si > 1)
+            cantidad = getattr(data, 'cantidad', 1) or 1
+            self.logger.info('IngresoItems', f"📊 Ingresando cantidad: {cantidad}")
+            time.sleep(0.5)
+            
+            try:
+                # Selector específico: solo dentro del modal visible
+                input_cantidad = self.page.wait_for_selector(
+                    ".ant-modal-wrap:not([style*='display: none']) .ant-modal-content input.ant-input-number-input[role='spinbutton']",
+                    timeout=5000
+                )
+                input_cantidad.click(click_count=3)
+                time.sleep(0.3)
+                input_cantidad.fill(str(int(cantidad)))
+                self.logger.info('IngresoItems', f"✅ Cantidad ingresada: {cantidad}")
+                time.sleep(0.5)
+            except Exception as cant_error:
+                # Si falla, no es crítico (el sistema tiene 1 por defecto)
+                self.logger.warning('IngresoItems', f"⚠️ No se pudo modificar cantidad: {cant_error}")
+                # Continuar el flujo sin lanzar excepción
+            
+            
         except Exception as e:
             self.logger.error('IngresoItems', f"❌ Error general en IntemsAndFor: {str(e)}", e)
             print(f"Error general en IntemsAndFor: {str(e)}")

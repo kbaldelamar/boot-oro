@@ -227,6 +227,7 @@ class AutomationWorker(threading.Thread):
             data.idProcedimiento = datos_paciente.get('idProcedimiento', '')
             data.idAtencion = datos_paciente.get('idAtencion', '')
             data.cups = datos_paciente.get('cups', '')
+            data.cantidad = datos_paciente.get('Cantidad', 1)
             
             if ejecutor.inicio_casos(data):
                 # ÉXITO - El ejecutor ya actualizó estadoCaso a 1

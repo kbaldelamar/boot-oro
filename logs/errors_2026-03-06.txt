@@ -1,0 +1,6 @@
+[2026-03-06 09:36:39.338] [❌ ERROR] [Licencia] Error en consulta: HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /ips-saldos (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x00000192CD2A68B0>: Failed to establish a new connection: [WinError 10061] No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión'))
+[2026-03-06 09:36:39.339] [⚠️ WARNING] [Licencia] Validación fallida: Error consultando saldo
+[2026-03-06 09:38:06.508] [⚠️ WARNING] [Playwright] Timeout en navegación, verificando si la página cargó: Page.goto: Timeout 15000ms exceeded.
+Call log:
+navigating to "https://portalsalud.coosalud.com/login", waiting until "domcontentloaded"
+

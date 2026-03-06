@@ -93,7 +93,7 @@ class PDFAnexo3Service:
             # 2. Generar nombre de archivo único
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
             no_documento = datos.get('NoDocumento', 'SinDoc')
-            filename = f"Anexo3_{id_atencion}_{id_orden}_{no_documento}_{timestamp}.pdf"
+            filename = f"Anexo3_{id_atencion}_{id_orden}_{id_procedimiento}_{no_documento}_{timestamp}.pdf"
             filepath = os.path.join(self.pdf_output_dir, filename)
             
             self.logger.info('PDFAnexo3', f"📝 Archivo destino: {filepath}")
@@ -607,7 +607,7 @@ class PDFAnexo3Service:
         self._texto(page, x + 10, y, "Código", 7, True)
         self._texto(page, x + 50, y, "Cantidad", 7, True)
         self._texto(page, x + 110, y, "Descripción", 7, True)
-        self._texto(page, x + 380, y, "Número de caso", 7, True)
+        self._texto(page, x + 470, y, "Número de caso", 7, True)
         self._texto(page, x + 10, y + 10, "CUPS", 7, True)
         
         y += 24
@@ -622,8 +622,10 @@ class PDFAnexo3Service:
 
                 self._texto(page, x + 10, y, f"{idx}  {cups}", 7)
                 self._texto(page, x + 65, y, cantidad, 7)
-                self._texto(page, x + 110, y, descripcion[:50], 6)
-                self._texto(page, x + 380, y, numero_autorizacion, 7)
+                # Descripción con textbox para ajuste automático
+                desc_rect = fitz.Rect(x + 110, y - 2, x + 465, y + 10)
+                page.insert_textbox(desc_rect, descripcion, fontsize=5, fontname=self.FONT_NORMAL, color=self.COLOR_NEGRO)
+                self._texto(page, x + 470, y, numero_autorizacion, 7)
 
                 y += 12
 
@@ -637,8 +639,10 @@ class PDFAnexo3Service:
             
             self._texto(page, x + 10, y, f"1  {cups}", 7)
             self._texto(page, x + 65, y, cantidad, 7)
-            self._texto(page, x + 110, y, descripcion[:50], 6)
-            self._texto(page, x + 380, y, numero_autorizacion, 7)
+            # Descripción con textbox para ajuste automático
+            desc_rect = fitz.Rect(x + 110, y - 2, x + 465, y + 10)
+            page.insert_textbox(desc_rect, descripcion, fontsize=5, fontname=self.FONT_NORMAL, color=self.COLOR_NEGRO)
+            self._texto(page, x + 470, y, numero_autorizacion, 7)
             
             y += 20
         
@@ -646,12 +650,14 @@ class PDFAnexo3Service:
         justificacion = datos.get('NotaHc', '')
         self._texto(page, x + 2, y, "Justificación Clínica:", 7, True)
         y += 12
-        self._texto(page, x + 2, y, justificacion[:80], 6)
-        if len(justificacion) > 80:
-            y += 10
-            self._texto(page, x + 2, y, justificacion[80:160], 6)
+        # Usar textbox para ajuste automático de texto largo
+        ancho_just = self.PAGE_WIDTH - self.MARGIN_LEFT - self.MARGIN_RIGHT - 4
+        alto_just = 50  # Espacio para varias líneas
+        just_rect = fitz.Rect(x + 2, y - 2, x + 2 + ancho_just, y - 2 + alto_just)
+        page.insert_textbox(just_rect, justificacion, fontsize=5, fontname=self.FONT_NORMAL, color=self.COLOR_NEGRO)
+        y += alto_just
         
-        return y + 16
+        return y + 4
     
     def _dibujar_seccion_diagnosticos(self, page, y: float, datos: dict) -> float:
         """Impresión Diagnóstica"""

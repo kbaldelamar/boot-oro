@@ -188,6 +188,14 @@ class FinalizarCasosService:
         """Estado 13: Error actualizando ruta en /ingreso-documento"""
         return self.actualizar_caso(id_orden, estado=13)
 
+    def marcar_remision_no_encontrada_smb(self, id_orden: int) -> bool:
+        """Estado 14: PDF de remisión no encontrado en servidor SMB"""
+        return self.actualizar_caso(id_orden, estado=14)
+
+    def marcar_error_api_remision(self, id_orden: int) -> bool:
+        """Estado 15: Error en API /buscar-pdf-remision (500/400/sin respuesta)"""
+        return self.actualizar_caso(id_orden, estado=15)
+
     # ------------------------------------------------------------------
     # Ingreso Documento (evidencias)
     # ------------------------------------------------------------------
