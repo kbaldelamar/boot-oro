@@ -151,7 +151,20 @@ class EjecutarCasosFC:
             elif estado == 'finalizado':
                 self._log(f"🏁 El caso {caso} ya está en estado 'Finalizado'")
                 try:
-                    self.api_service.marcar_finalizado_plataforma(id_orden)
+                    # Clic en ícono eye para abrir detalle del caso
+                    eye_xpath = f"//td[contains(.,'{caso}')]/preceding-sibling::td/div//span[contains(@aria-label,'eye')]"
+                    self.helper.click_element(eye_xpath, timeout=10000)
+                    self._log("👁️ Clic en ícono eye para ver caso finalizado")
+                    time.sleep(3)
+
+                    # Capturar evidencia y subir a SMB
+                    self._guardar_evidencia_y_subir(data)
+
+                    # Marcar como exitoso (estado 1)
+                    self.api_service.marcar_exitoso(id_orden)
+                    self._log(f"✅ Caso {caso} finalizado — evidencia capturada (estado 1)")
+
+                    self._cerrar_panel_x()
                     time.sleep(1)
                     self._reiniciar()
                     time.sleep(1)
@@ -301,8 +314,10 @@ class EjecutarCasosFC:
 
             # Esperar cierre del modal
             try:
-                modal = self.page.locator("div.ant-modal-wrap")
-                modal.wait_for(state='hidden', timeout=30000)
+                modals = self.page.locator("div.ant-modal-wrap")
+                count = modals.count()
+                for i in range(count):
+                    modals.nth(i).wait_for(state='hidden', timeout=30000)
                 self._log("✅ Modal de Asignar Cita cerrado correctamente")
             except PlaywrightTimeout:
                 self._log("⚠️ El modal no se cerró a tiempo. Puede causar problemas después.")
@@ -431,8 +446,12 @@ class EjecutarCasosFC:
             pdf_path = self._generar_pdf(id_recepcion, encabezado_data)
 
             if pdf_path:
-                # Subir PDF al portal
-                self._subir_pdf_portal(pdf_path)
+                # Subir PDF(s) al portal (resultados + remisión si aplica)
+                if remision == 1 and path_remision_local:
+                    self._subir_pdfs_portal([pdf_path, path_remision_local])
+                    self._log(f"📤 PDFs cargados al portal: resultados + remisión")
+                else:
+                    self._subir_pdf_portal(pdf_path)
                 time.sleep(2)
 
                 # Guardar
@@ -456,21 +475,6 @@ class EjecutarCasosFC:
 
                 # Guardar evidencia y subir a SMB
                 self._guardar_evidencia_y_subir(data)
-
-                # Subir PDF de remisión a SMB_EVIDENCIA_PATH si aplica
-                if remision == 1 and path_remision_local:
-                    self._log(f"📤 Subiendo PDF de remisión a SMB_EVIDENCIA_PATH...")
-                    exito_remision = self.smb_service.subir_evidencia(
-                        path_remision_local, os.path.basename(path_remision_local)
-                    )
-                    if exito_remision:
-                        metodo_rem = self.smb_service.ultimo_metodo or 'desconocido'
-                        if metodo_rem == 'smb':
-                            self._log(f"✅ PDF remisión subido a SMB: {os.path.basename(path_remision_local)}")
-                        else:
-                            self._log(f"⚠️ PDF remisión guardado en FALLBACK LOCAL: {os.path.basename(path_remision_local)}")
-                    else:
-                        self._log(f"❌ No se pudo subir PDF de remisión a SMB")
             else:
                 self._log(f"❌ No se pudo generar PDF para caso {caso}")
                 self.api_service.marcar_sin_pdf_resultados(id_orden)
@@ -513,6 +517,17 @@ class EjecutarCasosFC:
             time.sleep(1)
         except Exception as e:
             self._log(f"❌ Error subiendo PDF al portal: {e}")
+            raise
+
+    def _subir_pdfs_portal(self, pdf_paths: list):
+        """Sube múltiples archivos PDF al portal vía input type='file'."""
+        try:
+            file_input = self.page.locator("//input[contains(@type,'file')]")
+            file_input.set_input_files(pdf_paths)
+            self._log(f"📤 {len(pdf_paths)} PDFs cargados al portal")
+            time.sleep(1)
+        except Exception as e:
+            self._log(f"❌ Error subiendo PDFs al portal: {e}")
             raise
 
     # ==================================================================

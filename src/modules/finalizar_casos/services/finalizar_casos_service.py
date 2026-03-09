@@ -328,3 +328,51 @@ class FinalizarCasosService:
         except requests.RequestException as e:
             print(f"[FinalizarCasosService] Error consultando encabezado: {e}")
             return None
+
+    # ------------------------------------------------------------------
+    # Reporte de laboratorio finalizado
+    # ------------------------------------------------------------------
+
+    def obtener_reporte_finalizado(
+        self,
+        estado: Optional[int] = None,
+        fecha_inicio: Optional[str] = None,
+        fecha_final: Optional[str] = None
+    ) -> Dict[str, Any]:
+        """
+        Obtiene el reporte de laboratorio finalizado.
+        GET /reporte-laboratorio-finalizado?estado=X&fechaInicio=YYYY-MM-DD&fechaFinal=YYYY-MM-DD
+
+        Args:
+            estado: Estado del caso (opcional, None=Todos)
+            fecha_inicio: Fecha inicio YYYY-MM-DD
+            fecha_final: Fecha final YYYY-MM-DD
+
+        Returns:
+            Diccionario con status_code, message, description y data
+        """
+        url = f"{self.base_url}/reporte-laboratorio-finalizado"
+        params: Dict[str, Any] = {}
+
+        if estado is not None:
+            params['estado'] = estado
+        if fecha_inicio:
+            params['fechaInicio'] = fecha_inicio
+        if fecha_final:
+            params['fechaFinal'] = fecha_final
+
+        try:
+            print(f"[FinalizarCasosService] GET {url}")
+            print(f"[FinalizarCasosService] Params reporte: {params}")
+            response = requests.get(url, params=params, timeout=30)
+            response.raise_for_status()
+            data = response.json()
+            return data
+        except requests.RequestException as e:
+            print(f"[FinalizarCasosService] Error reporte finalizado: {e}")
+            return {
+                "status_code": 500,
+                "message": "Error",
+                "description": str(e),
+                "data": []
+            }
